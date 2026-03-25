@@ -2,18 +2,25 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
-  { href: "/experience", label: "Experience" },
-  { href: "/writings", label: "Writings" },
-  { href: "/shelf", label: "Shelf" },
-  { href: "/cinema", label: "Cinema" },
+  { href: "/#about",      label: "About",      anchor: true },
+  { href: "/#projects",   label: "Projects",   anchor: true },
+  { href: "/#skills",     label: "Skills",     anchor: true },
+  { href: "/#experience", label: "Experience", anchor: true },
+  { href: "/writings",    label: "Writings",   anchor: false },
+  { href: "/shelf",       label: "Shelf",      anchor: false },
+  { href: "/cinema",      label: "Cinema",     anchor: false },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
+
+  function isActive(href: string, anchor: boolean) {
+    if (anchor) return pathname === "/";
+    return pathname === href;
+  }
 
   return (
     <header
@@ -23,7 +30,8 @@ export default function Navbar() {
         left: 0,
         right: 0,
         zIndex: 50,
-        backdropFilter: "blur(8px)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
         backgroundColor: "color-mix(in srgb, var(--bg-primary) 85%, transparent)",
         borderBottom: "1px solid var(--border)",
       }}
@@ -37,30 +45,36 @@ export default function Navbar() {
           paddingBlock: "1rem",
         }}
       >
+        {/* Logo */}
         <Link
           href="/"
           style={{
             fontFamily: "var(--font-instrument-serif)",
-            fontSize: "1.125rem",
+            fontStyle: "italic",
+            fontSize: "1.25rem",
             color: "var(--text-primary)",
             textDecoration: "none",
+            flexShrink: 0,
           }}
         >
           Rijul
         </Link>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
-          {navLinks.map(({ href, label }) => {
-            const isActive = pathname === href;
+        {/* Links + Toggle */}
+        <div style={{ display: "flex", alignItems: "center", gap: "1.75rem" }}>
+          {navLinks.map(({ href, label, anchor }) => {
+            const active = isActive(href, anchor);
             return (
               <Link
                 key={href}
                 href={href}
                 style={{
                   fontSize: "0.875rem",
-                  color: isActive ? "var(--accent)" : "var(--text-secondary)",
+                  color: active ? "var(--accent)" : "var(--text-secondary)",
                   textDecoration: "none",
-                  borderBottom: isActive ? "2px solid var(--accent)" : "2px solid transparent",
+                  borderBottom: active
+                    ? "2px solid var(--accent)"
+                    : "2px solid transparent",
                   paddingBottom: "2px",
                   transition: "color 0.15s ease",
                 }}
@@ -69,6 +83,8 @@ export default function Navbar() {
               </Link>
             );
           })}
+
+          <ThemeToggle />
         </div>
       </nav>
     </header>

@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import ThemeProvider from "@/components/layout/ThemeProvider";
 import "@/styles/globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -41,9 +42,16 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
