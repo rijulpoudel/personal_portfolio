@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Github, Linkedin, Download, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { Github, Linkedin, Download, ArrowRight, ExternalLink } from "lucide-react";
 import {
   SiReact,
   SiNextdotjs,
@@ -8,10 +9,16 @@ import {
   SiTailwindcss,
   SiNodedotjs,
   SiPython,
+  SiJavascript,
+  SiC,
   SiGit,
   SiGithub,
   SiLinux,
   SiGnubash,
+  SiDocker,
+  SiFigma,
+  SiNumpy,
+  SiPandas,
 } from "react-icons/si";
 import GridBackground from "@/components/ui/GridBackground";
 import ProjectCard from "@/components/ui/ProjectCard";
@@ -29,28 +36,39 @@ export const metadata: Metadata = {
 
 const skillGroups = [
   {
+    label: "Languages",
+    skills: [
+      { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
+      { name: "JavaScript", Icon: SiJavascript, color: "#F7DF1E" },
+      { name: "Python", Icon: SiPython, color: "#3776AB" },
+      { name: "C", Icon: SiC, color: "var(--text-primary)" },
+    ],
+  },
+  {
     label: "Frontend",
     skills: [
-      { name: "React",        Icon: SiReact,       color: "#61DAFB" },
-      { name: "Next.js",      Icon: SiNextdotjs,   color: "var(--text-primary)" },
-      { name: "TypeScript",   Icon: SiTypescript,  color: "#3178C6" },
+      { name: "React", Icon: SiReact, color: "#61DAFB" },
+      { name: "Next.js", Icon: SiNextdotjs, color: "var(--text-primary)" },
       { name: "Tailwind CSS", Icon: SiTailwindcss, color: "#06B6D4" },
     ],
   },
   {
-    label: "Backend",
+    label: "Backend & Data",
     skills: [
       { name: "Node.js", Icon: SiNodedotjs, color: "#339933" },
-      { name: "Python",  Icon: SiPython,    color: "#3776AB" },
+      { name: "NumPy", Icon: SiNumpy, color: "#4DABCF" },
+      { name: "Pandas", Icon: SiPandas, color: "#150458" },
     ],
   },
   {
     label: "Tools",
     skills: [
-      { name: "Git",    Icon: SiGit,     color: "#F05032" },
-      { name: "GitHub", Icon: SiGithub,  color: "var(--text-primary)" },
-      { name: "Linux",  Icon: SiLinux,   color: "var(--text-primary)" },
-      { name: "Bash",   Icon: SiGnubash, color: "var(--text-primary)" },
+      { name: "Git", Icon: SiGit, color: "#F05032" },
+      { name: "GitHub", Icon: SiGithub, color: "var(--text-primary)" },
+      { name: "Docker", Icon: SiDocker, color: "#2496ED" },
+      { name: "Figma", Icon: SiFigma, color: "#F24E1E" },
+      { name: "Linux", Icon: SiLinux, color: "var(--text-primary)" },
+      { name: "Bash", Icon: SiGnubash, color: "var(--text-primary)" },
     ],
   },
 ];
@@ -131,12 +149,20 @@ export default function HomePage() {
                   marginBottom: "2.5rem",
                 }}
               >
-                I build things for the web and occasionally think about how
-                software fits into the rest of life. Based in Kathmandu.
+                CS student at the University of Kansas. I build for the web,
+                dabble in data science, and shoot photos when I&apos;m not
+                writing code.
               </p>
 
               {/* Social + Resume */}
-              <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "1rem",
+                  flexWrap: "wrap",
+                }}
+              >
                 <a
                   href="https://github.com/rijulpoudel"
                   target="_blank"
@@ -148,7 +174,7 @@ export default function HomePage() {
                 </a>
 
                 <a
-                  href="https://linkedin.com/in/rijulpoudel"
+                  href="https://www.linkedin.com/in/rijulpoudel/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
@@ -192,44 +218,15 @@ export default function HomePage() {
                 overflow: "hidden",
                 border: "1px solid var(--border)",
                 backgroundColor: "var(--bg-secondary)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                position: "relative",
               }}
             >
-              {/*
-                Replace this block with:
-                <Image
-                  src="/images/profile.jpg"
-                  alt="Rijul Poudel"
-                  fill
-                  style={{ objectFit: "cover" }}
-                />
-                (add "position: relative" to the parent div and drop the flex centering)
-              */}
-              <div style={{ textAlign: "center", color: "var(--text-tertiary)", padding: "1.5rem" }}>
-                <div
-                  style={{
-                    width: "72px",
-                    height: "72px",
-                    borderRadius: "50%",
-                    backgroundColor: "var(--border)",
-                    margin: "0 auto 1rem",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: "var(--font-instrument-serif)",
-                    fontSize: "1.5rem",
-                    color: "var(--text-secondary)",
-                  }}
-                >
-                  RP
-                </div>
-                <p style={{ fontSize: "0.75rem", lineHeight: "1.6" }}>
-                  Add <code>public/images/profile.jpg</code>
-                  <br />to replace this placeholder
-                </p>
-              </div>
+              <Image
+                src="/images/profile.jpg"
+                alt="Rijul Poudel"
+                fill
+                style={{ objectFit: "cover" }}
+              />
             </div>
           </div>
         </div>
@@ -238,11 +235,14 @@ export default function HomePage() {
       {/* ── About ─────────────────────────────────────────────── */}
       <Section id="about">
         <Divider />
-        <p className="label-caps" style={{ marginBottom: "2rem" }}>About</p>
+        <p className="label-caps" style={{ marginBottom: "2rem" }}>
+          About
+        </p>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 440px), 1fr))",
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(min(100%, 440px), 1fr))",
             gap: "3rem",
           }}
         >
@@ -250,19 +250,49 @@ export default function HomePage() {
             <h2 className="text-h2" style={{ marginBottom: "1.5rem" }}>
               A bit about me.
             </h2>
-            <p style={{ lineHeight: "1.8", color: "var(--text-secondary)", marginBottom: "1.25rem" }}>
-              I&apos;m a Software Engineering student with a focus on building
-              clean, purposeful software. I care about how things work under the
-              hood as much as how they feel on the surface.
+            <p
+              style={{
+                lineHeight: "1.8",
+                color: "var(--text-secondary)",
+                marginBottom: "1.25rem",
+              }}
+            >
+              I&apos;m studying Computer Science (Minor: Data Science) at the
+              University of Kansas — KU Honors Program, Dean&apos;s List,
+              International Excellence Award. I care as much about how software
+              feels as how it works.
             </p>
-            <p style={{ lineHeight: "1.8", color: "var(--text-secondary)", marginBottom: "1.25rem" }}>
-              Outside of code I shoot photos and video under{" "}
-              <span style={{ color: "var(--accent)" }}>Crafteako</span> — a
-              creative project about capturing moments most people scroll past.
+            <p
+              style={{
+                lineHeight: "1.8",
+                color: "var(--text-secondary)",
+                marginBottom: "1.25rem",
+              }}
+            >
+              I&apos;ve shipped across the stack: React/Next.js frontends,
+              Python backends, cross-platform mobile apps, and a blockchain
+              social network at a hackathon. Currently working as an IT
+              Technician at KU while building things on the side.
             </p>
             <p style={{ lineHeight: "1.8", color: "var(--text-secondary)" }}>
-              Currently studying at KU, learning something new every day, and
-              trying to ship more than I plan.
+              Outside of code I run{" "}
+              <a
+                href="https://crafteako.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: "var(--accent)",
+                  textDecoration: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.25rem",
+                }}
+              >
+                Crafteako
+                <ExternalLink size={14} />
+              </a>{" "}
+              — a photography and videography project. Originally from Kathmandu,
+              Nepal.
             </p>
           </div>
         </div>
@@ -298,7 +328,8 @@ export default function HomePage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 460px), 1fr))",
+            gridTemplateColumns:
+              "repeat(auto-fill, minmax(min(100%, 460px), 1fr))",
             gap: "1.5rem",
           }}
         >
@@ -311,9 +342,13 @@ export default function HomePage() {
       {/* ── Skills ────────────────────────────────────────────── */}
       <Section id="skills">
         <Divider />
-        <p className="label-caps" style={{ marginBottom: "2.5rem" }}>Skills</p>
+        <p className="label-caps" style={{ marginBottom: "2.5rem" }}>
+          Skills
+        </p>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+        <div
+          style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}
+        >
           {skillGroups.map((group) => (
             <div key={group.label}>
               <p
@@ -325,7 +360,9 @@ export default function HomePage() {
               >
                 {group.label}
               </p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
+              <div
+                style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}
+              >
                 {group.skills.map(({ name, Icon, color }) => (
                   <div key={name} className="skill-card">
                     <Icon size={20} style={{ color, flexShrink: 0 }} />
@@ -341,7 +378,9 @@ export default function HomePage() {
       {/* ── Experience ────────────────────────────────────────── */}
       <Section id="experience">
         <Divider />
-        <p className="label-caps" style={{ marginBottom: "2.5rem" }}>Experience</p>
+        <p className="label-caps" style={{ marginBottom: "2.5rem" }}>
+          Experience
+        </p>
         <div style={{ maxWidth: "680px" }}>
           {experiences.map((entry, i) => (
             <TimelineEntry key={i} entry={entry} />

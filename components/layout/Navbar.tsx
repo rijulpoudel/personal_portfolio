@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
@@ -16,9 +18,40 @@ const navLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActiveSection("");
+      return;
+    }
+
+    const sections = Array.from(document.querySelectorAll("section[id]"));
+    
+    const handleScroll = () => {
+      let current = "";
+      sections.forEach((section) => {
+        const top = section.getBoundingClientRect().top;
+        if (top < 300) {
+          current = section.id;
+        }
+      });
+      setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [pathname]);
 
   function isActive(href: string, anchor: boolean) {
-    if (anchor) return pathname === "/";
+    if (anchor) {
+      if (pathname === "/") {
+        return activeSection ? href === `/#${activeSection}` : false;
+      }
+      return false;
+    }
     return pathname === href;
   }
 
@@ -49,6 +82,9 @@ export default function Navbar() {
         <Link
           href="/"
           style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
             fontFamily: "var(--font-instrument-serif)",
             fontStyle: "italic",
             fontSize: "1.25rem",
@@ -57,7 +93,16 @@ export default function Navbar() {
             flexShrink: 0,
           }}
         >
-          Rijul
+          {/* Avatar Icon */}
+          <div style={{ position: "relative", width: "28px", height: "28px", borderRadius: "50%", overflow: "hidden" }}>
+            <Image
+              src="/images/profile.jpg"
+              alt="Rijul"
+              fill
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+          rijul
         </Link>
 
         {/* Links + Toggle */}
@@ -68,16 +113,7 @@ export default function Navbar() {
               <Link
                 key={href}
                 href={href}
-                style={{
-                  fontSize: "0.875rem",
-                  color: active ? "var(--accent)" : "var(--text-secondary)",
-                  textDecoration: "none",
-                  borderBottom: active
-                    ? "2px solid var(--accent)"
-                    : "2px solid transparent",
-                  paddingBottom: "2px",
-                  transition: "color 0.15s ease",
-                }}
+                className={`nav-link ${active ? "active" : ""}`}
               >
                 {label}
               </Link>

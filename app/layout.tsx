@@ -28,6 +28,10 @@ export const metadata: Metadata = {
     url: "https://rijulpoudel.com",
     siteName: "Rijul Poudel",
   },
+  icons: {
+    icon: "/images/profile.png",
+    apple: "/images/profile.png",
+  },
 };
 
 export default function RootLayout({
