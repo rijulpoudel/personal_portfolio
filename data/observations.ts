@@ -1,5 +1,5 @@
 /**
- * Field observations — photographs, each with its collection data.
+ * Field observations: photographs, each with its collection data.
  * Add image files under /public/observations/ and register them here.
  * EXIF fields are recorded manually for now (camera, lens, exposure).
  */

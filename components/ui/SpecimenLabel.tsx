@@ -2,7 +2,7 @@ import type { Specimen } from "@/data/collection";
 import { cn } from "@/lib/utils";
 
 /**
- * The determination label — typeset like a herbarium label.
+ * The determination label, typeset like a herbarium label.
  * Bottom-right of every specimen sheet; holotypes get the red bar.
  */
 export default function SpecimenLabel({
@@ -30,7 +30,7 @@ export default function SpecimenLabel({
         {s.nepali && (
           <span className="nepali">
             {" "}
-            — {s.nepali.script} <span style={{ fontStyle: "italic" }}>(“{s.nepali.meaning}”)</span>
+            · {s.nepali.script} <span style={{ fontStyle: "italic" }}>(“{s.nepali.meaning}”)</span>
           </span>
         )}
       </p>

@@ -1,7 +1,7 @@
 import type { PlateKind } from "@/data/collection";
 
 /**
- * Engraved plates — line illustrations in the manner of a 19th-century
+ * Engraved plates: line illustrations in the manner of a 19th-century
  * field guide. Stroke-only, inherits ink color via currentColor.
  */
 
@@ -43,7 +43,7 @@ function Svg({
   );
 }
 
-/* ── fig. — clock face, drawn at half past four ─────────────────── */
+/* ── fig. clock face, drawn at half past four ─────────────────── */
 function Clock() {
   const ticks = Array.from({ length: 12 }, (_, i) => {
     const a = (i * Math.PI) / 6;
@@ -58,7 +58,7 @@ function Clock() {
       <circle cx="50" cy="50" r="39" />
       <circle cx="50" cy="50" r="36" />
       {ticks}
-      {/* 4:30 — the sundowning hour */}
+      {/* 4:30, the sundowning hour */}
       <line x1="50" y1="50" x2="63.4" y2="63.4" strokeWidth="2" />
       <line x1="50" y1="50" x2="50" y2="78" />
       <circle cx="50" cy="50" r="2" fill="currentColor" stroke="none" />
@@ -66,7 +66,7 @@ function Clock() {
   );
 }
 
-/* ── fig. — marigold (सयपत्री) ───────────────────────────────────── */
+/* ── fig. marigold (सयपत्री) ───────────────────────────────────── */
 function Marigold() {
   const ring = (count: number, r: number, rx: number, ry: number, key: string) =>
     Array.from({ length: count }, (_, i) => (
@@ -94,7 +94,7 @@ function Marigold() {
   );
 }
 
-/* ── fig. — speaking-trumpet ────────────────────────────────────── */
+/* ── fig. speaking-trumpet ────────────────────────────────────── */
 function Megaphone() {
   return (
     <>
@@ -119,7 +119,7 @@ function Megaphone() {
   );
 }
 
-/* ── fig. — balance ─────────────────────────────────────────────── */
+/* ── fig. balance ─────────────────────────────────────────────── */
 function Balance() {
   return (
     <>
@@ -140,7 +140,7 @@ function Balance() {
   );
 }
 
-/* ── fig. — hand lens ───────────────────────────────────────────── */
+/* ── fig. hand lens ───────────────────────────────────────────── */
 function Lens() {
   return (
     <>
@@ -156,7 +156,7 @@ function Lens() {
   );
 }
 
-/* ── fig. — field camera, bellows type ──────────────────────────── */
+/* ── fig. field camera, bellows type ──────────────────────────── */
 function Camera() {
   return (
     <>
@@ -253,7 +253,7 @@ export function Frontispiece({ width = 220 }: { width?: number }) {
   );
 }
 
-/* ── The collection seal — a circular rubber stamp ──────────────── */
+/* ── The collection seal: a circular rubber stamp ──────────────── */
 
 export function CollectionSeal({ size = 128 }: { size?: number }) {
   return (
@@ -315,7 +315,7 @@ export function CollectionSeal({ size = 128 }: { size?: number }) {
   );
 }
 
-/* ── Fleuron — a small typographic leaf ─────────────────────────── */
+/* ── Fleuron: a small typographic leaf ─────────────────────────── */
 
 export function Fleuron({ size = 12 }: { size?: number }) {
   return (

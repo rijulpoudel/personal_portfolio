@@ -71,7 +71,6 @@ export default async function SpecimenSheet({ params }: Props) {
         style={{ fontStyle: "italic", color: "var(--ink-faded)", marginTop: "0.5rem" }}
       >
         {s.commonName}
-        {s.nepali && <> — “{s.nepali.meaning}” in Nepali</>}
       </p>
 
       {s.determinations?.some((d) => d.winner) && (
@@ -97,9 +96,6 @@ export default async function SpecimenSheet({ params }: Props) {
         }}
       >
         <div>
-          <p className="voice-reading" style={{ marginBottom: "1.5rem" }}>
-            {s.description}
-          </p>
           <div
             className="no-print"
             style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}
@@ -188,8 +184,8 @@ export default async function SpecimenSheet({ params }: Props) {
           <div style={{ display: "grid", gap: "1rem", maxWidth: "640px" }}>
             {s.annotations.map((a, i) => (
               <div key={i} className="annotation-slip">
-                <span className="ann-date">ann. {a.date} — </span>
-                {a.text} <span className="ann-date">— R.P.</span>
+                <span className="ann-date">ann. {a.date}. </span>
+                {a.text} <span className="ann-date">· R.P.</span>
               </div>
             ))}
           </div>
@@ -200,7 +196,7 @@ export default async function SpecimenSheet({ params }: Props) {
         className="voice-type print-note"
         style={{ marginTop: "4rem", color: "var(--ink-faded)" }}
       >
-        This sheet is designed to be printed — ⌘P yields a catalog card.
+        This sheet is designed to be printed. ⌘P yields a catalog card.
       </p>
     </article>
   );

@@ -4,7 +4,7 @@ import { getAllPosts } from "@/lib/mdx";
 
 export const metadata: Metadata = {
   title: "Field Notes",
-  description: "Numbered notes from the field — on software, collections, and craft.",
+  description: "Numbered notes from the field: on software, collections, and craft.",
 };
 
 export default function FieldNotesPage() {

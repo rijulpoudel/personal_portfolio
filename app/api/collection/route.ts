@@ -3,7 +3,7 @@ import { siteConfig } from "@/data/siteConfig";
 
 /**
  * The catalog, machine-readable.
- * Fields follow Darwin Core (https://dwc.tdwg.org) where they fit —
+ * Fields follow Darwin Core (https://dwc.tdwg.org) where they fit;
  * the same standard the Specify platform speaks.
  *
  *   curl rijulpoudel.com/api/collection
@@ -15,7 +15,7 @@ export async function GET() {
     scientificName: s.title,
     vernacularName: s.commonName,
     ...(s.nepali && {
-      nameAccordingTo: `${s.nepali.script} — Nepali, "${s.nepali.meaning}"`,
+      nameAccordingTo: `${s.nepali.script} · Nepali, "${s.nepali.meaning}"`,
     }),
     recordedBy: s.collectors,
     eventDate: s.eventDate,
@@ -38,7 +38,7 @@ export async function GET() {
   return Response.json(
     {
       meta: {
-        title: "Catalog of Work — R. Poudel, Collector",
+        title: "Catalog of Work · R. Poudel, Collector",
         recordedBy: siteConfig.author.name,
         institution: siteConfig.url,
         standard: "Darwin Core, applied loosely and with affection",

@@ -34,7 +34,7 @@ export default async function FieldNotePage({ params }: Props) {
         </Link>
 
         <p className="voice-type" style={{ color: "var(--ink-faded)", marginTop: "2.5rem" }}>
-          Lawrence, KS — {meta.date} —
+          Lawrence, KS · {meta.date}
         </p>
         <h1 className="display-title" style={{ marginTop: "0.5rem", marginBottom: "2rem" }}>
           {meta.title}

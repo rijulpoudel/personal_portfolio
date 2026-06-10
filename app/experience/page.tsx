@@ -4,7 +4,7 @@ import { experiences } from "@/data/experience";
 export const metadata: Metadata = {
   title: "Deposits & Determinations",
   description:
-    "Where the collector has been deposited: Specify Collections Consortium, KU IT, and field work in Kathmandu.",
+    "Where the collector has been deposited: Specify Collections Consortium, KU IT, and field work in Nepal.",
 };
 
 export default function ExperiencePage() {
@@ -21,8 +21,7 @@ export default function ExperiencePage() {
         style={{ color: "var(--ink-faded)", maxWidth: "560px", marginBottom: "3rem" }}
       >
         In a museum, a deposit is a specimen placed in an institution&apos;s
-        permanent care. These are mine — most recently with the people who
-        build the software that natural history collections run on.
+        permanent care. These are mine.
       </p>
 
       {experiences.map((e) => (
@@ -58,7 +57,7 @@ export default function ExperiencePage() {
             <div style={{ marginTop: "1rem", display: "grid", gap: "0.625rem" }}>
               {e.annotations.map((a, i) => (
                 <div key={i} className="annotation-slip">
-                  <span className="ann-date">ann. — </span>
+                  <span className="ann-date">ann. </span>
                   {a.url ? (
                     <a className="quiet-link" href={a.url} target="_blank" rel="noopener noreferrer">
                       {a.text}

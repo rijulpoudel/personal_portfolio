@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 /**
  * The EXAMINED stamp. The first time a visitor opens a specimen sheet,
  * the stamp thunks on with that day's date and is remembered in
- * localStorage — revisits find the sheet already stamped.
+ * localStorage, so revisits find the sheet already stamped.
  * Progressive enhancement only: renders nothing without JavaScript.
  */
 

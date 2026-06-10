@@ -13,7 +13,7 @@ export interface Experience {
   endDate?: string;
   description: string[];
   techStack?: string[];
-  /** Dated slips appended over time — e.g. merged PRs. */
+  /** Dated slips appended over time, e.g. merged PRs. */
   annotations?: DepositAnnotation[];
 }
 
@@ -23,18 +23,18 @@ export const experiences: Experience[] = [
     role: "Software Developer",
     company: "Specify Collections Consortium",
     context:
-      "KU Biodiversity Institute — open-source collections-management software used by natural history museums and herbaria worldwide.",
+      "KU Biodiversity Institute: open-source collections-management software used by natural history museums and herbaria worldwide.",
     location: "Lawrence, KS",
     startDate: "2026", // TODO(rijul): confirm exact start month
     description: [
       "Developing Specify 7, the open-source platform natural history collections use to catalog, manage, and publish specimen data.",
       "Working across a Django/Python backend and a React/TypeScript frontend backed by MySQL, in a production codebase serving institutions in dozens of countries.",
-      "Contributions are public — merged pull requests appear below as they land.",
+      "Contributions are public; merged pull requests appear below as they land.",
     ],
     techStack: ["Django", "Python", "React", "TypeScript", "MySQL"],
     annotations: [
       // TODO(rijul): add merged PRs as they land, e.g.:
-      // { text: "PR #1234 — short description of the change", url: "https://github.com/specify/specify7/pull/1234" },
+      // { text: "PR #1234: short description of the change", url: "https://github.com/specify/specify7/pull/1234" },
     ],
   },
   {

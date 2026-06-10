@@ -9,6 +9,7 @@ import {
   FleuronDivider,
   PlateIllustration,
 } from "@/components/ui/engravings";
+import ReadingLens from "@/components/ui/ReadingLens";
 
 export const revalidate = 21600; // refresh field activity every 6 hours
 
@@ -55,6 +56,28 @@ async function getFieldActivity(): Promise<ActivityLine[]> {
   }
 }
 
+/* ─── Microtext: legible only under the reading lens ─────────────── */
+
+function CoverMicrotext() {
+  return (
+    <>
+      <span style={{ top: "12%", left: "26%" }}>
+        no template was used in the making of this catalog
+      </span>
+      <span style={{ top: "31%", left: "58%" }}>
+        लाली गुराँस for Nepal · sunflower for Kansas · drawn by hand, point by point
+      </span>
+      <span style={{ top: "55%", left: "34%" }}>
+        if you can read this, you have found the reading lens
+      </span>
+      <span style={{ top: "72%", left: "57%" }}>
+        mention the lens in your email and I will know you truly looked
+      </span>
+      <span style={{ top: "84%", left: "20%" }}>भरतपुर, चितवन → लरेन्स, क्यान्सस</span>
+    </>
+  );
+}
+
 /* ─── Page ────────────────────────────────────────────────────────── */
 
 export default async function LedgerPage() {
@@ -64,105 +87,101 @@ export default async function LedgerPage() {
 
   return (
     <div className="container-page">
-      {/* ── Cover sheet ─────────────────────────────────────────── */}
+      {/* ── Cover sheet, under the reading lens ─────────────────── */}
       <section
         style={{
-          paddingBlock: "clamp(3.5rem, 9vh, 7rem) clamp(2.5rem, 6vh, 4.5rem)",
+          paddingBlock: "clamp(3rem, 8vh, 6rem) clamp(2.5rem, 6vh, 4rem)",
           textAlign: "center",
-          position: "relative",
         }}
       >
-        <div className="cover-seal no-print" aria-hidden="true">
-          <CollectionSeal size={124} />
-        </div>
+        <ReadingLens micro={<CoverMicrotext />}>
+          <div className="cover-seal no-print" aria-hidden="true">
+            <CollectionSeal size={124} />
+          </div>
 
-        <div className="rule-double" style={{ paddingTop: "2.25rem" }}>
-          <p className="voice-institutional">
-            University of Kansas · Lawrence
-          </p>
-          <p className="voice-institutional" style={{ marginTop: "0.5rem" }}>
-            Catalog of Work, Software & Observations
-          </p>
+          <div className="rule-double" style={{ paddingTop: "2.25rem" }}>
+            <p className="voice-institutional">
+              University of Kansas · Lawrence
+            </p>
+            <p className="voice-institutional" style={{ marginTop: "0.5rem" }}>
+              Catalog of Work, Software & Observations
+            </p>
 
-          <div
-            style={{
-              marginTop: "2rem",
-              color: "var(--ink)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Frontispiece width={210} />
-            <p
-              className="voice-type"
+            <div
               style={{
-                fontStyle: "italic",
-                color: "var(--ink-faded)",
-                fontSize: "0.6875rem",
-                marginTop: "0.25rem",
+                marginTop: "2rem",
+                color: "var(--ink)",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
-              Rhododendron arboreum (लाली गुराँस) · Helianthus annuus — the
-              collector&apos;s two localities.
-            </p>
-          </div>
+              <Frontispiece width={210} />
+              <p
+                className="voice-type"
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--ink-faded)",
+                  fontSize: "0.6875rem",
+                  marginTop: "0.25rem",
+                }}
+              >
+                Rhododendron arboreum (लाली गुराँस) · Helianthus annuus
+              </p>
+            </div>
 
-          <h1 className="display-name" style={{ marginTop: "1.75rem" }}>
-            Rijul Poudel
-          </h1>
-          <p
-            className="voice-reading"
-            style={{ fontStyle: "italic", color: "var(--ink-faded)", marginTop: "0.75rem" }}
-          >
-            collector &amp; engineer · काठमाडौँ → Lawrence, Kansas
-          </p>
-
-          <div style={{ marginTop: "2.25rem", lineHeight: 1.9 }}>
-            <p className="voice-reading">
-              Software Developer, Specify Collections Consortium
-            </p>
-            <p className="voice-type" style={{ color: "var(--ink-faded)" }}>
-              B.S. Computer Science, University of Kansas — expected 2027
-            </p>
-          </div>
-
-          <p
-            className="voice-type-caps"
-            style={{ marginTop: "2.25rem", color: "var(--ink-faded)" }}
-          >
-            Accessions: {specimens.length}
-            {activity[0] && <> · Last field activity: {activity[0].date}</>}
-          </p>
-
-          <div
-            className="no-print"
-            style={{
-              marginTop: "2rem",
-              paddingBottom: "2.25rem",
-              display: "flex",
-              gap: "1.25rem",
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <a className="type-link" href="#ledger">
-              Open the Ledger ↓
-            </a>
-            <a className="type-link" href="/resume.pdf" target="_blank" rel="noopener">
-              Résumé (PDF)
-            </a>
-            <a
-              className="type-link"
-              href={siteConfig.author.github}
-              target="_blank"
-              rel="noopener noreferrer"
+            <h1 className="display-name" style={{ marginTop: "1.75rem" }}>
+              Rijul Poudel
+            </h1>
+            <p
+              className="voice-reading"
+              style={{ fontStyle: "italic", color: "var(--ink-faded)", marginTop: "0.75rem" }}
             >
-              GitHub
-            </a>
+              collector &amp; engineer · भरतपुर, चितवन → Lawrence, Kansas
+            </p>
+
+            <div style={{ marginTop: "2rem", lineHeight: 1.9 }}>
+              <p className="voice-reading">
+                Software Developer, Specify Collections Consortium
+              </p>
+              <p className="voice-type" style={{ color: "var(--ink-faded)" }}>
+                B.S. Computer Science, University of Kansas · 2027
+              </p>
+            </div>
+
+            <div
+              className="no-print"
+              style={{
+                marginTop: "2rem",
+                display: "flex",
+                gap: "1.25rem",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <a className="type-link" href="#ledger">
+                Open the Ledger ↓
+              </a>
+              <a className="type-link" href="/resume.pdf" target="_blank" rel="noopener">
+                Résumé (PDF)
+              </a>
+              <a
+                className="type-link"
+                href={siteConfig.author.github}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+            </div>
+
+            <p className="lens-hint voice-type" style={{ paddingBottom: "2rem" }}>
+              field equipment: a reading lens is provided. hover the cover;
+              the fine print rewards it.
+            </p>
           </div>
-        </div>
-        <div className="rule-double" />
+          <div className="rule-double" />
+        </ReadingLens>
       </section>
 
       {/* ── The Accession Ledger ────────────────────────────────── */}
@@ -210,37 +229,26 @@ export default async function LedgerPage() {
           className="voice-type"
           style={{ marginTop: "1rem", color: "var(--ink-faded)" }}
         >
-          ● holotype — the specimen that defines the collection. Open any row
-          for its full sheet.
+          ● holotype. Open any row for its sheet.
         </p>
       </section>
 
       <FleuronDivider />
 
-      {/* ── Current deposit ─────────────────────────────────────── */}
+      {/* ── Current deposit, kept brief ─────────────────────────── */}
       <section>
         <h2 className="section-heading">Current Deposit</h2>
         <div className="deposit">
           <div className="deposit-kicker">
-            <span>No. {currentDeposit.accession} · deposit</span>
+            <span>No. {currentDeposit.accession}</span>
             <span>
               {currentDeposit.startDate} – {currentDeposit.endDate ?? "present"}
             </span>
           </div>
           <p className="deposit-org">{currentDeposit.company}</p>
-          <p className="deposit-role">
+          <p className="deposit-role" style={{ marginBottom: 0 }}>
             {currentDeposit.role} · {currentDeposit.location}
           </p>
-          {currentDeposit.context && (
-            <p className="voice-reading" style={{ fontSize: "0.9375rem", marginBottom: "0.875rem" }}>
-              {currentDeposit.context}
-            </p>
-          )}
-          {currentDeposit.techStack && (
-            <p className="deposit-substrate">
-              Substrate: {currentDeposit.techStack.join(" · ")}
-            </p>
-          )}
           <p style={{ marginTop: "1rem" }}>
             <Link className="type-link" href="/experience">
               All deposits →
@@ -259,9 +267,6 @@ export default async function LedgerPage() {
               <span>{a.text}</span>
             </p>
           ))}
-          <p className="voice-type" style={{ marginTop: "0.875rem", color: "var(--ink-faded)" }}>
-            Recorded automatically from public GitHub activity.
-          </p>
         </section>
       )}
     </div>

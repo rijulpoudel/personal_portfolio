@@ -17,7 +17,7 @@ export default function Navbar() {
     <header className="site-nav">
       <nav className="container-page site-nav-inner" aria-label="Main">
         <Link href="/" className="nav-brand">
-          R. Poudel — Catalog of Work
+          R. Poudel · Catalog of Work
         </Link>
         <div className="nav-links">
           {siteConfig.nav.map((item) => (

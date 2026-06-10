@@ -7,7 +7,7 @@ import { siteConfig } from "@/data/siteConfig";
 export const metadata: Metadata = {
   title: "The Collector",
   description:
-    "Poudel, Rijul (b. Kathmandu, Nepal). Collector active Lawrence, Kansas, 2023–. Fields: web systems, collections software, photography.",
+    "Poudel, Rijul (b. Bharatpur, Chitwan, Nepal). Collector active Lawrence, Kansas, 2023–. Fields: web systems, collections software, photography.",
 };
 
 export default function AboutPage() {
@@ -20,7 +20,7 @@ export default function AboutPage() {
       <h1 className="display-title" style={{ marginBottom: "2.5rem" }}>
         POUDEL, RIJUL{" "}
         <span style={{ fontWeight: 400, fontSize: "0.6em", color: "var(--ink-faded)" }}>
-          (b. Kathmandu, Nepal · काठमाडौँ)
+          (b. Bharatpur, Chitwan · भरतपुर, चितवन)
         </span>
       </h1>
 
@@ -41,30 +41,28 @@ export default function AboutPage() {
         </p>
         <p>
           I build software for the people who keep the world&apos;s natural
-          history. At the Specify Collections Consortium — based at the KU
-          Biodiversity Institute — I work on Specify 7, the open-source
-          platform museums and herbaria around the world use to catalog their
-          specimens. It is the rare first job where the code you write helps
-          keep two hundred years of collected knowledge findable.
+          history. At the Specify Collections Consortium, based at the KU
+          Biodiversity Institute, I work on Specify 7: the open-source
+          platform museums and herbaria worldwide use to catalog their
+          specimens.
         </p>
         <p>
           I&apos;m studying Computer Science with a Data Science minor at the
-          University of Kansas (Honors Program, Dean&apos;s List, International
-          Excellence Award, class of 2027). Outside of coursework I build at
-          hackathons — most recently Aawaj, a tamper-proof civic reporting
-          dApp that took Best Beginner Track at the Midwest Blockathon — and I
-          care as much about how software feels as how it works.
+          University of Kansas (Honors Program, Dean&apos;s List, class of
+          2027). Outside of coursework I build at hackathons; the most recent,
+          Aawaj, took Best Beginner Track at the Midwest Blockathon. I care as
+          much about how software feels as how it works.
         </p>
         <p>
           The other half of my practice is behind a camera.{" "}
           <a className="quiet-link" href="https://crafteako.com" target="_blank" rel="noopener noreferrer">
             Crafteako
           </a>{" "}
-          is my photography and videography studio; its website is also the
-          only project in this catalog built with no framework at all, on
-          purpose. Before Kansas there was Kathmandu: math olympiad campaigns,
-          a computational biology research program, and the habit of
-          collecting things carefully.
+          is my photography and videography studio, and its website is the
+          only specimen in this catalog built with no framework at all, on
+          purpose. Before Kansas there was Bharatpur: math olympiad
+          campaigns, a computational biology research program, and the habit
+          of collecting things carefully.
         </p>
         <p>
           Correspondence:{" "}

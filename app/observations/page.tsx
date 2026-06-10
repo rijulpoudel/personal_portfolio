@@ -6,7 +6,7 @@ import { PlateIllustration } from "@/components/ui/engravings";
 export const metadata: Metadata = {
   title: "Field Observations",
   description:
-    "Photographs from the field, each with its collection data — date, locality, camera, exposure.",
+    "Photographs from the field, each with its collection data: date, locality, camera, exposure.",
 };
 
 export default function ObservationsPage() {
@@ -22,12 +22,12 @@ export default function ObservationsPage() {
         className="voice-reading"
         style={{ color: "var(--ink-faded)", maxWidth: "560px", marginBottom: "3.5rem" }}
       >
-        Every observation is recorded with its collection data: date, locality,
-        instrument, exposure. The complete field archive lives at{" "}
+        Each one recorded with its collection data: date, locality,
+        instrument, exposure. The full archive lives at{" "}
         <a className="quiet-link" href="https://crafteako.com" target="_blank" rel="noopener noreferrer">
           Crafteako
         </a>
-        , my photography &amp; videography studio.
+        .
       </p>
 
       {observations.length === 0 ? (
@@ -36,17 +36,17 @@ export default function ObservationsPage() {
           <figcaption className="plate-roman">Plate I</figcaption>
           <PlateIllustration kind="camera" size={168} className="plate-art" />
           <p className="plate-caption">
-            fig. 1 — field camera, bellows type. The instrument of observation.
+            fig. 1. field camera, bellows type. The instrument of observation.
           </p>
         </figure>
         <div className="annotation-slip" style={{ maxWidth: "480px" }}>
-          <span className="ann-date">ann. 2026 — </span>
-          The field photographs in this catalog are currently being digitized.
-          Until then, the full archive is on view at{" "}
+          <span className="ann-date">ann. 2026. </span>
+          The field photographs in this catalog are being digitized. Until
+          then, the archive is on view at{" "}
           <a className="quiet-link" href="https://crafteako.com" target="_blank" rel="noopener noreferrer">
             crafteako.com
           </a>
-          . <span className="ann-date">— R.P.</span>
+          . <span className="ann-date">· R.P.</span>
         </div>
         </>
       ) : (

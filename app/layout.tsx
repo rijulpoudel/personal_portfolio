@@ -31,7 +31,7 @@ const notoDevanagari = Noto_Serif_Devanagari({
 export const metadata: Metadata = {
   title: {
     default: siteConfig.title,
-    template: "%s — Catalog of Work · R. Poudel",
+    template: "%s · Catalog of Work · R. Poudel",
   },
   description: siteConfig.description,
   metadataBase: new URL(siteConfig.url),
