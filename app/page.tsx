@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ledgerOrder } from "@/data/collection";
 import { experiences } from "@/data/experience";
 import { siteConfig } from "@/data/siteConfig";
@@ -98,6 +99,18 @@ export default async function LedgerPage() {
           <div className="cover-seal no-print" aria-hidden="true">
             <CollectionSeal size={124} />
           </div>
+
+          <figure className="cover-portrait">
+            <Image
+              src="/images/profile.jpg"
+              alt="Rijul Poudel"
+              width={150}
+              height={200}
+              priority
+              style={{ width: "100%", height: "auto", display: "block" }}
+            />
+            <figcaption className="voice-type">the collector</figcaption>
+          </figure>
 
           <div className="rule-double" style={{ paddingTop: "2.25rem" }}>
             <p className="voice-institutional">

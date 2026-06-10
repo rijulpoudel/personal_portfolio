@@ -635,6 +635,61 @@ a { color: inherit; }
   .cover-seal { display: none; }
 }
 
+/* The collector's photograph, taped to the cover like an old print. */
+.cover-portrait {
+  position: absolute;
+  top: 6.5rem;
+  left: clamp(0rem, 3vw, 2.5rem);
+  width: clamp(120px, 11vw, 150px);
+  margin: 0;
+  background: var(--label-paper);
+  border: 1px solid var(--rule);
+  box-shadow: 2px 3px 0 var(--shadow-pin);
+  padding: 0.625rem 0.625rem 0.375rem;
+  transform: rotate(-2.5deg);
+  z-index: 2;
+}
+
+.cover-portrait img {
+  filter: grayscale(0.85) sepia(0.32) contrast(0.92) brightness(1.03);
+}
+
+.cover-portrait figcaption {
+  text-align: center;
+  font-size: 0.625rem;
+  font-style: italic;
+  color: var(--ink-faded);
+  margin-top: 0.375rem;
+}
+
+.cover-portrait::before,
+.cover-portrait::after {
+  content: "";
+  position: absolute;
+  width: 3.5rem;
+  height: 1.125rem;
+  background: var(--tape);
+  border: 1px solid var(--tape-edge);
+  top: -0.55rem;
+}
+.cover-portrait::before {
+  left: -1.125rem;
+  transform: rotate(-38deg);
+}
+.cover-portrait::after {
+  right: -1.125rem;
+  transform: rotate(38deg);
+}
+
+/* Below 900px the cover narrows; the print joins the flow, centered. */
+@media (max-width: 900px) {
+  .cover-portrait {
+    position: static;
+    margin: 2.25rem auto 0;
+    transform: rotate(-2deg);
+  }
+}
+
 /* Small engraving glyphs in the ledger. */
 .ledger-glyph {
   display: inline-block;
