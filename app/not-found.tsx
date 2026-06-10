@@ -1,11 +1,15 @@
 import Link from "next/link";
+import { PlateIllustration } from "@/components/ui/engravings";
 
 export default function NotFound() {
   return (
-    <div className="container-sheet" style={{ paddingBlock: "7rem", textAlign: "center" }}>
+    <div className="container-sheet" style={{ paddingBlock: "6rem", textAlign: "center" }}>
       <p className="voice-institutional" style={{ marginBottom: "1.5rem" }}>
         Catalog of Work · R. Poudel, Collector
       </p>
+      <div style={{ color: "var(--ink-faded)", marginBottom: "1.5rem" }}>
+        <PlateIllustration kind="lens" size={120} />
+      </div>
       <h1 className="display-title" style={{ marginBottom: "1rem" }}>
         Specimen not found.
       </h1>

@@ -578,6 +578,121 @@ a { color: inherit; }
 }
 .storage-toggle .lit { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 
+/* ─── Engravings: plates, seal, glyphs, portrait ─────────────────── */
+
+/* A figure plate, framed like a page from a field guide. */
+.plate {
+  margin: 0;
+  max-width: 300px;
+  padding: 1.25rem 1rem 1rem;
+  border: 1px solid var(--rule);
+  outline: 1px solid var(--rule);
+  outline-offset: 4px;
+  text-align: center;
+  color: var(--ink);
+}
+
+.plate-roman {
+  font-family: var(--font-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+  font-size: 0.6875rem;
+  color: var(--ink-faded);
+  margin-bottom: 0.875rem;
+}
+
+.plate-art {
+  display: block;
+  margin-inline: auto;
+  opacity: 0.85;
+}
+
+.plate-caption {
+  font-family: var(--font-type);
+  font-style: italic;
+  font-size: 0.75rem;
+  color: var(--ink-faded);
+  margin-top: 0.875rem;
+  line-height: 1.55;
+}
+
+/* The circular collection seal on the cover sheet. */
+.cover-seal {
+  position: absolute;
+  top: 5rem;
+  right: clamp(0rem, 4vw, 3rem);
+  color: var(--stamp-violet);
+  opacity: 0.7;
+  transform: rotate(-12deg);
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  z-index: 1;
+}
+.dark .cover-seal { mix-blend-mode: normal; opacity: 0.55; }
+
+@media (max-width: 900px) {
+  .cover-seal { display: none; }
+}
+
+/* Small engraving glyphs in the ledger. */
+.ledger-glyph {
+  display: inline-block;
+  vertical-align: -0.2em;
+  margin-right: 0.5rem;
+  color: var(--ink-faded);
+  opacity: 0.8;
+}
+
+/* The collector's portrait — a photograph taped into the file. */
+.portrait-mount {
+  position: relative;
+  margin: 0;
+  max-width: 260px;
+  background: var(--label-paper);
+  border: 1px solid var(--rule);
+  box-shadow: 2px 3px 0 var(--shadow-pin);
+  padding: 0.875rem 0.875rem 0.5rem;
+  transform: rotate(-1.4deg);
+}
+
+.portrait-mount img {
+  filter: grayscale(0.25) sepia(0.15) contrast(0.97);
+}
+
+.portrait-mount::before,
+.portrait-mount::after {
+  content: "";
+  position: absolute;
+  width: 4.5rem;
+  height: 1.375rem;
+  background: var(--tape);
+  border: 1px solid var(--tape-edge);
+  top: -0.7rem;
+}
+.portrait-mount::before {
+  left: -1.375rem;
+  transform: rotate(-38deg);
+}
+.portrait-mount::after {
+  right: -1.375rem;
+  transform: rotate(38deg);
+}
+
+:root {
+  --tape: rgba(214, 202, 178, 0.5);
+  --tape-edge: rgba(38, 34, 30, 0.08);
+}
+.dark {
+  --tape: rgba(255, 250, 240, 0.07);
+  --tape-edge: rgba(255, 250, 240, 0.06);
+}
+
+@media (max-width: 760px) {
+  .bio-grid { grid-template-columns: 1fr !important; }
+  .portrait-mount { margin-top: 1rem; }
+}
+
 /* ─── Prose (field notes, biography) ─────────────────────────────── */
 
 .prose-archive p {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { books } from "@/data/books";
 import { movies } from "@/data/movies";
 import { siteConfig } from "@/data/siteConfig";
@@ -23,6 +24,16 @@ export default function AboutPage() {
         </span>
       </h1>
 
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "minmax(min(100%, 380px), 640px) auto",
+          gap: "3rem",
+          alignItems: "start",
+          flexWrap: "wrap",
+        }}
+        className="bio-grid"
+      >
       <div className="prose-archive" style={{ maxWidth: "640px" }}>
         <p className="voice-type" style={{ color: "var(--ink-faded)" }}>
           Collector active Lawrence, Kansas, 2023–. Fields: web systems,
@@ -61,6 +72,20 @@ export default function AboutPage() {
             {siteConfig.author.email}
           </a>
         </p>
+      </div>
+
+      <figure className="portrait-mount">
+        <Image
+          src="/images/profile.jpg"
+          alt="Rijul Poudel"
+          width={280}
+          height={373}
+          style={{ width: "100%", height: "auto", display: "block" }}
+        />
+        <figcaption className="voice-type" style={{ marginTop: "0.625rem", textAlign: "center", color: "var(--ink-faded)" }}>
+          The collector. Lawrence, Kansas.
+        </figcaption>
+      </figure>
       </div>
 
       {/* ── Specimens kept for personal study ───────────────────── */}

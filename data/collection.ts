@@ -4,6 +4,20 @@
  * Accession numbers are chronological by acquisition and never reused.
  */
 
+export type PlateKind =
+  | "clock"
+  | "marigold"
+  | "megaphone"
+  | "balance"
+  | "lens"
+  | "camera";
+
+export interface Plate {
+  roman: string; // plate number, by accession order
+  kind: PlateKind;
+  caption: string;
+}
+
 export interface DissectionComponent {
   name: string;
   role: string;
@@ -29,6 +43,7 @@ export interface Specimen {
   method: string; // sampling protocol
   substrate: string[]; // tech stack
   status: "live" | "exhibited" | "in-progress" | "archived";
+  plate: Plate;
   holotype?: boolean;
   determinations?: { text: string; winner?: boolean }[];
   links: { github?: string; devpost?: string; live?: string };
@@ -60,6 +75,11 @@ export const specimens: Specimen[] = [
     method: "hackathon, weekend build",
     substrate: ["React", "Solidity", "Polygon Amoy", "ethers.js", "Pinata IPFS", "MetaMask"],
     status: "exhibited",
+    plate: {
+      roman: "VI",
+      kind: "megaphone",
+      caption: "fig. 1 — speaking-trumpet, by which a voice carries.",
+    },
     holotype: true,
     determinations: [
       { text: "Best Beginner Track — WINNER", winner: true },
@@ -123,6 +143,11 @@ export const specimens: Specimen[] = [
     method: "hackathon, weekend build",
     substrate: ["Next.js", "Firebase", "Gemini API", "ElevenLabs", "Twilio"],
     status: "exhibited",
+    plate: {
+      roman: "V",
+      kind: "clock",
+      caption: "fig. 1 — clock face drawn at half past four, the sundowning hour.",
+    },
     links: {
       github: "https://github.com/rijulpoudel",
     },
@@ -182,6 +207,11 @@ export const specimens: Specimen[] = [
     method: "hackathon, weekend build",
     substrate: ["React Native", "Node.js", "Express.js", "Supabase", "Gemini API"],
     status: "exhibited",
+    plate: {
+      roman: "IV",
+      kind: "marigold",
+      caption: "fig. 1 — marigold (सयपत्री), worn for sisters at Tihar.",
+    },
     links: {
       github: "https://github.com/rijulpoudel",
     },
@@ -236,6 +266,11 @@ export const specimens: Specimen[] = [
     method: "8-week course capstone",
     substrate: ["React", "Supabase", "PostgreSQL", "CSS"],
     status: "live",
+    plate: {
+      roman: "III",
+      kind: "balance",
+      caption: "fig. 1 — balance. Fair exchange, weighed.",
+    },
     links: {
       github: "https://github.com/rijulpoudel",
     },
@@ -294,6 +329,11 @@ export const specimens: Specimen[] = [
     method: "48-hr hackathon",
     substrate: ["React Native", "Expo", "Firebase", "Flask", "Python"],
     status: "exhibited",
+    plate: {
+      roman: "II",
+      kind: "lens",
+      caption: "fig. 1 — hand lens, ×10. For finding what was misplaced.",
+    },
     links: {
       devpost: "https://devpost.com",
     },
@@ -348,6 +388,11 @@ export const specimens: Specimen[] = [
     method: "ongoing practice",
     substrate: ["HTML", "CSS", "JavaScript"],
     status: "live",
+    plate: {
+      roman: "I",
+      kind: "camera",
+      caption: "fig. 1 — field camera, bellows type. The instrument of observation.",
+    },
     links: {
       live: "https://crafteako.com",
       github: "https://github.com/rijulpoudel",

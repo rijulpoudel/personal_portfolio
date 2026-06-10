@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { observations } from "@/data/observations";
+import { PlateIllustration } from "@/components/ui/engravings";
 
 export const metadata: Metadata = {
   title: "Field Observations",
@@ -30,6 +31,14 @@ export default function ObservationsPage() {
       </p>
 
       {observations.length === 0 ? (
+        <>
+        <figure className="plate" style={{ marginBottom: "2rem" }}>
+          <figcaption className="plate-roman">Plate I</figcaption>
+          <PlateIllustration kind="camera" size={168} className="plate-art" />
+          <p className="plate-caption">
+            fig. 1 — field camera, bellows type. The instrument of observation.
+          </p>
+        </figure>
         <div className="annotation-slip" style={{ maxWidth: "480px" }}>
           <span className="ann-date">ann. 2026 — </span>
           The field photographs in this catalog are currently being digitized.
@@ -39,6 +48,7 @@ export default function ObservationsPage() {
           </a>
           . <span className="ann-date">— R.P.</span>
         </div>
+        </>
       ) : (
         <div style={{ display: "grid", gap: "4.5rem" }}>
           {observations.map((o) => (

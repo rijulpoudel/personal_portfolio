@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getSpecimen, specimens } from "@/data/collection";
 import SpecimenLabel from "@/components/ui/SpecimenLabel";
 import ExaminedStamp from "@/components/ui/ExaminedStamp";
+import { PlateIllustration } from "@/components/ui/engravings";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -119,6 +120,12 @@ export default async function SpecimenSheet({ params }: Props) {
               </a>
             )}
           </div>
+
+          <figure className="plate" style={{ marginTop: "2.5rem" }}>
+            <figcaption className="plate-roman">Plate {s.plate.roman}</figcaption>
+            <PlateIllustration kind={s.plate.kind} size={168} className="plate-art" />
+            <p className="plate-caption">{s.plate.caption}</p>
+          </figure>
         </div>
 
         <div style={{ position: "relative", maxWidth: "26rem", justifySelf: "end", width: "100%" }}>
