@@ -1,76 +1,98 @@
 import type { Metadata } from "next";
-import PageHeader from "@/components/layout/PageHeader";
+import { books } from "@/data/books";
+import { movies } from "@/data/movies";
+import { siteConfig } from "@/data/siteConfig";
 
 export const metadata: Metadata = {
-  title: "About",
-  description: "A bit about who I am and what I care about.",
+  title: "The Collector",
+  description:
+    "Poudel, Rijul (b. Kathmandu, Nepal). Collector active Lawrence, Kansas, 2023–. Fields: web systems, collections software, photography.",
 };
 
 export default function AboutPage() {
   return (
-    <div className="container-page" style={{ paddingTop: "6rem", paddingBottom: "8rem" }}>
-      <PageHeader title="About" />
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "minmax(0, 640px)",
-          marginTop: "3rem",
-          gap: "1.5rem",
-        }}
-      >
-        <p style={{ lineHeight: "1.8", color: "var(--text-secondary)", fontSize: "1rem" }}>
-          I&apos;m Rijul — a Computer Science student at the{" "}
-          <span style={{ color: "var(--text-primary)" }}>University of Kansas</span> (BS CS,
-          Minor in Data Science, expected May 2027). I&apos;m in the KU Honors Program and on the
-          Dean&apos;s List, which mostly means I spend a lot of time in the library.
-        </p>
+    <div className="container-sheet" style={{ paddingBlock: "3.5rem" }}>
+      {/* ── Collector's biography ───────────────────────────────── */}
+      <p className="voice-institutional" style={{ marginBottom: "0.75rem" }}>
+        Biographical Note · From the Finding Aid
+      </p>
+      <h1 className="display-title" style={{ marginBottom: "2.5rem" }}>
+        POUDEL, RIJUL{" "}
+        <span style={{ fontWeight: 400, fontSize: "0.6em", color: "var(--ink-faded)" }}>
+          (b. Kathmandu, Nepal · काठमाडौँ)
+        </span>
+      </h1>
 
-        <p style={{ lineHeight: "1.8", color: "var(--text-secondary)", fontSize: "1rem" }}>
-          I care about building software that actually works for people — not just technically
-          correct, but thoughtfully designed. I&apos;ve built across the stack: React frontends,
-          Python backends, mobile apps, blockchain experiments, and everything in between. I&apos;m
-          particularly drawn to the intersection of clean engineering and good UX.
+      <div className="prose-archive" style={{ maxWidth: "640px" }}>
+        <p className="voice-type" style={{ color: "var(--ink-faded)" }}>
+          Collector active Lawrence, Kansas, 2023–. Fields: web systems,
+          collections software, photography.
         </p>
-
-        <p style={{ lineHeight: "1.8", color: "var(--text-secondary)", fontSize: "1rem" }}>
-          Outside of code I run{" "}
-          <span style={{ color: "var(--accent)" }}>Crafteako</span> — a photography and
-          videography project where I shoot things that most people walk past. I use Adobe
-          Lightroom and DaVinci Resolve for editing, and I&apos;m always looking for an interesting
-          frame.
+        <p>
+          I build software for the people who keep the world&apos;s natural
+          history. At the Specify Collections Consortium — based at the KU
+          Biodiversity Institute — I work on Specify 7, the open-source
+          platform museums and herbaria around the world use to catalog their
+          specimens. It is the rare first job where the code you write helps
+          keep two hundred years of collected knowledge findable.
         </p>
-
-        <p style={{ lineHeight: "1.8", color: "var(--text-secondary)", fontSize: "1rem" }}>
-          I grew up in Kathmandu, Nepal, and came to Kansas for university. That context shapes how
-          I think about technology — both what it can do and what it tends to assume.
+        <p>
+          I&apos;m studying Computer Science with a Data Science minor at the
+          University of Kansas (Honors Program, Dean&apos;s List, International
+          Excellence Award, class of 2027). Outside of coursework I build at
+          hackathons — most recently Aawaj, a tamper-proof civic reporting
+          dApp that took Best Beginner Track at the Midwest Blockathon — and I
+          care as much about how software feels as how it works.
         </p>
+        <p>
+          The other half of my practice is behind a camera.{" "}
+          <a className="quiet-link" href="https://crafteako.com" target="_blank" rel="noopener noreferrer">
+            Crafteako
+          </a>{" "}
+          is my photography and videography studio; its website is also the
+          only project in this catalog built with no framework at all, on
+          purpose. Before Kansas there was Kathmandu: math olympiad campaigns,
+          a computational biology research program, and the habit of
+          collecting things carefully.
+        </p>
+        <p>
+          Correspondence:{" "}
+          <a className="quiet-link" href={`mailto:${siteConfig.author.email}`}>
+            {siteConfig.author.email}
+          </a>
+        </p>
+      </div>
 
-        {/* Quick facts */}
-        <div
-          style={{
-            marginTop: "1.5rem",
-            paddingTop: "2rem",
-            borderTop: "1px solid var(--border)",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-            gap: "1.5rem",
-          }}
-        >
-          {[
-            { label: "University", value: "University of Kansas" },
-            { label: "Degree", value: "BS Computer Science" },
-            { label: "Minor", value: "Data Science" },
-            { label: "Expected", value: "May 2027" },
-            { label: "Based in", value: "Lawrence, KS" },
-            { label: "From", value: "Kathmandu, Nepal" },
-          ].map(({ label, value }) => (
-            <div key={label}>
-              <p className="label-caps" style={{ marginBottom: "0.25rem" }}>{label}</p>
-              <p style={{ color: "var(--text-primary)", fontSize: "0.9375rem" }}>{value}</p>
+      {/* ── Specimens kept for personal study ───────────────────── */}
+      <section style={{ marginTop: "5rem" }}>
+        <h2 className="section-heading">Specimens Kept for Personal Study</h2>
+
+        <p className="voice-type-caps" style={{ color: "var(--ink-faded)", margin: "1.5rem 0 0.5rem" }}>
+          Books
+        </p>
+        <div>
+          {books.map((b) => (
+            <div key={b.title} className="study-row">
+              <span className="study-title">{b.title}</span>
+              <span className="study-meta">{b.author}</span>
+              <span className="study-meta">{b.yearRead}</span>
             </div>
           ))}
         </div>
-      </div>
+
+        <p className="voice-type-caps" style={{ color: "var(--ink-faded)", margin: "2.5rem 0 0.5rem" }}>
+          Films
+        </p>
+        <div>
+          {movies.map((m) => (
+            <div key={m.title} className="study-row">
+              <span className="study-title">{m.title}</span>
+              <span className="study-meta">{m.genre?.join(", ")}</span>
+              <span className="study-meta">{m.year}</span>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

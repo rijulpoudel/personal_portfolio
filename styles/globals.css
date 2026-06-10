@@ -1,203 +1,636 @@
 @import "tailwindcss";
 
-/* ─── Color System ─────────────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════════════
+   THE COLLECTION — design tokens
+   A natural-history catalog: aged paper, iron-gall ink, typed labels.
+   Red is reserved for the holotype. Violet is reserved for stamps.
+   ════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* Light mode (default) */
-  --bg-primary:     #FAFAF8;
-  --bg-secondary:   #F2F1ED;
-  --text-primary:   #1A1A1A;
-  --text-secondary: #6B6B6B;
-  --text-tertiary:  #9C9C9C;
-  --accent:         #E8593C;
-  --accent-muted:   rgba(232, 89, 60, 0.07);
-  --border:         #E8E8E4;
+  /* Reading room (default) */
+  --paper:        #F2EDE3;
+  --paper-deep:   #E8E1D2;
+  --ink:          #26221E;
+  --ink-faded:    #6E6557;
+  --rule:         #C9BFA8;
+  --type-red:     #A8231D;
+  --stamp-violet: #5B4E8C;
+  --label-paper:  #F6F1E7;
+  --shadow-pin:   rgba(38, 34, 30, 0.12);
 }
 
 .dark {
-  /* Dark mode */
-  --bg-primary:     #0E0E0E;
-  --bg-secondary:   #1A1A1A;
-  --text-primary:   #EDEDED;
-  --text-secondary: #8A8A8A;
-  --text-tertiary:  #5A5A5A;
-  --accent:         #F07052;
-  --accent-muted:   rgba(240, 112, 82, 0.08);
-  --border:         #2A2A2A;
+  /* Storage (lights off in the collection range) */
+  --paper:        #171411;
+  --paper-deep:   #211D17;
+  --ink:          #D9CFBE;
+  --ink-faded:    #8F8372;
+  --rule:         #3B342A;
+  --type-red:     #C4554C;
+  --stamp-violet: #9486C9;
+  --label-paper:  #1D1914;
+  --shadow-pin:   rgba(0, 0, 0, 0.5);
 }
-
-/* ─── Tailwind Theme Extensions ────────────────────────────────── */
 
 @theme {
-  --font-serif: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
-  --font-sans:  var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-  --font-mono:  var(--font-geist-mono), "Courier New", monospace;
-
-  /* Spacing scale from spec */
-  --spacing-xs:  0.5rem;
-  --spacing-sm:  1rem;
-  --spacing-md:  2rem;
-  --spacing-lg:  4rem;
-  --spacing-xl:  8rem;
-  --spacing-2xl: 12rem;
+  --font-serif: var(--font-source-serif), "Source Serif 4", Georgia, serif;
+  --font-type:  var(--font-courier-prime), "Courier Prime", "Courier New", monospace;
 }
 
-/* ─── Base Styles ──────────────────────────────────────────────── */
+/* ─── Base ───────────────────────────────────────────────────────── */
 
 html {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-source-serif), Georgia, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
 }
 
-/* ─── Animations ────────────────────────────────────────────────── */
-
-@keyframes gridDrift {
-  0%   { transform: translate(0, 0); }
-  100% { transform: translate(60px, 60px); }
-}
-
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  background-color: var(--paper);
+  color: var(--ink);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* ─── Typography Scale ─────────────────────────────────────────── */
-
-.text-hero {
-  font-size: clamp(3rem, 8vw, 6rem);
-  line-height: 1.0;
-  font-family: var(--font-instrument-serif), Georgia, serif;
+/* Paper grain — a whisper of tooth, never a parchment JPEG. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-.text-h1 {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+::selection {
+  background: var(--rule);
+  color: var(--ink);
+}
+
+a { color: inherit; }
+
+/* ─── The three voices ───────────────────────────────────────────── */
+
+/* Institutional: engraved letterhead. Serif, caps, letterspaced. */
+.voice-institutional {
+  font-family: var(--font-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--ink-faded);
+}
+
+/* Typewriter: everything typed onto a label. */
+.voice-type {
+  font-family: var(--font-type);
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
+}
+
+.voice-type-caps {
+  font-family: var(--font-type);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+/* Reading: long-form narrative. */
+.voice-reading {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+/* Display headings */
+.display-name {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: clamp(2rem, 6vw, 3.75rem);
   line-height: 1.1;
-  font-family: var(--font-instrument-serif), Georgia, serif;
 }
 
-.text-h2 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  line-height: 1.2;
-  font-family: var(--font-instrument-serif), Georgia, serif;
+.display-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.15;
 }
 
-.text-h3 {
-  font-size: 1.25rem;
-  line-height: 1.3;
-  font-family: var(--font-instrument-serif), Georgia, serif;
+.section-heading {
+  font-family: var(--font-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.section-heading::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid var(--rule);
 }
 
-/* ─── Layout ───────────────────────────────────────────────────── */
+/* ─── Layout ─────────────────────────────────────────────────────── */
 
 .container-page {
-  max-width: 1200px;
-  padding-inline: clamp(1.5rem, 5vw, 6rem);
+  max-width: 1080px;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
   margin-inline: auto;
 }
 
-/* ─── Utility ──────────────────────────────────────────────────── */
-
-.text-accent        { color: var(--accent); }
-.bg-surface         { background-color: var(--bg-secondary); }
-.border-subtle      { border-color: var(--border); }
-.text-meta          { color: var(--text-secondary); }
-.text-hint          { color: var(--text-tertiary); }
-
-.label-caps {
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
+.container-sheet {
+  max-width: 880px;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+  margin-inline: auto;
 }
 
-/* ─── Home page interactive elements ───────────────────────────── */
-
-.icon-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: color 0.15s ease, border-color 0.15s ease;
+/* Double rule — the ledger-cover ornament. */
+.rule-double {
+  border-top: 1px solid var(--rule);
+  position: relative;
 }
-.icon-link:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-.resume-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1.25rem;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: border-color 0.15s ease, color 0.15s ease;
-}
-.resume-btn:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-.skill-card {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.625rem;
-  padding: 0.625rem 1rem;
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 0.875rem;
-  color: var(--text-primary);
-  transition: border-color 0.2s ease;
-}
-.skill-card:hover {
-  border-color: var(--accent);
-}
-
-/* ─── Project card (album cover style) ─────────────────────────── */
-
-.project-card {
+.rule-double::after {
+  content: "";
   display: block;
-  text-decoration: none;
-  color: inherit;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background-color: var(--bg-secondary);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-.project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.14);
-  border-color: transparent;
+  border-top: 1px solid var(--rule);
+  margin-top: 3px;
 }
 
-/* ─── Navigation Links ─────────────────────────────────────────── */
+/* ─── Typewriter link: [ LIKE THIS ] ─────────────────────────────── */
+
+.type-link {
+  font-family: var(--font-type);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.type-link::before { content: "[ "; color: var(--ink-faded); }
+.type-link::after  { content: " ]"; color: var(--ink-faded); }
+.type-link:hover { background: var(--paper-deep); }
+
+.quiet-link {
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+}
+.quiet-link:hover { text-decoration-color: var(--ink); }
+
+/* ─── Navigation ─────────────────────────────────────────────────── */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+
+.site-nav-inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-block: 0.875rem;
+}
+
+.nav-brand {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8125rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.nav-links {
+  display: flex;
+  gap: clamp(0.875rem, 2.5vw, 1.75rem);
+  flex-wrap: wrap;
+}
 
 .nav-link {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
+  font-family: var(--font-type);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
   text-decoration: none;
-  border-bottom: 2px solid transparent;
+  color: var(--ink-faded);
   padding-bottom: 2px;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  border-bottom: 1px solid transparent;
+}
+.nav-link:hover { color: var(--ink); }
+.nav-link.active {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
 }
 
-.nav-link:hover,
-.nav-link.active {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
+/* ─── The Accession Ledger ───────────────────────────────────────── */
+
+.ledger {
+  border-top: 1px solid var(--rule);
+}
+
+.ledger-head,
+.ledger-row {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(12rem, 1.6fr) minmax(9rem, 1.2fr) 5rem minmax(7rem, 1fr) 7.5rem;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.7rem 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.ledger-head {
+  font-family: var(--font-type);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-faded);
+  border-bottom-width: 1px;
+}
+
+.ledger-row {
+  font-family: var(--font-type);
+  font-size: 0.8125rem;
+  text-decoration: none;
+  color: var(--ink);
+  transition: background-color 0.12s ease;
+}
+.ledger-row:hover { background: var(--paper-deep); }
+
+.ledger-acc { color: var(--ink-faded); white-space: nowrap; }
+.ledger-acc .holotype-dot { color: var(--type-red); margin-left: 0.375rem; }
+
+.ledger-specimen {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+.ledger-specimen .nepali {
+  font-weight: 400;
+  color: var(--ink-faded);
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.ledger-row .arrow {
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  color: var(--ink-faded);
+}
+.ledger-row:hover .arrow { opacity: 1; }
+
+.ledger-status { white-space: nowrap; }
+.ledger-status.winner { color: var(--type-red); }
+
+@media (max-width: 860px) {
+  .ledger-head,
+  .ledger-row {
+    grid-template-columns: 7.5rem minmax(10rem, 1.6fr) 5rem 7rem;
+  }
+  .ledger-col-event, .ledger-col-locality { display: none; }
+}
+
+@media (max-width: 540px) {
+  .ledger-head,
+  .ledger-row {
+    grid-template-columns: minmax(9rem, 1.6fr) 5rem 6.5rem;
+    gap: 0.625rem;
+  }
+  .ledger-col-acc { display: none; }
+}
+
+/* ─── The Specimen Label ─────────────────────────────────────────── */
+
+.specimen-label {
+  background: var(--label-paper);
+  border: 1px solid var(--rule);
+  box-shadow: 2px 3px 0 var(--shadow-pin);
+  padding: 1.25rem 1.375rem 1.375rem;
+  font-family: var(--font-type);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  position: relative;
+}
+
+.specimen-label .label-institution {
+  font-family: var(--font-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  font-size: 0.625rem;
+  color: var(--ink-faded);
+  text-align: center;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.625rem;
+  margin-bottom: 0.875rem;
+}
+
+.specimen-label .label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.specimen-label .label-no { color: var(--ink-faded); }
+
+.holotype-mark {
+  color: var(--type-red);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.6875rem;
+}
+
+.specimen-label .label-name {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-top: 0.625rem;
+}
+.specimen-label .label-name .nepali { font-weight: 400; color: var(--ink-faded); }
+
+.specimen-label .label-common {
+  font-style: italic;
+  font-family: var(--font-serif);
+  color: var(--ink-faded);
+  font-size: 0.875rem;
+  margin-bottom: 0.875rem;
+}
+
+.specimen-label dl { margin: 0; }
+.specimen-label .label-field {
+  display: grid;
+  grid-template-columns: 6.25rem 1fr;
+  gap: 0 0.75rem;
+  padding-block: 0.1rem;
+}
+.specimen-label .label-field dt { color: var(--ink-faded); }
+.specimen-label .label-field dd { margin: 0; }
+
+.specimen-label .label-det {
+  margin-top: 0.875rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--rule);
+}
+.specimen-label .label-det .det-line { display: block; }
+.specimen-label .label-det .det-line.winner { color: var(--type-red); }
+
+/* Red bar across the top of a holotype label */
+.specimen-label.is-holotype {
+  border-top: 4px solid var(--type-red);
+}
+
+/* ─── The EXAMINED stamp ─────────────────────────────────────────── */
+
+.stamp {
+  display: inline-block;
+  font-family: var(--font-type);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--stamp-violet);
+  border: 2.5px solid var(--stamp-violet);
+  border-radius: 3px;
+  padding: 0.375rem 0.75rem;
+  line-height: 1.35;
+  text-align: center;
+  opacity: 0.82;
+  mix-blend-mode: multiply;
+  transform: rotate(var(--stamp-rot, -2deg));
+  pointer-events: none;
+}
+.dark .stamp { mix-blend-mode: normal; opacity: 0.9; }
+
+.stamp--inking {
+  animation: stamp-in 0.28s cubic-bezier(0.2, 1.3, 0.4, 1) both;
+}
+
+@keyframes stamp-in {
+  0%   { transform: scale(1.9) rotate(var(--stamp-rot, -2deg)); opacity: 0; }
+  55%  { transform: scale(0.94) rotate(var(--stamp-rot, -2deg)); opacity: 0.95; }
+  100% { transform: scale(1) rotate(var(--stamp-rot, -2deg)); opacity: 0.82; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp--inking { animation: none; }
+}
+
+.stamp-anchor {
+  position: absolute;
+  top: -1.125rem;
+  right: -0.875rem;
+  z-index: 2;
+}
+
+/* ─── Annotation slips ───────────────────────────────────────────── */
+
+.annotation-slip {
+  background: var(--label-paper);
+  border: 1px solid var(--rule);
+  box-shadow: 1px 2px 0 var(--shadow-pin);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-type);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+.annotation-slip .ann-date { color: var(--ink-faded); }
+
+/* ─── Deposits (experience) ──────────────────────────────────────── */
+
+.deposit {
+  border: 1px solid var(--rule);
+  background: var(--label-paper);
+  box-shadow: 2px 3px 0 var(--shadow-pin);
+  padding: 1.5rem 1.75rem;
+}
+
+.deposit + .deposit { margin-top: 2rem; }
+
+.deposit .deposit-kicker {
+  font-family: var(--font-type);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-faded);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.625rem;
+}
+
+.deposit .deposit-org {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.deposit .deposit-role {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--ink-faded);
+  margin-bottom: 0.875rem;
+}
+
+.deposit ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.deposit ul li {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  padding-left: 1.125rem;
+  position: relative;
+  margin-bottom: 0.375rem;
+}
+.deposit ul li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--ink-faded);
+}
+
+.deposit .deposit-substrate {
+  margin-top: 0.875rem;
+  font-family: var(--font-type);
+  font-size: 0.75rem;
+  color: var(--ink-faded);
+}
+
+/* ─── Compact study ledgers (books, films) ───────────────────────── */
+
+.study-row {
+  display: grid;
+  grid-template-columns: minmax(10rem, 1.4fr) minmax(7rem, 1fr) 3.5rem;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.5rem 0.25rem;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-type);
+  font-size: 0.8125rem;
+}
+.study-row .study-title { font-family: var(--font-serif); font-size: 0.9375rem; }
+.study-row .study-meta { color: var(--ink-faded); }
+
+/* ─── Field activity ─────────────────────────────────────────────── */
+
+.activity-line {
+  font-family: var(--font-type);
+  font-size: 0.8125rem;
+  padding-block: 0.45rem;
+  border-bottom: 1px dashed var(--rule);
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.activity-line .activity-date { color: var(--ink-faded); white-space: nowrap; }
+
+/* ─── Footer / colophon ──────────────────────────────────────────── */
+
+.site-footer {
+  margin-top: 6rem;
+  border-top: 1px solid var(--rule);
+  padding-block: 2.5rem 3rem;
+}
+
+.colophon {
+  font-family: var(--font-type);
+  font-size: 0.75rem;
+  line-height: 1.9;
+  color: var(--ink-faded);
+}
+.colophon code {
+  background: var(--paper-deep);
+  padding: 0.1rem 0.375rem;
+  color: var(--ink);
+}
+
+.storage-toggle {
+  font-family: var(--font-type);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink-faded);
+  padding: 0;
+}
+.storage-toggle .lit { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ─── Prose (field notes, biography) ─────────────────────────────── */
+
+.prose-archive p {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+.prose-archive h2 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-top: 2.25rem;
+  margin-bottom: 0.875rem;
+}
+.prose-archive code {
+  font-family: var(--font-type);
+  font-size: 0.875em;
+  background: var(--paper-deep);
+  padding: 0.1rem 0.3rem;
+}
+
+/* ─── Print: catalog cards ───────────────────────────────────────── */
+
+@media print {
+  @page { margin: 1.5cm; }
+
+  body::after { display: none; }
+  .site-nav,
+  .site-footer,
+  .stamp,
+  .print-note,
+  .no-print {
+    display: none !important;
+  }
+
+  html, body { background: #fff; }
+  :root {
+    --paper: #fff;
+    --label-paper: #fff;
+    --ink: #000;
+    --ink-faded: #444;
+    --rule: #999;
+    --shadow-pin: transparent;
+  }
+
+  .specimen-label {
+    box-shadow: none;
+    border: 1.5px solid #000;
+    page-break-inside: avoid;
+    max-width: 6in;
+  }
+
+  .annotation-slip { box-shadow: none; page-break-inside: avoid; }
+  a { text-decoration: none; }
 }

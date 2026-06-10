@@ -1,31 +1,35 @@
-import ExternalLink from "@/components/ui/ExternalLink";
+import { siteConfig } from "@/data/siteConfig";
+import StorageToggle from "@/components/layout/StorageToggle";
 
 export default function Footer() {
   return (
-    <footer
-      style={{
-        borderTop: "1px solid var(--border)",
-        paddingBlock: "3rem",
-      }}
-    >
-      <div
-        className="container-page"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: "1rem",
-        }}
-      >
-        <p style={{ color: "var(--text-tertiary)", fontSize: "0.875rem" }}>
-          © {new Date().getFullYear()} Rijul Poudel
+    <footer className="site-footer">
+      <div className="container-page colophon">
+        <p>
+          <span className="voice-institutional">Colophon</span>
         </p>
-        <div style={{ display: "flex", gap: "1.5rem" }}>
-          <ExternalLink href="https://github.com/rijulpoudel" label="GitHub" />
-          <ExternalLink href="https://linkedin.com/in/rijulpoudel" label="LinkedIn" />
-          <ExternalLink href="mailto:hello@rijulpoudel.com" label="Email" />
-        </div>
+        <p style={{ marginTop: "0.75rem" }}>
+          No. RP-2024-0000 — this catalog itself. Kept by R. Poudel, Lawrence,
+          Kansas; collected continuously since 2024. Set in Source Serif 4 and
+          Courier Prime on aged paper. Built with Next.js; readable without
+          JavaScript, like any good archive.
+        </p>
+        <p>
+          This catalog is machine-readable:{" "}
+          <code>curl {siteConfig.url.replace("https://", "")}/api/collection</code>
+        </p>
+        <p style={{ marginTop: "0.75rem", display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
+          <a className="type-link" href={siteConfig.author.github} target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+          <a className="type-link" href={siteConfig.author.linkedin} target="_blank" rel="noopener noreferrer">
+            LinkedIn
+          </a>
+          <a className="type-link" href={`mailto:${siteConfig.author.email}`}>
+            Correspondence
+          </a>
+          <StorageToggle />
+        </p>
       </div>
     </footer>
   );

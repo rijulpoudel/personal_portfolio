@@ -1,32 +1,45 @@
 import type { Metadata } from "next";
-import { Instrument_Serif } from "next/font/google";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import { Source_Serif_4, Courier_Prime, Noto_Serif_Devanagari } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ThemeProvider from "@/components/layout/ThemeProvider";
+import { siteConfig } from "@/data/siteConfig";
 import "@/styles/globals.css";
 
-const instrumentSerif = Instrument_Serif({
+const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
-  weight: ["400"],
   style: ["normal", "italic"],
-  variable: "--font-instrument-serif",
+  variable: "--font-source-serif",
+  display: "swap",
+});
+
+const courierPrime = Courier_Prime({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-courier-prime",
+  display: "swap",
+});
+
+const notoDevanagari = Noto_Serif_Devanagari({
+  subsets: ["devanagari"],
+  weight: ["400"],
+  variable: "--font-devanagari",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Rijul Poudel",
-    template: "%s — Rijul Poudel",
+    default: siteConfig.title,
+    template: "%s — Catalog of Work · R. Poudel",
   },
-  description: "Software Engineering Student. Building things on the web.",
-  metadataBase: new URL("https://rijulpoudel.com"),
+  description: siteConfig.description,
+  metadataBase: new URL(siteConfig.url),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://rijulpoudel.com",
-    siteName: "Rijul Poudel",
+    url: siteConfig.url,
+    siteName: siteConfig.title,
   },
   icons: {
     icon: "/images/profile.png",
@@ -42,14 +55,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSerif.variable} ${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${sourceSerif.variable} ${courierPrime.variable} ${notoDevanagari.variable}`}
       suppressHydrationWarning
     >
       <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Navbar />
