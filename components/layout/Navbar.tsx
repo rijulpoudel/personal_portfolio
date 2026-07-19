@@ -8,6 +8,9 @@ import { cn } from "@/lib/utils";
 export default function Navbar() {
   const pathname = usePathname();
 
+  // The redesigned landing page renders its own in-hero navigation.
+  if (pathname === "/") return null;
+
   const isActive = (href: string) =>
     href === "/"
       ? pathname === "/" || pathname.startsWith("/specimen")

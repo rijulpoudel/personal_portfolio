@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Source_Serif_4, Courier_Prime, Noto_Serif_Devanagari } from "next/font/google";
+import { Source_Serif_4, Courier_Prime, Noto_Serif_Devanagari, Kanit } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ThemeProvider from "@/components/layout/ThemeProvider";
@@ -25,6 +25,13 @@ const notoDevanagari = Noto_Serif_Devanagari({
   subsets: ["devanagari"],
   weight: ["400"],
   variable: "--font-devanagari",
+  display: "swap",
+});
+
+const kanit = Kanit({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-kanit",
   display: "swap",
 });
 
@@ -55,7 +62,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sourceSerif.variable} ${courierPrime.variable} ${notoDevanagari.variable}`}
+      className={`${sourceSerif.variable} ${courierPrime.variable} ${notoDevanagari.variable} ${kanit.variable}`}
       suppressHydrationWarning
     >
       <body>
