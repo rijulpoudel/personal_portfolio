@@ -3488,7 +3488,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 .chalk-hero__thatsme {
   position: absolute;
   top: -2.9rem;
-  left: 46%;
+  left: 28%;
   display: block;
   width: 132px;
   max-width: none;
