@@ -95,5 +95,6 @@ Do not claim visual verification from code inspection alone.
 - Never work directly on `main`.
 - Current redesign branch: `redesign/portfolio-overhaul`.
 - One logical change per conventional commit.
-- Do not commit or push unless Rijul or the orchestrator explicitly requests it.
+- Rijul's standing order (2026-09-04): commit after EACH change on the working branch. No batching, no waiting to be asked.
+- Do not push unless Rijul explicitly requests it.
 - Never reset, clean, stash, or discard user-owned work to make the tree look tidy.
