@@ -8,8 +8,6 @@ import ChalkBursts from "./ChalkBursts";
 import AskAboutMe from "./AskAboutMe";
 import HeroDoodles, { ThatsMeArrow } from "./HeroDoodles";
 
-const statusLine = "building useful software · shipping real products · always learning";
-
 const aboutNotes = [
   <>
     Software developer at the <strong>Specify Collections Consortium</strong>, helping build tools
@@ -209,12 +207,8 @@ export default async function Hero() {
             </nav>
           </div>
 
-          <p className="chalk-hero__status" aria-label={statusLine}>
-            <span className="chalk-hero__status-track" aria-hidden="true">
-              <span>{statusLine}</span>
-              <span>{statusLine}</span>
-              <span>{statusLine}</span>
-            </span>
+          <p className="chalk-hero__status-line">
+            building useful software. always learning. messi is the goat.
           </p>
         </div>
 
