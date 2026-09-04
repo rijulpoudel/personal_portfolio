@@ -5685,7 +5685,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   position: absolute;
   bottom: 0.35rem;
   left: 0;
-  width: 3rem;
+  width: 3.75rem;
   translate: -50% 0;
   color: #f5ece3;
   pointer-events: none;
@@ -5703,9 +5703,8 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   overflow: visible;
 }
 
-.project-rail__ball-number {
-  font-family: var(--font-gochi-hand), cursive;
-  font-size: 11.5px;
+.project-rail__ball-crest {
+  filter: drop-shadow(0 1px 0 rgba(8, 10, 10, 0.72));
 }
 
 .project-rail__ball-bounce {
@@ -5809,6 +5808,10 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 }
 
 @media (max-width: 760px) {
+  .project-rail--pinned .project-rail__stage {
+    padding-bottom: 4.25rem;
+  }
+
   .project-rail__card {
     flex-basis: 78vw;
   }
