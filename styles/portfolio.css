@@ -5673,8 +5673,11 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 }
 
 .project-rail__linewrap {
+  --project-ball-size: 3.75rem;
+  --project-ball-radius: 1.875rem;
   position: relative;
   flex: 1;
+  margin-inline: var(--project-ball-radius);
   padding-top: 3.2rem;
 }
 
@@ -5698,7 +5701,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   position: absolute;
   bottom: 0.35rem;
   left: 0;
-  width: 3.75rem;
+  width: var(--project-ball-size);
   translate: -50% 0;
   color: #f5ece3;
   pointer-events: none;
