@@ -43,31 +43,78 @@ function CardCover({ slug, title }: { slug: string; title: string }) {
   );
 }
 
-/** Original chalk pup. Trots while the rail moves, idles otherwise. Faces right. */
-function RailPup() {
+/** Barça ball. Dribbles along the rail while the track moves, idles otherwise. Number 10 for Messi. */
+function RailBall() {
   return (
-    <svg className="project-rail__pup" viewBox="0 0 76 60" aria-hidden="true">
-      <g
-        className="project-rail__pup-trot"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={3}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path
-          className="project-rail__pup-tail"
-          d="M17 30 C11 29 8 24 9 18"
-        />
-        <path d="M16 34 C16 26 24 22 34 22 L48 22 C56 22 60 26 60 32 C60 38 54 41 46 41 L28 41 C20 41 16 38 16 34 Z" />
-        <path d="M26 41 L26 52 M31 41 L31 52 M47 41 L47 52 M52 41 L52 52" />
-        <circle cx={60} cy={15} r={8} />
-        <path d="M67 13 C71 13 73 16 73 19" />
-        <path d="M56 8 C54 3 58 1 60 4 C62 7 60 11 58 12" />
-        <circle cx={61} cy={14} r={1.4} fill="currentColor" stroke="none" />
-        <circle cx={71.5} cy={18.5} r={1.6} fill="currentColor" stroke="none" />
-      </g>
-    </svg>
+    <span className="project-rail__ball" aria-hidden="true">
+      <svg viewBox="0 0 60 60">
+        <g className="project-rail__ball-bounce">
+          <g className="project-rail__ball-spin">
+            <circle cx="30" cy="30" r="26" fill="none" stroke="currentColor" strokeWidth="2.6" />
+            {/* Center patch — blaugrana garnet, with Messi's 10 */}
+            <path
+              d="M30 22 L37.6 27.1 L34.7 36 L25.3 36 L22.4 27.1 Z"
+              fill="#A50044"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinejoin="round"
+            />
+            <text
+              className="project-rail__ball-number"
+              x="30"
+              y="33.5"
+              textAnchor="middle"
+              fill="#f5ece3"
+            >
+              10
+            </text>
+            {/* Seams — classic five-spoke football */}
+            <path d="M30 22 L30 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <path d="M37.6 27.1 L54.7 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <path d="M34.7 36 L45.3 51" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <path d="M25.3 36 L14.7 51" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <path d="M22.4 27.1 L5.3 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            {/* Rim patches — blaugrana blue and garnet petals */}
+            <path
+              d="M30 22 C25.5 14.5 24 8.5 30 4 C36 8.5 34.5 14.5 30 22 Z"
+              fill="#004D98"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M37.6 27.1 C44.5 29 51 30.5 54.7 22 C50.4 16.5 43.8 18.6 37.6 27.1 Z"
+              fill="#A50044"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M34.7 36 C38.5 42.5 42.4 47.8 45.3 51 C39.6 53.6 34.6 49 34.7 36 Z"
+              fill="#004D98"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M25.3 36 C21.5 42.5 17.6 47.8 14.7 51 C20.4 53.6 25.4 49 25.3 36 Z"
+              fill="#A50044"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M22.4 27.1 C15.5 29 9 30.5 5.3 22 C9.6 16.5 16.2 18.6 22.4 27.1 Z"
+              fill="#004D98"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinejoin="round"
+            />
+          </g>
+        </g>
+        <ellipse className="project-rail__ball-shadow" cx="30" cy="55.5" rx="11" ry="2.4" fill="currentColor" opacity="0.35" />
+      </svg>
+    </span>
   );
 }
 
@@ -79,7 +126,7 @@ export default function ProjectIndex() {
   const stageRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLDivElement>(null);
-  const pupSlotRef = useRef<HTMLDivElement>(null);
+  const ballSlotRef = useRef<HTMLDivElement>(null);
   const trotTimeout = useRef<number | null>(null);
   const lastProgress = useRef(-1);
 
@@ -92,8 +139,8 @@ export default function ProjectIndex() {
     const stage = stageRef.current;
     const track = trackRef.current;
     const fill = fillRef.current;
-    const pupSlot = pupSlotRef.current;
-    if (!section || !viewport || !stage || !track || !fill || !pupSlot) return;
+    const ballSlot = ballSlotRef.current;
+    if (!section || !viewport || !stage || !track || !fill || !ballSlot) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let raf = 0;
@@ -128,7 +175,7 @@ export default function ProjectIndex() {
       const zoom = 0.94 + 0.06 * Math.min(1, progress / 0.15);
       stage.style.transform = `scale(${zoom.toFixed(4)})`;
       fill.style.transform = `scaleX(${progress.toFixed(4)})`;
-      pupSlot.style.left = `${(progress * 100).toFixed(2)}%`;
+      ballSlot.style.left = `${(progress * 100).toFixed(2)}%`;
       if (progress !== lastProgress.current) {
         lastProgress.current = progress;
         setTrotting(true);
@@ -197,8 +244,8 @@ export default function ProjectIndex() {
                 {NUMBER_WORDS[total] ?? total} builds, one long walk.
               </h2>
               <p>
-                Keep scrolling — the walk drives the rail sideways and the pup
-                keeps pace. Click any card to open its project page.
+                Keep scrolling — the walk drives the rail sideways and the ball
+                keeps dribbling. Click any card to open its project page.
               </p>
             </div>
           </header>
@@ -270,8 +317,8 @@ export default function ProjectIndex() {
               >
                 <div ref={fillRef} className="project-rail__fill" />
               </div>
-              <div ref={pupSlotRef} className="project-rail__pup-slot">
-                <RailPup />
+              <div ref={ballSlotRef} className="project-rail__ball-slot">
+                <RailBall />
               </div>
             </div>
           </div>

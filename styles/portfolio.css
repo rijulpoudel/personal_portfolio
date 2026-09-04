@@ -5375,7 +5375,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   }
 }
 
-/* Projects rail: pinned horizontal walk with a trotting pup. */
+/* Projects rail: pinned horizontal walk with a dribbling Barça ball. */
 .project-rail {
   position: relative;
   overflow-x: clip;
@@ -5681,26 +5681,41 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   transform-origin: 0 50%;
 }
 
-.project-rail__pup-slot {
+.project-rail__ball-slot {
   position: absolute;
   bottom: 0.35rem;
   left: 0;
-  width: 3.4rem;
+  width: 3rem;
   translate: -50% 0;
   color: #f5ece3;
   pointer-events: none;
 }
 
-.project-rail__pup {
+.project-rail__ball {
+  display: block;
+  width: 100%;
+}
+
+.project-rail__ball svg {
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
 }
 
-.project-rail__pup-tail {
+.project-rail__ball-number {
+  font-family: var(--font-gochi-hand), cursive;
+  font-size: 11.5px;
+}
+
+.project-rail__ball-bounce {
   transform-box: fill-box;
-  transform-origin: 85% 90%;
+  transform-origin: 50% 100%;
+}
+
+.project-rail__ball-spin {
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 .project-rail--pinned .project-rail__pin {
@@ -5736,29 +5751,60 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .project-rail--trotting .project-rail__pup-trot {
-    animation: pup-trot 0.28s ease-in-out infinite alternate;
+  .project-rail--trotting .project-rail__ball-bounce {
+    animation: ball-dribble 0.45s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
-  .project-rail--trotting .project-rail__pup-tail {
-    animation: pup-wag 0.3s ease-in-out infinite alternate;
+  .project-rail--trotting .project-rail__ball-spin {
+    animation: ball-roll 0.9s linear infinite;
+  }
+  .project-rail--trotting .project-rail__ball-shadow {
+    animation: ball-shadow 0.45s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 }
 
-@keyframes pup-trot {
-  from {
+@keyframes ball-dribble {
+  0%,
+  100% {
     translate: 0 0;
+    scale: 1 1;
   }
-  to {
-    translate: 0 -2.5px;
+  30% {
+    translate: 0 -14px;
+    scale: 1 1;
+  }
+  60% {
+    translate: 0 0;
+    scale: 1 1;
+  }
+  80% {
+    translate: 0 -5px;
+    scale: 1 1;
   }
 }
 
-@keyframes pup-wag {
+@keyframes ball-roll {
   from {
-    rotate: -10deg;
+    rotate: 0deg;
   }
   to {
-    rotate: 14deg;
+    rotate: 360deg;
+  }
+}
+
+@keyframes ball-shadow {
+  0%,
+  60%,
+  100% {
+    scale: 1;
+    opacity: 0.35;
+  }
+  30% {
+    scale: 0.72;
+    opacity: 0.16;
+  }
+  80% {
+    scale: 0.88;
+    opacity: 0.24;
   }
 }
 
