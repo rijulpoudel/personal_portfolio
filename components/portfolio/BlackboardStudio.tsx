@@ -185,7 +185,7 @@ export default function BlackboardStudio() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || tool === "browse") return;
 
     let resizeFrame = 0;
 
@@ -221,7 +221,7 @@ export default function BlackboardStudio() {
       window.removeEventListener("resize", scheduleResize);
       window.cancelAnimationFrame(resizeFrame);
     };
-  }, []);
+  }, [tool]);
 
   useEffect(() => {
     const cursor = cursorRef.current;
