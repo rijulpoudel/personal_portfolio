@@ -136,7 +136,7 @@ export default function ContactSection() {
                     aria-label={label}
                   >
                     <svg className="footer-orbit" viewBox="0 0 44 44" aria-hidden="true">
-                      <circle cx="22" cy="22" r="20" fill="none" stroke="#e85749" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="6 7" />
+                      <circle cx="22" cy="22" r="20" fill="none" stroke="#e85749" strokeWidth="3.5" strokeLinecap="round" strokeDasharray="6 7" />
                     </svg>
                     <Icon aria-hidden="true" />
                   </a>
