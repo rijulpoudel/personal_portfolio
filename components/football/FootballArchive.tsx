@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { footballPlayers, type FootballPlayer } from "@/data/football";
+import QuestionUniverse from "./QuestionUniverse";
 
 function FootballMark() {
   return (
@@ -141,6 +142,8 @@ export default function FootballArchive() {
           thought, leave one behind.
         </p>
       </section>
+
+      <QuestionUniverse />
 
       <footer className="football-credits">
         <details>
