@@ -485,6 +485,118 @@
   rotate: 7deg;
 }
 
+.football-personal {
+  position: relative;
+  padding: clamp(4rem, 7vw, 6.5rem) max(1rem, calc((100vw - 88rem) / 2));
+  border-top: 0.85rem solid var(--football-gold);
+  background:
+    linear-gradient(rgba(239, 226, 196, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(239, 226, 196, 0.055) 1px, transparent 1px),
+    var(--football-navy);
+  background-size: 2.5rem 2.5rem;
+  color: var(--football-cream);
+}
+
+.football-personal::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 31%;
+  height: 0.85rem;
+  background: var(--football-garnet);
+  content: "";
+  translate: 0 -100%;
+}
+
+.football-personal__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.55fr);
+  align-items: end;
+  gap: 1rem 3rem;
+  margin-bottom: 2rem;
+}
+
+.football-personal__header .football-kicker {
+  grid-column: 1 / -1;
+  color: var(--football-gold);
+}
+
+.football-personal__header h2 {
+  max-width: 10ch;
+  font-family: var(--font-kanit), Impact, sans-serif;
+  font-size: clamp(3rem, 5vw, 5.15rem);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  line-height: 0.82;
+  text-transform: uppercase;
+}
+
+.football-personal__header > p:last-child {
+  max-width: 31rem;
+  color: rgba(239, 226, 196, 0.76);
+  font-family: Georgia, serif;
+  font-size: clamp(1rem, 1.6vw, 1.28rem);
+  line-height: 1.55;
+}
+
+.football-personal__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.football-personal-card {
+  overflow: hidden;
+  border: 2px solid rgba(239, 226, 196, 0.65);
+  background: var(--football-cream);
+  color: var(--football-ink);
+  box-shadow: 0.55rem 0.55rem 0 rgba(237, 187, 0, 0.92);
+}
+
+.football-personal-card:nth-child(2) {
+  box-shadow: 0.55rem 0.55rem 0 rgba(126, 23, 63, 0.95);
+}
+
+.football-personal-card__image {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 2px solid var(--football-ink);
+}
+
+.football-personal-card__image img {
+  object-fit: cover;
+}
+
+.football-personal-card__copy {
+  padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+.football-personal-card__copy span {
+  color: var(--football-garnet);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.football-personal-card__copy h3 {
+  margin: 0.3rem 0 0.5rem;
+  font-family: var(--font-kanit), Impact, sans-serif;
+  font-size: clamp(1.65rem, 3vw, 2.45rem);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.football-personal-card__copy p {
+  max-width: 46ch;
+  font-family: Georgia, serif;
+  line-height: 1.55;
+}
+
 .football-credits {
   display: flex;
   width: min(100% - 2rem, 88rem);
@@ -632,6 +744,28 @@
 
   .football-archive-card figcaption span {
     width: fit-content;
+  }
+
+  .football-personal__header {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .football-personal__header h2 {
+    font-size: clamp(3rem, 13vw, 4.4rem);
+  }
+
+  .football-personal__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .football-personal-card {
+    box-shadow: 0.4rem 0.4rem 0 rgba(237, 187, 0, 0.92);
+  }
+
+  .football-personal-card:nth-child(2) {
+    box-shadow: 0.4rem 0.4rem 0 rgba(126, 23, 63, 0.95);
   }
 
   .football-credits {

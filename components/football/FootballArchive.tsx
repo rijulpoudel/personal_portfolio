@@ -55,6 +55,50 @@ function ArchiveCard({ player }: { player: FootballPlayer }) {
   );
 }
 
+function PersonalFootball() {
+  const personalCards = [
+    {
+      eyebrow: "On my phone",
+      title: "eFootball 2027 Mobile",
+      copy: "I play this way too much. My current squad will sit here once I grab a clean screenshot.",
+      image: "/images/football/efootball-squad-placeholder.svg",
+      alt: "Placeholder for Rijul's current eFootball 2027 Mobile squad screenshot",
+    },
+    {
+      eyebrow: "Every gameweek",
+      title: "Fantasy Premier League",
+      copy: "My current team will live here too, along with the transfers I regret every weekend.",
+      image: "/images/football/fpl-team-placeholder.svg",
+      alt: "Placeholder for Rijul's current Fantasy Premier League team screenshot",
+    },
+  ];
+
+  return (
+    <section className="football-personal" aria-labelledby="football-personal-title">
+      <header className="football-personal__header">
+        <p className="football-kicker">What I&apos;m playing</p>
+        <h2 id="football-personal-title">I play, too.</h2>
+        <p>I watch, argue and then try to build the team myself.</p>
+      </header>
+
+      <div className="football-personal__grid">
+        {personalCards.map((card) => (
+          <article className="football-personal-card" key={card.title}>
+            <div className="football-personal-card__image">
+              <Image src={card.image} alt={card.alt} fill sizes="(max-width: 760px) 92vw, 43vw" />
+            </div>
+            <div className="football-personal-card__copy">
+              <span>{card.eyebrow}</span>
+              <h3>{card.title}</h3>
+              <p>{card.copy}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export default function FootballArchive() {
   return (
     <main className="football-page">
@@ -114,6 +158,8 @@ export default function FootballArchive() {
           ))}
         </div>
       </section>
+
+      <PersonalFootball />
 
       <footer className="football-credits">
         <details>
