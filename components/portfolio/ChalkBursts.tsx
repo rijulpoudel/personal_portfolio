@@ -56,19 +56,16 @@ export default function ChalkBursts() {
   const timers = useRef<number[]>([]);
 
   useEffect(() => {
-    const hero = document.getElementById("top");
     const scheduledTimers = timers.current;
-    if (!hero) return;
 
     const makePop = (event: PointerEvent) => {
       if (event.button !== 0 || document.documentElement.classList.contains("blackboard-draw-mode")) return;
 
-      const rect = hero.getBoundingClientRect();
       const id = nextId.current++;
       const pop: StringPop = {
         id,
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top,
+        x: event.clientX,
+        y: event.clientY,
         strands: buildStrands(id),
       };
 
@@ -80,10 +77,10 @@ export default function ChalkBursts() {
       );
     };
 
-    hero.addEventListener("pointerdown", makePop);
+    document.addEventListener("pointerdown", makePop);
 
     return () => {
-      hero.removeEventListener("pointerdown", makePop);
+      document.removeEventListener("pointerdown", makePop);
       for (const timer of scheduledTimers) window.clearTimeout(timer);
     };
   }, []);

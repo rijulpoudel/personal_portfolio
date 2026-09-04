@@ -4089,8 +4089,8 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 }
 
 .chalk-bursts {
-  position: absolute;
-  z-index: 3;
+  position: fixed;
+  z-index: 80;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
