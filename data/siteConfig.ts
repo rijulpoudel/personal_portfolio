@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "Rijul Poudel",
-  title: "Rijul Poudel · Catalog of Work",
+  title: "Rijul Poudel · Software Developer",
   description:
-    "Software developer at the Specify Collections Consortium. CS at the University of Kansas. A portfolio kept the way a museum keeps a collection.",
+    "Software developer at the Specify Collections Consortium and Computer Science student at the University of Kansas. Selected work across Django, React, TypeScript, and data-heavy systems.",
   url: "https://rijulpoudel.com",
   author: {
     name: "Rijul Poudel",
@@ -12,10 +12,8 @@ export const siteConfig = {
     linkedin: "https://linkedin.com/in/rijulpoudel",
   },
   nav: [
-    { href: "/", label: "Ledger" },
+    { href: "/", label: "Home" },
     { href: "/experience", label: "Experience" },
-    { href: "/observations", label: "Observations" },
-    { href: "/field-notes", label: "Field Notes" },
     { href: "/about", label: "About" },
   ],
 } as const;

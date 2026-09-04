@@ -3,7 +3,7 @@
 /* ════════════════════════════════════════════════════════════════
    THE COLLECTION — design tokens
    A natural-history catalog: aged paper, iron-gall ink, typed labels.
-   Red is reserved for the holotype. Violet is reserved for stamps.
+   Red is reserved for featured projects.
    ════════════════════════════════════════════════════════════════ */
 
 :root {
@@ -20,7 +20,7 @@
 }
 
 .dark {
-  /* Storage (lights off in the collection range) */
+  /* Storage (lights off) */
   --paper:        #171411;
   --paper-deep:   #211D17;
   --ink:          #D9CFBE;
@@ -74,8 +74,8 @@ a { color: inherit; }
 
 /* ─── The three voices ───────────────────────────────────────────── */
 
-/* Institutional: engraved letterhead. Serif, caps, letterspaced. */
-.voice-institutional {
+/* Kicker: small caps label. Serif, caps, letterspaced. */
+.voice-kicker {
   font-family: var(--font-serif);
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -154,7 +154,7 @@ a { color: inherit; }
   margin-inline: auto;
 }
 
-/* Double rule — the ledger-cover ornament. */
+/* Double rule ornament. */
 .rule-double {
   border-top: 1px solid var(--rule);
   position: relative;
@@ -239,14 +239,14 @@ a { color: inherit; }
   border-bottom-color: var(--ink);
 }
 
-/* ─── The Accession Ledger ───────────────────────────────────────── */
+/* ─── The Writing Index ───────────────────────────────────────── */
 
-.ledger {
+.note-index {
   border-top: 1px solid var(--rule);
 }
 
-.ledger-head,
-.ledger-row {
+.note-head,
+.note-row {
   display: grid;
   grid-template-columns: 7.5rem minmax(12rem, 1.6fr) minmax(9rem, 1.2fr) 5rem minmax(7rem, 1fr) 7.5rem;
   gap: 1rem;
@@ -255,7 +255,7 @@ a { color: inherit; }
   border-bottom: 1px solid var(--rule);
 }
 
-.ledger-head {
+.note-head {
   font-family: var(--font-type);
   font-size: 0.6875rem;
   text-transform: uppercase;
@@ -264,60 +264,60 @@ a { color: inherit; }
   border-bottom-width: 1px;
 }
 
-.ledger-row {
+.note-row {
   font-family: var(--font-type);
   font-size: 0.8125rem;
   text-decoration: none;
   color: var(--ink);
   transition: background-color 0.12s ease;
 }
-.ledger-row:hover { background: var(--paper-deep); }
+.note-row:hover { background: var(--paper-deep); }
 
-.ledger-acc { color: var(--ink-faded); white-space: nowrap; }
-.ledger-acc .holotype-dot { color: var(--type-red); margin-left: 0.375rem; }
+.note-num { color: var(--ink-faded); white-space: nowrap; }
+.note-num .featured-dot { color: var(--type-red); margin-left: 0.375rem; }
 
-.ledger-specimen {
+.note-title {
   font-family: var(--font-serif);
   font-size: 0.9375rem;
   font-weight: 600;
 }
-.ledger-specimen .nepali {
+.note-title .nepali {
   font-weight: 400;
   color: var(--ink-faded);
   margin-left: 0.5rem;
   font-size: 0.875rem;
 }
 
-.ledger-row .arrow {
+.note-row .arrow {
   opacity: 0;
   transition: opacity 0.12s ease;
   color: var(--ink-faded);
 }
-.ledger-row:hover .arrow { opacity: 1; }
+.note-row:hover .arrow { opacity: 1; }
 
-.ledger-status { white-space: nowrap; }
-.ledger-status.winner { color: var(--type-red); }
+.note-status { white-space: nowrap; }
+.note-status.winner { color: var(--type-red); }
 
 @media (max-width: 860px) {
-  .ledger-head,
-  .ledger-row {
+  .note-head,
+  .note-row {
     grid-template-columns: 7.5rem minmax(10rem, 1.6fr) 5rem 7rem;
   }
-  .ledger-col-event, .ledger-col-locality { display: none; }
+  .note-col-event, .note-index-col-locality { display: none; }
 }
 
 @media (max-width: 540px) {
-  .ledger-head,
-  .ledger-row {
+  .note-head,
+  .note-row {
     grid-template-columns: minmax(9rem, 1.6fr) 5rem 6.5rem;
     gap: 0.625rem;
   }
-  .ledger-col-acc { display: none; }
+  .note-col-num { display: none; }
 }
 
-/* ─── The Specimen Label ─────────────────────────────────────────── */
+/* ─── The Project Label ─────────────────────────────────────────── */
 
-.specimen-label {
+.project-label {
   background: var(--label-paper);
   border: 1px solid var(--rule);
   box-shadow: 2px 3px 0 var(--shadow-pin);
@@ -328,7 +328,7 @@ a { color: inherit; }
   position: relative;
 }
 
-.specimen-label .label-institution {
+.project-label .label-institution {
   font-family: var(--font-serif);
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -341,16 +341,16 @@ a { color: inherit; }
   margin-bottom: 0.875rem;
 }
 
-.specimen-label .label-row {
+.project-label .label-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 1rem;
 }
 
-.specimen-label .label-no { color: var(--ink-faded); }
+.project-label .label-no { color: var(--ink-faded); }
 
-.holotype-mark {
+.featured-mark {
   color: var(--type-red);
   font-weight: 700;
   text-transform: uppercase;
@@ -358,15 +358,15 @@ a { color: inherit; }
   font-size: 0.6875rem;
 }
 
-.specimen-label .label-name {
+.project-label .label-name {
   font-family: var(--font-serif);
   font-weight: 600;
   font-size: 1.125rem;
   margin-top: 0.625rem;
 }
-.specimen-label .label-name .nepali { font-weight: 400; color: var(--ink-faded); }
+.project-label .label-name .nepali { font-weight: 400; color: var(--ink-faded); }
 
-.specimen-label .label-common {
+.project-label .label-common {
   font-style: italic;
   font-family: var(--font-serif);
   color: var(--ink-faded);
@@ -374,75 +374,34 @@ a { color: inherit; }
   margin-bottom: 0.875rem;
 }
 
-.specimen-label dl { margin: 0; }
-.specimen-label .label-field {
+.project-label dl { margin: 0; }
+.project-label .label-field {
   display: grid;
   grid-template-columns: 6.25rem 1fr;
   gap: 0 0.75rem;
   padding-block: 0.1rem;
 }
-.specimen-label .label-field dt { color: var(--ink-faded); }
-.specimen-label .label-field dd { margin: 0; }
+.project-label .label-field dt { color: var(--ink-faded); }
+.project-label .label-field dd { margin: 0; }
 
-.specimen-label .label-det {
+.project-label .label-awards {
   margin-top: 0.875rem;
   padding-top: 0.75rem;
   border-top: 1px dashed var(--rule);
 }
-.specimen-label .label-det .det-line { display: block; }
-.specimen-label .label-det .det-line.winner { color: var(--type-red); }
+.project-label .label-awards .award-line { display: block; }
+.project-label .label-awards .award-line.winner { color: var(--type-red); }
 
-/* Red bar across the top of a holotype label */
-.specimen-label.is-holotype {
+/* Red bar across the top of a featured label */
+.project-label.is-featured {
   border-top: 4px solid var(--type-red);
 }
 
-/* ─── The EXAMINED stamp ─────────────────────────────────────────── */
+/* stamp retired */
 
-.stamp {
-  display: inline-block;
-  font-family: var(--font-type);
-  font-weight: 700;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--stamp-violet);
-  border: 2.5px solid var(--stamp-violet);
-  border-radius: 3px;
-  padding: 0.375rem 0.75rem;
-  line-height: 1.35;
-  text-align: center;
-  opacity: 0.82;
-  mix-blend-mode: multiply;
-  transform: rotate(var(--stamp-rot, -2deg));
-  pointer-events: none;
-}
-.dark .stamp { mix-blend-mode: normal; opacity: 0.9; }
+/* ─── Note slips ───────────────────────────────────────────── */
 
-.stamp--inking {
-  animation: stamp-in 0.28s cubic-bezier(0.2, 1.3, 0.4, 1) both;
-}
-
-@keyframes stamp-in {
-  0%   { transform: scale(1.9) rotate(var(--stamp-rot, -2deg)); opacity: 0; }
-  55%  { transform: scale(0.94) rotate(var(--stamp-rot, -2deg)); opacity: 0.95; }
-  100% { transform: scale(1) rotate(var(--stamp-rot, -2deg)); opacity: 0.82; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .stamp--inking { animation: none; }
-}
-
-.stamp-anchor {
-  position: absolute;
-  top: -1.125rem;
-  right: -0.875rem;
-  z-index: 2;
-}
-
-/* ─── Annotation slips ───────────────────────────────────────────── */
-
-.annotation-slip {
+.note-slip {
   background: var(--label-paper);
   border: 1px solid var(--rule);
   box-shadow: 1px 2px 0 var(--shadow-pin);
@@ -451,20 +410,20 @@ a { color: inherit; }
   font-size: 0.8125rem;
   line-height: 1.6;
 }
-.annotation-slip .ann-date { color: var(--ink-faded); }
+.note-slip .note-date { color: var(--ink-faded); }
 
-/* ─── Deposits (experience) ──────────────────────────────────────── */
+/* ─── Experience entries ──────────────────────────────────────── */
 
-.deposit {
+.exp-item {
   border: 1px solid var(--rule);
   background: var(--label-paper);
   box-shadow: 2px 3px 0 var(--shadow-pin);
   padding: 1.5rem 1.75rem;
 }
 
-.deposit + .deposit { margin-top: 2rem; }
+.exp-item + .exp-item { margin-top: 2rem; }
 
-.deposit .deposit-kicker {
+.exp-item .exp-kicker {
   font-family: var(--font-type);
   font-size: 0.6875rem;
   text-transform: uppercase;
@@ -477,25 +436,25 @@ a { color: inherit; }
   margin-bottom: 0.625rem;
 }
 
-.deposit .deposit-org {
+.exp-item .exp-org {
   font-family: var(--font-serif);
   font-weight: 600;
   font-size: 1.25rem;
 }
 
-.deposit .deposit-role {
+.exp-item .exp-role {
   font-family: var(--font-serif);
   font-style: italic;
   color: var(--ink-faded);
   margin-bottom: 0.875rem;
 }
 
-.deposit ul {
+.exp-item ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.deposit ul li {
+.exp-item ul li {
   font-family: var(--font-serif);
   font-size: 0.9375rem;
   line-height: 1.65;
@@ -503,21 +462,21 @@ a { color: inherit; }
   position: relative;
   margin-bottom: 0.375rem;
 }
-.deposit ul li::before {
+.exp-item ul li::before {
   content: "—";
   position: absolute;
   left: 0;
   color: var(--ink-faded);
 }
 
-.deposit .deposit-substrate {
+.exp-item .exp-stack {
   margin-top: 0.875rem;
   font-family: var(--font-type);
   font-size: 0.75rem;
   color: var(--ink-faded);
 }
 
-/* ─── Compact study ledgers (books, films) ───────────────────────── */
+/* ─── Compact study lists (books, films) ───────────────────────── */
 
 .study-row {
   display: grid;
@@ -578,128 +537,8 @@ a { color: inherit; }
 }
 .storage-toggle .lit { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 
-/* ─── Engravings: plates, seal, glyphs, portrait ─────────────────── */
-
-/* A figure plate, framed like a page from a field guide. */
-.plate {
-  margin: 0;
-  max-width: 300px;
-  padding: 1.25rem 1rem 1rem;
-  border: 1px solid var(--rule);
-  outline: 1px solid var(--rule);
-  outline-offset: 4px;
-  text-align: center;
-  color: var(--ink);
-}
-
-.plate-roman {
-  font-family: var(--font-serif);
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  font-weight: 600;
-  font-size: 0.6875rem;
-  color: var(--ink-faded);
-  margin-bottom: 0.875rem;
-}
-
-.plate-art {
-  display: block;
-  margin-inline: auto;
-  opacity: 0.85;
-}
-
-.plate-caption {
-  font-family: var(--font-type);
-  font-style: italic;
-  font-size: 0.75rem;
-  color: var(--ink-faded);
-  margin-top: 0.875rem;
-  line-height: 1.55;
-}
-
-/* The circular collection seal on the cover sheet. */
-.cover-seal {
-  position: absolute;
-  top: 5rem;
-  right: clamp(0rem, 4vw, 3rem);
-  color: var(--stamp-violet);
-  opacity: 0.7;
-  transform: rotate(-12deg);
-  pointer-events: none;
-  mix-blend-mode: multiply;
-  z-index: 1;
-}
-.dark .cover-seal { mix-blend-mode: normal; opacity: 0.55; }
-
-@media (max-width: 900px) {
-  .cover-seal { display: none; }
-}
-
-/* The collector's photograph, taped to the cover like an old print. */
-.cover-portrait {
-  position: absolute;
-  top: 6.5rem;
-  left: clamp(0rem, 3vw, 2.5rem);
-  width: clamp(120px, 11vw, 150px);
-  margin: 0;
-  background: var(--label-paper);
-  border: 1px solid var(--rule);
-  box-shadow: 2px 3px 0 var(--shadow-pin);
-  padding: 0.625rem 0.625rem 0.375rem;
-  transform: rotate(-2.5deg);
-  z-index: 2;
-}
-
-.cover-portrait img {
-  filter: grayscale(0.85) sepia(0.32) contrast(0.92) brightness(1.03);
-}
-
-.cover-portrait figcaption {
-  text-align: center;
-  font-size: 0.625rem;
-  font-style: italic;
-  color: var(--ink-faded);
-  margin-top: 0.375rem;
-}
-
-.cover-portrait::before,
-.cover-portrait::after {
-  content: "";
-  position: absolute;
-  width: 3.5rem;
-  height: 1.125rem;
-  background: var(--tape);
-  border: 1px solid var(--tape-edge);
-  top: -0.55rem;
-}
-.cover-portrait::before {
-  left: -1.125rem;
-  transform: rotate(-38deg);
-}
-.cover-portrait::after {
-  right: -1.125rem;
-  transform: rotate(38deg);
-}
-
-/* Below 900px the cover narrows; the print joins the flow, centered. */
-@media (max-width: 900px) {
-  .cover-portrait {
-    position: static;
-    margin: 2.25rem auto 0;
-    transform: rotate(-2deg);
-  }
-}
-
-/* Small engraving glyphs in the ledger. */
-.ledger-glyph {
-  display: inline-block;
-  vertical-align: -0.2em;
-  margin-right: 0.5rem;
-  color: var(--ink-faded);
-  opacity: 0.8;
-}
-
-/* The collector's portrait — a photograph taped into the file. */
+/* ─── Portrait ───────────────────────────────────────────────────── */
+/* Portrait — a photograph taped into the page. */
 .portrait-mount {
   position: relative;
   margin: 0;
@@ -821,22 +660,22 @@ a { color: inherit; }
   .lens, .microtext, .lens-hint { display: none !important; }
 }
 
-/* ─── Prose (field notes, biography) ─────────────────────────────── */
+/* ─── Prose (writing, biography) ─────────────────────────────── */
 
-.prose-archive p {
+.prose-block p {
   font-family: var(--font-serif);
   font-size: 1.0625rem;
   line-height: 1.75;
   margin-bottom: 1.25rem;
 }
-.prose-archive h2 {
+.prose-block h2 {
   font-family: var(--font-serif);
   font-weight: 600;
   font-size: 1.25rem;
   margin-top: 2.25rem;
   margin-bottom: 0.875rem;
 }
-.prose-archive code {
+.prose-block code {
   font-family: var(--font-type);
   font-size: 0.875em;
   background: var(--paper-deep);
@@ -867,13 +706,36 @@ a { color: inherit; }
     --shadow-pin: transparent;
   }
 
-  .specimen-label {
+  .project-label {
     box-shadow: none;
     border: 1.5px solid #000;
     page-break-inside: avoid;
     max-width: 6in;
   }
 
-  .annotation-slip { box-shadow: none; page-break-inside: avoid; }
+  .note-slip { box-shadow: none; page-break-inside: avoid; }
   a { text-decoration: none; }
+}
+
+/* ─── Creator landing (route / only) ─────────────────────────────── */
+
+.font-kanit {
+  font-family: var(--font-kanit), sans-serif;
+}
+
+.hero-heading {
+  background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Sticky project cards: 6rem base offset, 8rem from md up, plus per-card stack offset */
+.project-card-sticky {
+  top: calc(6rem + var(--card-offset, 0px));
+}
+@media (min-width: 768px) {
+  .project-card-sticky {
+    top: calc(8rem + var(--card-offset, 0px));
+  }
 }
