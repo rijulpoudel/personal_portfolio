@@ -166,6 +166,7 @@ export default function BlackboardStudio() {
   const lastPointRef = useRef<Point | null>(null);
   const toolRef = useRef<DrawingTool>("browse");
   const colorRef = useRef(colors[0].value);
+  const hasDrawingRef = useRef(false);
   const [tool, setTool] = useState<DrawingTool>("browse");
   const [color, setColor] = useState(colors[0].value);
   const [isOpen, setIsOpen] = useState(false);
@@ -263,12 +264,22 @@ export default function BlackboardStudio() {
     };
 
     const moveCursor = (event: PointerEvent) => {
+      if (toolRef.current === "browse") {
+        if (isVisible || animationFrame !== 0) {
+          isVisible = false;
+          cursor.dataset.visible = "false";
+          if (animationFrame !== 0) window.cancelAnimationFrame(animationFrame);
+          animationFrame = 0;
+          lastFrameTime = 0;
+        }
+        return;
+      }
+
       const target = event.target;
       const isInteractive =
         target instanceof Element &&
         Boolean(target.closest("[data-blackboard-toolbar], a, button, input, textarea, select, summary"));
-      const shouldShow =
-        toolRef.current !== "browse" && event.pointerType !== "touch" && !isInteractive;
+      const shouldShow = event.pointerType !== "touch" && !isInteractive;
 
       targetX = event.clientX;
       targetY = event.clientY;
@@ -355,15 +366,25 @@ export default function BlackboardStudio() {
       const context = canvas.getContext("2d");
       if (!lastPoint || !context) return;
 
-      const nextPoint = {
-        x: event.clientX + window.scrollX,
-        y: event.clientY + window.scrollY,
-      };
-
       event.preventDefault();
-      drawSegment(context, lastPoint, nextPoint, activeTool, colorRef.current);
-      lastPointRef.current = nextPoint;
-      if (activeTool !== "eraser") setHasDrawing(true);
+      const coalescedSamples = event.getCoalescedEvents?.();
+      const samples = coalescedSamples?.length ? coalescedSamples : [event];
+      let previousPoint = lastPoint;
+
+      for (const sample of samples) {
+        const nextPoint = {
+          x: sample.clientX + window.scrollX,
+          y: sample.clientY + window.scrollY,
+        };
+        drawSegment(context, previousPoint, nextPoint, activeTool, colorRef.current);
+        previousPoint = nextPoint;
+      }
+
+      lastPointRef.current = previousPoint;
+      if (activeTool !== "eraser" && !hasDrawingRef.current) {
+        hasDrawingRef.current = true;
+        setHasDrawing(true);
+      }
     };
 
     const stopDrawing = (event: PointerEvent) => {
@@ -406,6 +427,7 @@ export default function BlackboardStudio() {
     const context = canvas?.getContext("2d");
     if (!canvas || !context) return;
     context.clearRect(0, 0, canvas.width, canvas.height);
+    hasDrawingRef.current = false;
     setHasDrawing(false);
   };
 

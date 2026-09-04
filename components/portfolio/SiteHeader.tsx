@@ -16,8 +16,9 @@ export default function SiteHeader() {
     let animationFrame = 0;
 
     const updateActiveSection = () => {
-      window.cancelAnimationFrame(animationFrame);
+      if (animationFrame !== 0) return;
       animationFrame = window.requestAnimationFrame(() => {
+        animationFrame = 0;
         const readingLine = window.scrollY + Math.min(window.innerHeight * 0.33, 220);
         let nextSection: (typeof navigation)[number]["id"] = "top";
         let nearestSectionTop = Number.NEGATIVE_INFINITY;
@@ -58,7 +59,8 @@ export default function SiteHeader() {
       if (id !== "contact") setActiveSection(id);
 
       const target = id === "top" ? 0 : section.getBoundingClientRect().top + window.scrollY - 50;
-      window.scrollTo({ top: Math.max(0, target), behavior: "smooth" });
+      const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+      window.scrollTo({ top: Math.max(0, target), behavior });
       window.history.pushState(null, "", `#${id}`);
     };
   }

@@ -141,6 +141,7 @@ export default function ProjectIndex() {
 
     let raf = 0;
     let maxScroll = 0;
+    let lineWidth = 0;
     let pinHeight = 0;
     let sectionTop = 0;
     let visualProgress = 0;
@@ -150,6 +151,7 @@ export default function ProjectIndex() {
     let rollAngle = 0;
     let dribblePhase = 0;
     let initialized = false;
+    let renderedPercent = -1;
     let movingClassApplied = false;
     let disposed = false;
 
@@ -165,6 +167,7 @@ export default function ProjectIndex() {
       pinHeight = window.innerHeight;
       sectionTop = section.getBoundingClientRect().top + window.scrollY;
       maxScroll = Math.max(0, track.scrollWidth - viewport.clientWidth);
+      lineWidth = lineWrap.clientWidth;
       section.style.height = `${Math.round(pinHeight + maxScroll)}px`;
     };
 
@@ -213,7 +216,6 @@ export default function ProjectIndex() {
       fill.style.transform = `scaleX(${visualProgress.toFixed(5)})`;
       ballSlot.style.left = `${(visualProgress * 100).toFixed(3)}%`;
 
-      const lineWidth = lineWrap.clientWidth;
       const travelPx = (visualProgress - lastVisualProgress) * lineWidth;
       lastVisualProgress = visualProgress;
       rollAngle += (travelPx / BALL_RADIUS_PX) * (180 / Math.PI);
@@ -235,10 +237,11 @@ export default function ProjectIndex() {
       ballShadow.style.transform = `scaleX(${shadowScale.toFixed(3)})`;
       ballShadow.style.opacity = shadowOpacity.toFixed(3);
 
-      setPercent((current) => {
-        const next = Math.round(visualProgress * 100);
-        return current === next ? current : next;
-      });
+      const nextPercent = Math.round(visualProgress * 100);
+      if (nextPercent !== renderedPercent) {
+        renderedPercent = nextPercent;
+        setPercent(nextPercent);
+      }
 
       const moving =
         Math.abs(targetProgress - visualProgress) >= 0.00002 || Math.abs(progressVelocity) >= 0.00025;
