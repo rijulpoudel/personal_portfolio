@@ -1687,6 +1687,13 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -3199,7 +3206,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   background: transparent;
   filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.24));
   transform-origin: 50% 0;
-  animation: chalk-nav-drop 420ms step-end 60ms both;
+  animation: chalk-nav-drop 520ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both;
 }
 
 .chalk-header__frame {
@@ -3262,7 +3269,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   line-height: 1;
   text-decoration: none;
   transform-origin: 50%;
-  animation: chalk-nav-link-pop 280ms steps(1, end) both;
+  animation: chalk-nav-link-pop 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .chalk-header__link:nth-child(1) {
@@ -3326,7 +3333,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 }
 
 .chalk-header__link--active .chalk-header__underline path {
-  animation: chalk-rule-draw 320ms steps(1, end) both;
+  animation: chalk-rule-draw 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .chalk-header__connect {
@@ -3344,7 +3351,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   font-weight: 400;
   line-height: 1;
   text-decoration: none;
-  animation: chalk-connect-stamp 360ms step-end 460ms both;
+  animation: chalk-connect-stamp 460ms cubic-bezier(0.22, 1, 0.36, 1) 420ms both;
 }
 
 .chalk-header__connect-mark {
@@ -3357,7 +3364,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   pointer-events: none;
   transform: rotate(-7deg);
   transform-origin: 50%;
-  transition: transform 120ms step-end;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .chalk-header__connect:hover .chalk-header__connect-mark,
@@ -4063,8 +4070,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 @keyframes chalk-name-write {
   from {
     opacity: 0;
-    filter: blur(4px);
-    transform: translateX(-1.5rem);
+    transform: translate3d(-1.25rem, 0, 0);
   }
 }
 
@@ -4092,7 +4098,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   }
   .chalk-hero__name,
   .chalk-hero__status-line {
-    animation: chalk-name-write 520ms steps(6, end) 180ms both;
+    animation: chalk-name-write 560ms cubic-bezier(0.22, 1, 0.36, 1) 180ms both;
   }
   .chalk-hero__social {
     opacity: 0;
