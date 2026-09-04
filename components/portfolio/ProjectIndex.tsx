@@ -191,7 +191,7 @@ export default function ProjectIndex() {
       <div className="project-rail__pin">
         <div ref={stageRef} className="project-rail__stage">
           <header className="project-rail__heading">
-            <SectionLabel index="02">Projects</SectionLabel>
+            <SectionLabel>Projects</SectionLabel>
             <div>
               <h2 id="project-index-title">
                 {NUMBER_WORDS[total] ?? total} builds, one long walk.

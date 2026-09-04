@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 interface SectionLabelProps {
-  index: string;
+  index?: string;
   children: ReactNode;
   inverse?: boolean;
 }
@@ -16,9 +16,11 @@ export default function SectionLabel({
       className="section-label"
       data-inverse={inverse ? "true" : undefined}
     >
-      <span className="section-label__index" aria-hidden="true">
-        {index}
-      </span>
+      {index ? (
+        <span className="section-label__index" aria-hidden="true">
+          {index}
+        </span>
+      ) : null}
       <span>{children}</span>
     </p>
   );
