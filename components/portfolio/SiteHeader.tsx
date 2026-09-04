@@ -13,25 +13,26 @@ export default function SiteHeader() {
   const [activeSection, setActiveSection] = useState<(typeof navigation)[number]["id"]>("top");
 
   useEffect(() => {
+    type SectionId = (typeof navigation)[number]["id"];
+
     let animationFrame = 0;
+    let settleTimer = 0;
+    let disposed = false;
+    const sectionTops = new Map<SectionId, number>();
 
     const updateActiveSection = () => {
       if (animationFrame !== 0) return;
       animationFrame = window.requestAnimationFrame(() => {
         animationFrame = 0;
         const readingLine = window.scrollY + Math.min(window.innerHeight * 0.33, 220);
-        let nextSection: (typeof navigation)[number]["id"] = "top";
+        let nextSection: SectionId = "top";
         let nearestSectionTop = Number.NEGATIVE_INFINITY;
 
         for (const item of navigation) {
-          const section = document.getElementById(item.id);
-          if (
-            section &&
-            section.offsetTop <= readingLine &&
-            section.offsetTop > nearestSectionTop
-          ) {
+          const sectionTop = sectionTops.get(item.id);
+          if (sectionTop !== undefined && sectionTop <= readingLine && sectionTop > nearestSectionTop) {
             nextSection = item.id;
-            nearestSectionTop = section.offsetTop;
+            nearestSectionTop = sectionTop;
           }
         }
 
@@ -39,14 +40,35 @@ export default function SiteHeader() {
       });
     };
 
-    updateActiveSection();
+    const measureSections = () => {
+      for (const item of navigation) {
+        const section = document.getElementById(item.id);
+        if (section) sectionTops.set(item.id, section.getBoundingClientRect().top + window.scrollY);
+      }
+      updateActiveSection();
+    };
+
+    const resizeObserver = new ResizeObserver(measureSections);
+    for (const item of navigation) {
+      const section = document.getElementById(item.id);
+      if (section) resizeObserver.observe(section);
+    }
+
+    measureSections();
     window.addEventListener("scroll", updateActiveSection, { passive: true });
-    window.addEventListener("resize", updateActiveSection);
+    window.addEventListener("resize", measureSections, { passive: true });
+    document.fonts?.ready.then(() => {
+      if (!disposed) measureSections();
+    }).catch(() => {});
+    settleTimer = window.setTimeout(measureSections, 700);
 
     return () => {
+      disposed = true;
       window.cancelAnimationFrame(animationFrame);
+      window.clearTimeout(settleTimer);
+      resizeObserver.disconnect();
       window.removeEventListener("scroll", updateActiveSection);
-      window.removeEventListener("resize", updateActiveSection);
+      window.removeEventListener("resize", measureSections);
     };
   }, []);
 
