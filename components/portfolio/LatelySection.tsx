@@ -115,7 +115,7 @@ const latelyItems: LatelyItem[] = [
       "Turning a budgeting idea into a focused Django and DRF MVP, one milestone and pull request at a time.",
     art: "mohr",
     icon: <FiLayers aria-hidden="true" />,
-    accent: "#8ecfd0",
+    accent: "#e85749",
     tilt: "0.9deg",
     drop: "1rem",
     height: "24.75rem",
@@ -195,7 +195,7 @@ function BackendArt() {
       <circle cx="40" cy="34" r="5" fill="#e65d50" />
       <circle cx="58" cy="34" r="5" fill="#f0c85a" />
       <circle cx="76" cy="34" r="5" fill="#6fc4a4" />
-      <text x="42" y="80" fill="#8ecfd0" fontFamily="monospace" fontSize="16">GET</text>
+      <text x="42" y="80" fill="#e85749" fontFamily="monospace" fontSize="16">GET</text>
       <text x="87" y="80" fill="#f5ece3" fontFamily="monospace" fontSize="16">/api/reports</text>
       <text x="42" y="111" fill="#b8dfb2" fontFamily="monospace" fontSize="15">{"{"}</text>
       <text x="61" y="135" fill="#f6a4aa" fontFamily="monospace" fontSize="14">{`"status"`}</text>

@@ -22,7 +22,7 @@ const colors = [
   { name: "Cream", value: "#f5ece3" },
   { name: "Red", value: "#e35342" },
   { name: "Yellow", value: "#f0c64d" },
-  { name: "Blue", value: "#66c7f2" },
+  { name: "Orange", value: "#e85749" },
   { name: "Green", value: "#63d39a" },
   { name: "Purple", value: "#a78bfa" },
 ];
@@ -77,7 +77,7 @@ function ToolCursorGraphic({ tool }: { tool: DrawingTool }) {
       <svg viewBox="0 0 48 48" aria-hidden="true">
         <g transform="rotate(-24 24 24)">
           <rect x="5" y="15" width="38" height="23" rx="5" fill="#ee8c86" stroke="#211d1a" strokeWidth="1.8" />
-          <path d="M29 15h9a5 5 0 0 1 5 5v13a5 5 0 0 1-5 5h-9Z" fill="#76b9d7" />
+          <path d="M29 15h9a5 5 0 0 1 5 5v13a5 5 0 0 1-5 5h-9Z" fill="#e85749" />
           <path d="M29 15v23" stroke="#211d1a" strokeOpacity="0.55" strokeWidth="1.5" />
           <path d="M9 20h16" stroke="#ffffff" strokeOpacity="0.34" strokeWidth="2.5" strokeLinecap="round" />
         </g>
