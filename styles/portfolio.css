@@ -6279,20 +6279,22 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 
 .contact-section__title {
   margin: 1.5rem 0 0;
-  color: #f5ece3;
+  color: #e85749;
   font-family: var(--font-gochi-hand), "Bradley Hand", cursive;
   font-size: clamp(2.5rem, 5.5vw, 4.25rem);
   font-weight: 400;
   line-height: 1.05;
   letter-spacing: 0;
+  text-align: center;
   rotate: -0.5deg;
 }
 
 .contact-section__email {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
   align-items: center;
   gap: 0.625rem;
-  margin-top: 2rem;
+  margin: 2rem auto 0;
   padding: 0.9rem 1.9rem;
   border-radius: 999px;
   background: #f5ece3;
@@ -6316,16 +6318,17 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 
 .contact-section__grid {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
   gap: 2rem;
   margin-top: 3rem;
+  text-align: center;
 }
 
 .contact-section__nav {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.5rem 2rem;
 }
 
@@ -6348,12 +6351,13 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   color: rgba(245, 236, 227, 0.65);
   font-family: var(--font-gochi-hand), "Bradley Hand", cursive;
   font-size: 1.05rem;
-  text-align: right;
+  text-align: center;
   rotate: -1deg;
 }
 
 .contact-section__socials {
   display: flex;
+  justify-content: center;
   gap: 0.9rem;
   margin: 0;
   padding: 0;
