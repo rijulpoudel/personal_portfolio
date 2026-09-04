@@ -6265,7 +6265,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
-  border: 1.5px solid #e85749;
+  border: none;
   border-radius: 50%;
   background: transparent;
   color: #e85749;
@@ -6283,10 +6283,10 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   height: 1.25rem;
 }
 
-/* Dotted orange ring. Always visible, spins on hover. */
+/* The one dotted orange ring. Always visible, spins on hover. */
 .contact-section__socials .footer-orbit {
   position: absolute;
-  inset: -0.5rem;
+  inset: 0;
   border: 1.5px dotted #e85749;
   border-radius: 50%;
   opacity: 1;
