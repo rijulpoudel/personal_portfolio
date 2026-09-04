@@ -1,6 +1,6 @@
 .football-question-universe {
   position: relative;
-  padding: clamp(5rem, 9vw, 9rem) max(1rem, calc((100vw - 88rem) / 2));
+  padding: clamp(3.75rem, 6vw, 6rem) max(1rem, calc((100vw - 88rem) / 2));
   border-top: 1px solid rgba(239, 226, 196, 0.32);
   background: var(--football-navy);
   color: var(--football-cream);
@@ -24,14 +24,14 @@
   grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.54fr);
   align-items: end;
   gap: clamp(2rem, 7vw, 8rem);
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .football-question-universe__header h2 {
   max-width: 12ch;
   margin-top: 0.85rem;
   font-family: var(--font-kanit), Impact, sans-serif;
-  font-size: clamp(3.4rem, 7vw, 6.8rem);
+  font-size: clamp(3rem, 6vw, 5.7rem);
   font-style: italic;
   font-weight: 800;
   letter-spacing: -0.055em;
@@ -142,7 +142,7 @@
 
 .football-question-viewport {
   position: relative;
-  height: clamp(36rem, 72svh, 50rem);
+  height: clamp(32rem, 64svh, 42rem);
   overflow: hidden;
   background-color: #0a3945;
   background-image: repeating-linear-gradient(
@@ -414,32 +414,6 @@
   display: none;
 }
 
-.football-question-cta {
-  display: flex;
-  min-height: 54px;
-  align-items: center;
-  gap: 0.8rem;
-  margin: 2.75rem auto 0;
-  padding: 0 0.2rem;
-  border: 0;
-  border-bottom: 2px solid var(--football-gold);
-  background: transparent;
-  color: var(--football-cream);
-  cursor: pointer;
-  font-family: var(--font-gochi-hand), cursive;
-  font-size: clamp(1.25rem, 2.5vw, 1.8rem);
-  rotate: -1deg;
-}
-
-.football-question-cta span {
-  color: var(--football-gold);
-  transition: transform 180ms ease-out;
-}
-
-.football-question-cta:hover span {
-  transform: translate(0.2rem, -0.2rem);
-}
-
 .football-question-dialog {
   width: min(92vw, 38rem);
   max-height: calc(100svh - 2rem);
@@ -661,11 +635,6 @@
     color: rgba(239, 226, 196, 0.62);
     font-size: 0.64rem;
     line-height: 1.55;
-  }
-
-  .football-question-cta {
-    max-width: 90%;
-    text-align: left;
   }
 
   .football-question-dialog {

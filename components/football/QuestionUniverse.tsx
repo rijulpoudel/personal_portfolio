@@ -453,15 +453,16 @@ export default function QuestionUniverse() {
   };
 
   return (
-    <section className="football-question-universe" aria-labelledby="question-universe-title">
+    <section id="questions" className="football-question-universe" aria-labelledby="question-universe-title">
       <header className="football-question-universe__header">
         <div>
-          <p className="football-kicker">The supporters&apos; tactics board</p>
-          <h2 id="question-universe-title">Every question finds a position.</h2>
+          <p className="football-kicker">Ask me about football</p>
+          <h2 id="question-universe-title">Leave me a question.</h2>
         </div>
         <div className="football-question-universe__intro">
           <p>
-            Drag the pitch. Zoom into a card. Leave your own question somewhere in the formation.
+            Tell me your name, pick your club, and ask me anything. I want to know who you rate or
+            the opinion you know will start an argument.
           </p>
           <span>Prototype mode · your questions stay on this device</span>
         </div>
@@ -554,10 +555,6 @@ export default function QuestionUniverse() {
         On a phone: drag with one finger, then use +/− to zoom. Scroll the page from outside the pitch.
       </p>
 
-      <button type="button" className="football-question-cta" onClick={openQuestionForm}>
-        Put your question on the board <span aria-hidden="true">↗</span>
-      </button>
-
       <p className="sr-only" aria-live="polite">
         {announcement}
       </p>
@@ -566,8 +563,8 @@ export default function QuestionUniverse() {
         <form onSubmit={submitQuestion}>
           <header>
             <div>
-              <p className="football-kicker">Join the formation</p>
-              <h3>Leave a football question.</h3>
+              <p className="football-kicker">Ask me anything</p>
+              <h3>What do you want to know?</h3>
             </div>
             <button type="button" onClick={closeQuestionForm} aria-label="Close question form">
               <X size={19} aria-hidden="true" />

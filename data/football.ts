@@ -2,6 +2,7 @@ export type FootballPlayer = {
   slug: "messi" | "xavi" | "iniesta" | "busquets" | "pedri";
   name: string;
   note: string;
+  love: string;
   image: string;
   imageAlt: string;
   sourceUrl: string;
@@ -14,7 +15,8 @@ export const footballPlayers: FootballPlayer[] = [
   {
     slug: "messi",
     name: "Messi",
-    note: "the impossible",
+    note: "why I fell in love",
+    love: "Messi is why I fell in love with football. I've watched his clips too many times, and they still don't feel normal.",
     image: "/images/football/messi.jpg",
     imageAlt: "Lionel Messi on the pitch in an Argentina shirt",
     sourceUrl:
@@ -26,7 +28,8 @@ export const footballPlayers: FootballPlayer[] = [
   {
     slug: "xavi",
     name: "Xavi",
-    note: "the rhythm",
+    note: "I love the control",
+    love: "I love how Xavi could own a match without rushing it. He made control feel exciting.",
     image: "/images/football/xavi.jpg",
     imageAlt: "Xavi Hernández walking at FC Barcelona training",
     sourceUrl:
@@ -38,7 +41,8 @@ export const footballPlayers: FootballPlayer[] = [
   {
     slug: "iniesta",
     name: "Iniesta",
-    note: "the pause",
+    note: "I love the calm",
+    love: "Iniesta always looked calm, even when everything around him was frantic. I love that about him.",
     image: "/images/football/iniesta.jpg",
     imageAlt: "Andrés Iniesta lifting the World Cup trophy",
     sourceUrl:
@@ -50,7 +54,8 @@ export const footballPlayers: FootballPlayer[] = [
   {
     slug: "busquets",
     name: "Busquets",
-    note: "the space",
+    note: "I watch the space",
+    love: "Busquets made me pay attention to what happens before the pass. I could watch his turns and body shape all day.",
     image: "/images/football/busquets.jpg",
     imageAlt: "Sergio Busquets wearing number 28 for FC Barcelona in 2008",
     sourceUrl:
@@ -62,7 +67,8 @@ export const footballPlayers: FootballPlayer[] = [
   {
     slug: "pedri",
     name: "Pedri",
-    note: "the present",
+    note: "the one I watch now",
+    love: "Pedri is the player I look for first now. I love how calm and brave he is with the ball. He feels like the next part of the same story.",
     image: "/images/football/pedri.jpg",
     imageAlt: "Pedri on the pitch in a Spain shirt",
     sourceUrl:

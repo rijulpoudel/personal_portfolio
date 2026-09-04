@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import FootballArchive from "@/components/football/FootballArchive";
 
 export const metadata: Metadata = {
-  title: "The Midfield Room",
+  title: "My Football Room",
   description:
-    "Rijul Poudel's football room: a retro, interactive guestbook about Barcelona, midfielders, and the questions that keep a match alive.",
+    "The players Rijul loves, the football he plays, and a tactics board for questions from other supporters.",
 };
 
 export default function FootballPage() {
