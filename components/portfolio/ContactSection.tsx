@@ -1,6 +1,7 @@
 import { FaCamera, FaGithub, FaLinkedinIn } from "react-icons/fa6";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import { siteConfig } from "@/data/siteConfig";
+import OrbitRing from "./OrbitRing";
 
 const NAV = [
   { label: "Lately", href: "#work" },
@@ -135,9 +136,7 @@ export default function ContactSection() {
                     rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                     aria-label={label}
                   >
-                    <svg className="footer-orbit" viewBox="0 0 44 44" aria-hidden="true">
-                      <circle cx="22" cy="22" r="20" fill="none" stroke="#e85749" strokeWidth="3.5" strokeLinecap="round" strokeDasharray="3.5 5" />
-                    </svg>
+                    <OrbitRing />
                     <Icon aria-hidden="true" />
                   </a>
                 </li>

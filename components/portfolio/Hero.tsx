@@ -7,6 +7,7 @@ import ChalkboardBackdrop from "./ChalkboardBackdrop";
 import ChalkBursts from "./ChalkBursts";
 import AskAboutMe from "./AskAboutMe";
 import { ThatsMeArrow } from "./ThatsMeArrow";
+import OrbitRing from "./OrbitRing";
 
 const aboutNotes = [
   <>
@@ -176,6 +177,7 @@ export default async function Hero() {
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
               >
+                <OrbitRing />
                 <FaLinkedinIn aria-hidden="true" />
               </a>
               <a
@@ -185,6 +187,7 @@ export default async function Hero() {
                 rel="noopener noreferrer"
                 aria-label="GitHub"
               >
+                <OrbitRing />
                 <FaGithub aria-hidden="true" />
               </a>
               <a
@@ -192,6 +195,7 @@ export default async function Hero() {
                 href={`mailto:${siteConfig.author.email}`}
                 aria-label="Email Rijul"
               >
+                <OrbitRing />
                 <HiOutlineEnvelope aria-hidden="true" />
               </a>
               <a
@@ -201,6 +205,7 @@ export default async function Hero() {
                 rel="noopener noreferrer"
                 aria-label="Open résumé"
               >
+                <OrbitRing />
                 <HiOutlineDocumentText aria-hidden="true" />
               </a>
             </nav>

@@ -3614,10 +3614,18 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   border-radius: 50%;
   background: #f7efe6;
   box-shadow: 0.2rem 0.25rem 0 #0b0c0c;
-  color: #27221e;
+  color: #e85749;
   font-size: 1.12rem;
   text-decoration: none;
-  transition: translate 130ms ease-out, rotate 130ms ease-out, box-shadow 130ms ease-out;
+  transition: translate 130ms ease-out, rotate 130ms ease-out, box-shadow 130ms ease-out, transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.chalk-hero__social .orbit-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .chalk-hero__social:nth-child(1) {
@@ -3640,6 +3648,12 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   box-shadow: 0.1rem 0.12rem 0 #0b0c0c;
   translate: 0.1rem 0.12rem;
   rotate: 0deg;
+  transform: scale(1.15);
+}
+
+.chalk-hero__social:hover .orbit-ring,
+.chalk-hero__social:focus-visible .orbit-ring {
+  animation: footer-orbit 7s linear infinite;
 }
 
 .chalk-hero__status-line {
@@ -6278,13 +6292,13 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   transform: scale(1.15);
 }
 
-.contact-section__socials a > svg:not(.footer-orbit) {
+.contact-section__socials a > svg:not(.orbit-ring) {
   width: 1.25rem;
   height: 1.25rem;
 }
 
 /* The one dotted orange ring. Always visible, spins on hover. */
-.contact-section__socials .footer-orbit {
+.contact-section__socials .orbit-ring {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -6292,8 +6306,8 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   pointer-events: none;
 }
 
-.contact-section__socials a:hover .footer-orbit,
-.contact-section__socials a:focus-visible .footer-orbit {
+.contact-section__socials a:hover .orbit-ring,
+.contact-section__socials a:focus-visible .orbit-ring {
   animation: footer-orbit 7s linear infinite;
 }
 
