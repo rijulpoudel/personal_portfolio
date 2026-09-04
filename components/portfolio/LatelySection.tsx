@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import type { CSSProperties, ReactNode } from "react";
+import { useLayoutEffect, useRef, type CSSProperties, type ReactNode } from "react";
 import {
   FiArrowUpRight,
   FiAward,
@@ -245,8 +247,33 @@ function CardArt({ kind }: { kind: LatelyItem["art"] }) {
 }
 
 export default function LatelySection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      section.classList.add("lately-section--visible");
+      return;
+    }
+
+    section.classList.add("lately-section--motion-ready");
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        section.classList.add("lately-section--visible");
+        observer.disconnect();
+      },
+      { rootMargin: "0px 0px -12%", threshold: 0.12 },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="work" className="lately-section" aria-labelledby="lately-title">
+    <section ref={sectionRef} id="work" className="lately-section" aria-labelledby="lately-title">
       <header className="lately-section__heading">
         <h2 id="lately-title">
           What I&apos;ve been <span><s>up to</s> lately</span>

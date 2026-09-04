@@ -4639,11 +4639,19 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .lately-clothesline__rope path {
+  .lately-section--motion-ready:not(.lately-section--visible) .lately-clothesline__rope path {
+    stroke-dasharray: 1700;
+    stroke-dashoffset: 1700;
+  }
+  .lately-section--motion-ready:not(.lately-section--visible) .lately-card {
+    opacity: 0;
+    translate: 0 -2.5rem;
+  }
+  .lately-section--visible .lately-clothesline__rope path {
     animation: lately-rope-draw 900ms cubic-bezier(0.2, 0.75, 0.25, 1) 120ms both;
     stroke-dasharray: 1700;
   }
-  .lately-card {
+  .lately-section--visible .lately-card {
     animation: lately-card-arrive 620ms cubic-bezier(0.2, 0.8, 0.25, 1) var(--card-delay) both;
   }
   .lately-card-wrap:hover .lately-card__pin,
