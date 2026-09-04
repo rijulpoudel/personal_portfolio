@@ -6,7 +6,7 @@ import { getGitHubActivity, type GitHubContribution } from "@/lib/github";
 import ChalkboardBackdrop from "./ChalkboardBackdrop";
 import ChalkBursts from "./ChalkBursts";
 import AskAboutMe from "./AskAboutMe";
-import HeroDoodles, { ThatsMeArrow } from "./HeroDoodles";
+import { ThatsMeArrow } from "./ThatsMeArrow";
 
 const aboutNotes = [
   <>
@@ -142,7 +142,6 @@ export default async function Hero() {
       <ChalkboardBackdrop />
       <ChalkBursts />
       <AskAboutMe />
-      <HeroDoodles />
 
       <div className="chalk-hero__inner">
         <div className="chalk-hero__portrait-wrap">
