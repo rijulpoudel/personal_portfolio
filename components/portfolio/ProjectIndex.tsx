@@ -18,6 +18,11 @@ const NUMBER_WORDS = [
   "Eight",
 ];
 
+const PROJECT_SPRING_STIFFNESS = 150;
+const PROJECT_SPRING_DAMPING = 23;
+const BALL_RADIUS_PX = 25;
+const BALL_BOUNCE_DISTANCE_PX = 54;
+
 /** Photo slot. Drop `public/images/projects/<slug>-cover.png` to fill it.
  *  Until then the project's initial holds the space. */
 function CardCover({ slug, title }: { slug: string; title: string }) {
@@ -104,8 +109,6 @@ export default function ProjectIndex() {
   const trackRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLDivElement>(null);
   const ballSlotRef = useRef<HTMLDivElement>(null);
-  const trotTimeout = useRef<number | null>(null);
-  const lastProgress = useRef(-1);
 
   const [pinned, setPinned] = useState(false);
   const [percent, setPercent] = useState(0);
@@ -117,14 +120,46 @@ export default function ProjectIndex() {
     const track = trackRef.current;
     const fill = fillRef.current;
     const ballSlot = ballSlotRef.current;
-    if (!section || !viewport || !stage || !track || !fill || !ballSlot) return;
+    const lineWrap = ballSlot?.parentElement;
+    const ballBounce = ballSlot?.querySelector<SVGGElement>(".project-rail__ball-bounce");
+    const ballSpin = ballSlot?.querySelector<SVGGElement>(".project-rail__ball-spin");
+    const ballShadow = ballSlot?.querySelector<SVGEllipseElement>(".project-rail__ball-shadow");
+
+    if (
+      !section ||
+      !viewport ||
+      !stage ||
+      !track ||
+      !fill ||
+      !ballSlot ||
+      !lineWrap ||
+      !ballBounce ||
+      !ballSpin ||
+      !ballShadow
+    ) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let raf = 0;
     let maxScroll = 0;
     let pinHeight = 0;
     let sectionTop = 0;
+    let visualProgress = 0;
+    let progressVelocity = 0;
+    let lastVisualProgress = 0;
+    let lastTimestamp = 0;
+    let rollAngle = 0;
+    let dribblePhase = 0;
+    let initialized = false;
+    let movingClassApplied = false;
     let disposed = false;
+
+    const clamp = (value: number, minimum = 0, maximum = 1) =>
+      Math.min(maximum, Math.max(minimum, value));
+
+    const readTargetProgress = () => {
+      const raw = maxScroll > 0 ? (window.scrollY - sectionTop) / maxScroll : 1;
+      return clamp(raw);
+    };
 
     const measure = () => {
       pinHeight = window.innerHeight;
@@ -133,72 +168,124 @@ export default function ProjectIndex() {
       section.style.height = `${Math.round(pinHeight + maxScroll)}px`;
     };
 
-    const setTrotting = (moving: boolean) => {
-      if (moving) {
-        section.classList.add("project-rail--trotting");
-        if (trotTimeout.current !== null) window.clearTimeout(trotTimeout.current);
-        trotTimeout.current = window.setTimeout(() => {
-          section.classList.remove("project-rail--trotting");
-        }, 280);
-      }
+    const updateMovingClass = (moving: boolean) => {
+      if (moving === movingClassApplied) return;
+      movingClassApplied = moving;
+      section.classList.toggle("project-rail--moving", moving);
     };
 
-    const render = () => {
+    const render = (timestamp: number) => {
       raf = 0;
       if (disposed) return;
-      const raw = maxScroll > 0 ? (window.scrollY - sectionTop) / maxScroll : 1;
-      const progress = Math.min(1, Math.max(0, raw));
-      track.style.transform = `translate3d(${(-progress * maxScroll).toFixed(1)}px, 0, 0)`;
-      const zoom = 0.94 + 0.06 * Math.min(1, progress / 0.15);
+
+      const targetProgress = readTargetProgress();
+      if (!initialized) {
+        visualProgress = targetProgress;
+        lastVisualProgress = targetProgress;
+        initialized = true;
+      } else {
+        const deltaTime = Math.min(0.032, lastTimestamp ? (timestamp - lastTimestamp) / 1000 : 1 / 60);
+        const displacement = targetProgress - visualProgress;
+        const acceleration =
+          displacement * PROJECT_SPRING_STIFFNESS - progressVelocity * PROJECT_SPRING_DAMPING;
+
+        progressVelocity += acceleration * deltaTime;
+        visualProgress += progressVelocity * deltaTime;
+
+        if (visualProgress <= 0 && progressVelocity < 0) {
+          visualProgress = 0;
+          progressVelocity = 0;
+        } else if (visualProgress >= 1 && progressVelocity > 0) {
+          visualProgress = 1;
+          progressVelocity = 0;
+        }
+
+        if (Math.abs(targetProgress - visualProgress) < 0.00002 && Math.abs(progressVelocity) < 0.00025) {
+          visualProgress = targetProgress;
+          progressVelocity = 0;
+        }
+      }
+      lastTimestamp = timestamp;
+
+      track.style.transform = `translate3d(${(-visualProgress * maxScroll).toFixed(2)}px, 0, 0)`;
+      const zoom = 0.94 + 0.06 * Math.min(1, visualProgress / 0.15);
       stage.style.transform = `scale(${zoom.toFixed(4)})`;
-      fill.style.transform = `scaleX(${progress.toFixed(4)})`;
-      ballSlot.style.left = `${(progress * 100).toFixed(2)}%`;
-      if (progress !== lastProgress.current) {
-        lastProgress.current = progress;
-        setTrotting(true);
-        setPercent((current) => {
-          const next = Math.round(progress * 100);
-          return current === next ? current : next;
-        });
+      fill.style.transform = `scaleX(${visualProgress.toFixed(5)})`;
+      ballSlot.style.left = `${(visualProgress * 100).toFixed(3)}%`;
+
+      const lineWidth = lineWrap.clientWidth;
+      const travelPx = (visualProgress - lastVisualProgress) * lineWidth;
+      lastVisualProgress = visualProgress;
+      rollAngle += (travelPx / BALL_RADIUS_PX) * (180 / Math.PI);
+      dribblePhase = (dribblePhase + (Math.abs(travelPx) * Math.PI) / BALL_BOUNCE_DISTANCE_PX) % Math.PI;
+
+      const speedPx = Math.abs(progressVelocity * lineWidth);
+      const speedStrength = clamp(speedPx / 280);
+      const settleStrength = clamp(speedPx / 45);
+      const airborne = Math.max(0, Math.sin(dribblePhase));
+      const lift = airborne * (4 + 10 * speedStrength) * settleStrength;
+      const impact = Math.pow(1 - airborne, 8) * speedStrength * settleStrength;
+      const scaleX = 1 + impact * 0.13;
+      const scaleY = 1 - impact * 0.1;
+      const shadowScale = 1 - airborne * speedStrength * 0.3;
+      const shadowOpacity = 0.35 - airborne * speedStrength * 0.2;
+
+      ballBounce.style.transform = `translate3d(0, ${(-lift).toFixed(2)}px, 0) scale(${scaleX.toFixed(3)}, ${scaleY.toFixed(3)})`;
+      ballSpin.style.transform = `rotate(${rollAngle.toFixed(2)}deg)`;
+      ballShadow.style.transform = `scaleX(${shadowScale.toFixed(3)})`;
+      ballShadow.style.opacity = shadowOpacity.toFixed(3);
+
+      setPercent((current) => {
+        const next = Math.round(visualProgress * 100);
+        return current === next ? current : next;
+      });
+
+      const moving =
+        Math.abs(targetProgress - visualProgress) >= 0.00002 || Math.abs(progressVelocity) >= 0.00025;
+      updateMovingClass(moving);
+
+      if (moving) {
+        raf = window.requestAnimationFrame(render);
+      } else {
+        lastTimestamp = 0;
       }
     };
 
     const requestRender = () => {
       if (raf === 0) raf = window.requestAnimationFrame(render);
     };
+    const handleResize = () => {
+      measure();
+      requestRender();
+    };
 
     measure();
     setPinned(true);
-    render();
+    requestRender();
 
     window.addEventListener("scroll", requestRender, { passive: true });
-    window.addEventListener("resize", () => {
-      measure();
-      requestRender();
-    });
+    window.addEventListener("resize", handleResize, { passive: true });
     if (document.fonts?.ready) {
       document.fonts.ready.then(() => {
-        if (!disposed) {
-          measure();
-          requestRender();
-        }
+        if (!disposed) handleResize();
       }).catch(() => {});
     }
     const settleTimer = window.setTimeout(() => {
-      if (!disposed) {
-        measure();
-        requestRender();
-      }
+      if (!disposed) handleResize();
     }, 600);
 
     return () => {
       disposed = true;
       if (raf !== 0) window.cancelAnimationFrame(raf);
-      if (trotTimeout.current !== null) window.clearTimeout(trotTimeout.current);
       window.clearTimeout(settleTimer);
       window.removeEventListener("scroll", requestRender);
+      window.removeEventListener("resize", handleResize);
       section.style.height = "";
-      section.classList.remove("project-rail--trotting");
+      section.classList.remove("project-rail--moving");
+      ballBounce.style.transform = "";
+      ballSpin.style.transform = "";
+      ballShadow.style.transform = "";
+      ballShadow.style.opacity = "";
     };
   }, []);
 
