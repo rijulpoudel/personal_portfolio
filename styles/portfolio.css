@@ -6278,7 +6278,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   transform: scale(1.15);
 }
 
-.contact-section__socials svg {
+.contact-section__socials a > svg:not(.footer-orbit) {
   width: 1.25rem;
   height: 1.25rem;
 }
@@ -6287,9 +6287,8 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 .contact-section__socials .footer-orbit {
   position: absolute;
   inset: 0;
-  border: 1.5px dotted #e85749;
-  border-radius: 50%;
-  opacity: 1;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
 }
 

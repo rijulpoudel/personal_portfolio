@@ -135,7 +135,9 @@ export default function ContactSection() {
                     rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                     aria-label={label}
                   >
-                    <span className="footer-orbit" aria-hidden="true" />
+                    <svg className="footer-orbit" viewBox="0 0 44 44" aria-hidden="true">
+                      <circle cx="22" cy="22" r="20" fill="none" stroke="#e85749" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="0.1 8" />
+                    </svg>
                     <Icon aria-hidden="true" />
                   </a>
                 </li>
