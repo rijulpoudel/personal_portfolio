@@ -3516,11 +3516,11 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 
 .chalk-hero__football {
   position: absolute;
-  top: -3.9rem;
-  left: calc(100% + 1.25rem);
+  top: 21.5rem;
+  left: -2.75rem;
   z-index: 5;
   display: block;
-  width: 10rem;
+  width: 11.5rem;
   color: #f5ece3;
   text-decoration: none;
   rotate: 2.5deg;
@@ -4190,6 +4190,13 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   }
   .github-calendar {
     animation: chalk-card-unfold 620ms cubic-bezier(0.22, 1, 0.36, 1) 390ms both;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1100px) {
+  .chalk-hero__football--desktop {
+    left: 0.25rem;
+    width: 10rem;
   }
 }
 
