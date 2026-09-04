@@ -6263,42 +6263,38 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 1.5px solid rgba(245, 236, 227, 0.7);
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1.5px solid #e85749;
   border-radius: 50%;
   background: transparent;
-  color: #f5ece3;
+  color: #e85749;
   text-decoration: none;
-  transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 180ms ease-out, color 180ms ease-out;
+  transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .contact-section__socials a:hover,
 .contact-section__socials a:focus-visible {
-  background: #f5ece3;
-  color: #26221f;
-  transform: scale(1.12);
+  transform: scale(1.15);
 }
 
 .contact-section__socials svg {
-  width: 1.15rem;
-  height: 1.15rem;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
-/* Dotted orbit ring. Appears and spins on hover. */
+/* Dotted orange ring. Always visible, spins on hover. */
 .contact-section__socials .footer-orbit {
   position: absolute;
-  inset: -0.45rem;
-  border: 1.5px dashed rgba(245, 236, 227, 0.9);
+  inset: -0.5rem;
+  border: 1.5px dotted #e85749;
   border-radius: 50%;
-  opacity: 0;
-  transition: opacity 180ms ease-out;
+  opacity: 1;
   pointer-events: none;
 }
 
 .contact-section__socials a:hover .footer-orbit,
 .contact-section__socials a:focus-visible .footer-orbit {
-  opacity: 1;
   animation: footer-orbit 7s linear infinite;
 }
 
