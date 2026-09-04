@@ -5399,7 +5399,6 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   flex-direction: column;
   gap: clamp(1.25rem, 3vh, 2.25rem);
   transform-origin: 50% 50%;
-  will-change: transform;
 }
 
 .project-rail__heading {
@@ -5695,6 +5694,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   translate: -50% 0;
   color: #f5ece3;
   pointer-events: none;
+  will-change: transform;
 }
 
 .project-rail__ball {
@@ -5735,6 +5735,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 .project-rail--pinned .project-rail__stage {
   height: 100%;
   padding-block: clamp(4.5rem, 9vh, 6rem) clamp(1.25rem, 3vh, 2rem);
+  will-change: transform;
 }
 
 .project-rail--pinned .project-rail__track {

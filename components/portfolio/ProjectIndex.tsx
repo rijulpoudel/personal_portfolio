@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/data/projects";
@@ -113,7 +113,7 @@ export default function ProjectIndex() {
   const [pinned, setPinned] = useState(false);
   const [percent, setPercent] = useState(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const section = sectionRef.current;
     const viewport = viewportRef.current;
     const stage = stageRef.current;
@@ -211,10 +211,12 @@ export default function ProjectIndex() {
       lastTimestamp = timestamp;
 
       track.style.transform = `translate3d(${(-visualProgress * maxScroll).toFixed(2)}px, 0, 0)`;
-      const zoom = 0.94 + 0.06 * Math.min(1, visualProgress / 0.15);
+      const zoomProgress = clamp(visualProgress / 0.25);
+      const easedZoom = zoomProgress * zoomProgress * (3 - 2 * zoomProgress);
+      const zoom = 0.94 + 0.06 * easedZoom;
       stage.style.transform = `scale(${zoom.toFixed(4)})`;
       fill.style.transform = `scaleX(${visualProgress.toFixed(5)})`;
-      ballSlot.style.left = `${(visualProgress * 100).toFixed(3)}%`;
+      ballSlot.style.transform = `translate3d(${(visualProgress * lineWidth).toFixed(2)}px, 0, 0)`;
 
       const travelPx = (visualProgress - lastVisualProgress) * lineWidth;
       lastVisualProgress = visualProgress;
@@ -285,6 +287,7 @@ export default function ProjectIndex() {
       window.removeEventListener("resize", handleResize);
       section.style.height = "";
       section.classList.remove("project-rail--moving");
+      ballSlot.style.transform = "";
       ballBounce.style.transform = "";
       ballSpin.style.transform = "";
       ballShadow.style.transform = "";
