@@ -17,20 +17,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: meta.title };
 }
 
-export default async function FieldNotePage({ params }: Props) {
+export default async function WritingPage({ params }: Props) {
   const { slug } = await params;
   if (!getPostSlugs().includes(slug)) notFound();
   const meta = getPostMeta(slug);
 
   return (
-    <div className="container-sheet" style={{ paddingBlock: "3.5rem" }}>
+    <main className="container-sheet" style={{ paddingBlock: "3.5rem" }}>
       <article style={{ maxWidth: "640px" }}>
         <Link
-          href="/field-notes"
+          href="/writing"
           className="voice-type-caps quiet-link no-print"
           style={{ textDecoration: "none", color: "var(--ink-faded)" }}
         >
-          ← All field notes
+          ← All writing
         </Link>
 
         <p className="voice-type" style={{ color: "var(--ink-faded)", marginTop: "2.5rem" }}>
@@ -40,13 +40,13 @@ export default async function FieldNotePage({ params }: Props) {
           {meta.title}
         </h1>
 
-        <div className="prose-archive">
+        <div className="prose-block">
           <p>
-            This note is still being transcribed from the field notebook. MDX
+            This note is still being drafted. MDX
             rendering will be wired up in <code>lib/mdx.ts</code>.
           </p>
         </div>
       </article>
-    </div>
+    </main>
   );
 }

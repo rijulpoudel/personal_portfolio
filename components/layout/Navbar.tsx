@@ -13,7 +13,7 @@ export default function Navbar() {
 
   const isActive = (href: string) =>
     href === "/"
-      ? pathname === "/" || pathname.startsWith("/specimen")
+      ? pathname === "/" || pathname.startsWith("/projects")
       : pathname.startsWith(href);
 
   return (

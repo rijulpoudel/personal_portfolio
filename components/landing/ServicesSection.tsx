@@ -7,7 +7,7 @@ const SERVICES = [
     number: "01",
     name: "Web Development",
     description:
-      "Full-stack web apps with React, TypeScript, Django, and MySQL — the same stack trusted by natural history museums in dozens of countries.",
+      "Full-stack web apps with React, TypeScript, Django, and MySQL — the same stack used by research institutions in dozens of countries.",
   },
   {
     number: "02",

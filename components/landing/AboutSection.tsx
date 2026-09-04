@@ -14,7 +14,7 @@ const GROUP_URL =
   "https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png";
 
 const ABOUT_TEXT =
-  "I'm a software developer at the Specify Collections Consortium, building the open-source platform museums worldwide use to catalog natural history. CS at the University of Kansas, class of 2027. I build at hackathons, shoot for my studio Crafteako, and care as much about how software feels as how it works. Let's build something incredible together!";
+  "I'm a software developer at the Specify Collections Consortium, building open-source software used around the world for natural history collections. CS at the University of Kansas, class of 2027. I build at hackathons, shoot for my studio Crafteako, and care as much about how software feels as how it works. Let's build something incredible together!";
 
 export default function AboutSection() {
   return (

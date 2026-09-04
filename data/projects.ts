@@ -1,99 +1,77 @@
 /**
- * THE COLLECTION
- * Every project is a specimen: accessioned, labeled, annotated.
- * Accession numbers are chronological by acquisition and never reused.
+ * PROJECTS
+ * Every project Rijul has shipped: described, credited, annotated.
+ * IDs are chronological and never reused.
  */
 
-export type PlateKind =
-  | "clock"
-  | "marigold"
-  | "megaphone"
-  | "balance"
-  | "lens"
-  | "camera";
-
-export interface Plate {
-  roman: string; // plate number, by accession order
-  kind: PlateKind;
-  caption: string;
-}
-
-export interface DissectionComponent {
+export interface ArchitectureComponent {
   name: string;
   role: string;
 }
 
-export interface Annotation {
-  date: string; // year or YYYY-MM, when the annotation was added
+export interface ProjectNote {
+  date: string; // year or YYYY-MM, when the note was added
   text: string;
 }
 
-export interface Specimen {
-  accession: string; // e.g. "RP-2026-0006"
+export interface Project {
+  id: string; // e.g. "RP-2026-0006"
   slug: string;
   title: string;
   nepali?: { script: string; meaning: string };
-  commonName: string; // the vernacular tagline
-  description: string; // one line, for the ledger + metadata
-  collectedAt: string; // the event
+  tagline: string;
+  description: string; // one line, for cards + metadata
+  builtAt: string; // where it was built
   eventDate: string; // display date
   year: number;
-  locality: string;
-  collectors: string;
-  method: string; // sampling protocol
-  substrate: string[]; // tech stack
-  status: "live" | "exhibited" | "in-progress" | "archived";
-  plate: Plate;
-  holotype?: boolean;
-  determinations?: { text: string; winner?: boolean }[];
+  location: string;
+  team: string;
+  format: string; // hackathon, course capstone, self-directed, ...
+  stack: string[]; // tech stack
+  status: "live" | "shipped" | "in-progress" | "archived";
+  featured?: boolean;
+  awards?: { text: string; winner?: boolean }[];
   links: { github?: string; devpost?: string; live?: string };
-  fieldNotes: string[]; // the narrative
-  dissection?: {
+  story: string[]; // the narrative
+  architecture?: {
     description: string;
-    components: DissectionComponent[];
+    components: ArchitectureComponent[];
   };
-  annotations: Annotation[];
+  notes: ProjectNote[];
 }
 
-export const COLLECTOR = "R. Poudel";
-
-export const specimens: Specimen[] = [
-  /* ── RP-2026-0006 · Aawaj, the holotype ────────────────────────── */
+export const projects: Project[] = [
+  /* Aawaj */
   {
-    accession: "RP-2026-0006",
+    id: "RP-2026-0006",
     slug: "aawaj",
     title: "Aawaj",
     nepali: { script: "आवाज", meaning: "voice" },
-    commonName: "civic issue reporting, tamper-proof and on-chain",
+    tagline: "civic issue reporting, tamper-proof and on-chain",
     description:
       "A blockchain dApp on Polygon Amoy for tamper-proof civic issue reporting, with a 5-tier government escalation system and IPFS photo evidence.",
-    collectedAt: "Midwest Blockathon",
+    builtAt: "Midwest Blockathon",
     eventDate: "2026",
     year: 2026,
-    locality: "Midwest, USA",
-    collectors: "R. Poudel et al.",
-    method: "hackathon, weekend build",
-    substrate: ["React", "Solidity", "Polygon Amoy", "ethers.js", "Pinata IPFS", "MetaMask"],
-    status: "exhibited",
-    plate: {
-      roman: "VI",
-      kind: "megaphone",
-      caption: "fig. 1. speaking-trumpet, by which a voice carries.",
-    },
-    holotype: true,
-    determinations: [
+    location: "Midwest, USA",
+    team: "R. Poudel et al.",
+    format: "hackathon, weekend build",
+    stack: ["React", "Solidity", "Polygon Amoy", "ethers.js", "Pinata IPFS", "MetaMask"],
+    status: "shipped",
+    featured: true,
+    awards: [
       { text: "Best Beginner Track, winner", winner: true },
       { text: "Best Hack Built with Antigravity, winner", winner: true },
     ],
     links: {
       github: "https://github.com/rijulpoudel/midwest_blockathon_awaj",
     },
-    fieldNotes: [
+    story: [
       "Aawaj is Nepali for “voice.” The premise comes from watching civic complaints disappear into bureaucracy back home: a pothole gets reported, the report sits in a drawer, and there is no way to prove it was ever filed or who ignored it. We wanted the paper trail itself to be incorruptible.",
       "Reports are written to a smart contract on Polygon Amoy, which makes them permanent and publicly auditable. The interesting design problem was escalation; a report shouldn't just sit on-chain, it should move. We built a five-tier ladder (Ward to Municipality to District to Province to Federal) with on-chain confirmation at each level and dispute logic when a citizen contests a resolution.",
       "Photo evidence is too large and too expensive for the chain, so images go to IPFS via Pinata and the contract stores the content hash. Officials work from a wallet-gated dashboard and authenticate with MetaMask, so their confirmations are themselves on-chain transactions. The audit trail covers the responders too, not just the reporters.",
     ],
-    dissection: {
+    architecture: {
       description:
         "A React frontend talks to a Solidity contract on Polygon Amoy via ethers.js. Pinata pins photo evidence to IPFS; the chain stores hashes and the full escalation state machine.",
       components: [
@@ -115,7 +93,7 @@ export const specimens: Specimen[] = [
         },
       ],
     },
-    annotations: [
+    notes: [
       {
         date: "2026",
         text: "Putting the escalation logic on-chain, not just the reports, was the idea judges responded to. Accountability for the responders, not only a complaint box.",
@@ -127,36 +105,31 @@ export const specimens: Specimen[] = [
     ],
   },
 
-  /* ── RP-2026-0005 · Lucid AI ───────────────────────────────────── */
+  /* Lucid AI */
   {
-    accession: "RP-2026-0005",
+    id: "RP-2026-0005",
     slug: "lucid-ai",
     title: "Lucid AI",
-    commonName: "ambient prediction of dementia sundowning",
+    tagline: "ambient prediction of dementia sundowning",
     description:
       "An ambient AI platform that predicts dementia sundowning episodes 20 to 40 minutes early via continuous audio analysis, streaming to a caregiver dashboard.",
-    collectedAt: "DevFest WashU",
+    builtAt: "DevFest WashU",
     eventDate: "2026",
     year: 2026,
-    locality: "St. Louis, MO",
-    collectors: "R. Poudel et al.",
-    method: "hackathon, weekend build",
-    substrate: ["Next.js", "Firebase", "Gemini API", "ElevenLabs", "Twilio"],
-    status: "exhibited",
-    plate: {
-      roman: "V",
-      kind: "clock",
-      caption: "fig. 1. clock face drawn at half past four, the sundowning hour.",
-    },
+    location: "St. Louis, MO",
+    team: "R. Poudel et al.",
+    format: "hackathon, weekend build",
+    stack: ["Next.js", "Firebase", "Gemini API", "ElevenLabs", "Twilio"],
+    status: "shipped",
     links: {
       github: "https://github.com/rijulpoudel",
     },
-    fieldNotes: [
+    story: [
       "Sundowning, the late-afternoon agitation common in dementia, usually catches caregivers off guard. The episodes have leading indicators in speech and ambient sound, but no human can monitor for them continuously. That is a machine's job.",
       "Lucid listens ambiently and runs continuous audio analysis through Gemini 1.5 Pro, looking for the early signatures of an episode. When the model's confidence shifts, state changes stream to a caregiver dashboard in real time. The goal is a 20 to 40 minute head start: enough time to adjust the environment, redirect, or simply be present before distress peaks.",
       "Two more pieces round it out. Daily cognitive assessments (clock drawing and word recall) are scored by Gemini Vision against an eight-week personal baseline, so decline is measured against the person rather than a population average. And the companion speaks in a familiar family voice cloned with ElevenLabs, because a known voice de-escalates where a synthetic one can agitate.",
     ],
-    dissection: {
+    architecture: {
       description:
         "A Next.js app with Firebase as the real-time backbone. Gemini handles both continuous audio interpretation and vision-based scoring of cognitive assessments; ElevenLabs and Twilio handle the human-facing outputs.",
       components: [
@@ -178,7 +151,7 @@ export const specimens: Specimen[] = [
         },
       ],
     },
-    annotations: [
+    notes: [
       {
         date: "2026",
         text: "Baseline-relative scoring matters more than absolute scores. An 8-week personal baseline catches drift that population norms hide.",
@@ -190,37 +163,32 @@ export const specimens: Specimen[] = [
     ],
   },
 
-  /* ── RP-2026-0004 · Didi ───────────────────────────────────────── */
+  /* Didi */
   {
-    accession: "RP-2026-0004",
+    id: "RP-2026-0004",
     slug: "didi",
     title: "Didi",
     nepali: { script: "दिदी", meaning: "older sister" },
-    commonName: "a mental-health companion that checks on you",
+    tagline: "a mental-health companion that checks on you",
     description:
       "A mental health companion app with mood-personalized AI guidance and an automated alert system that intervenes on consecutive low-mood patterns.",
-    collectedAt: "NLN Hackathon",
+    builtAt: "NLN Hackathon",
     eventDate: "2026",
     year: 2026,
-    locality: "remote",
-    collectors: "R. Poudel et al.",
-    method: "hackathon, weekend build",
-    substrate: ["React Native", "Node.js", "Express.js", "Supabase", "Gemini API"],
-    status: "exhibited",
-    plate: {
-      roman: "IV",
-      kind: "marigold",
-      caption: "fig. 1. marigold (सयपत्री), worn for sisters at Tihar.",
-    },
+    location: "remote",
+    team: "R. Poudel et al.",
+    format: "hackathon, weekend build",
+    stack: ["React Native", "Node.js", "Express.js", "Supabase", "Gemini API"],
+    status: "shipped",
     links: {
       github: "https://github.com/rijulpoudel",
     },
-    fieldNotes: [
+    story: [
       "Didi means “older sister” in Nepali: the person who notices you have been quiet for three days and shows up at your door. The app is named for the behavior we wanted to replicate. Not a chatbot you have to reach out to, but a companion that notices.",
       "Users do quick emotional check-ins, and Gemini generates guidance personalized to the mood, history, and goals behind each one rather than generic wellness copy. The check-in stream is also a signal: an automated alert system watches for consecutive low-mood patterns and triggers wellness interventions when a streak forms. The noticing is built into the architecture, not left to the user's initiative.",
       "The stack is React Native on the front, a Node/Express API in the middle, and Supabase for auth and storage. A deliberate choice: keep the mobile client thin and put the pattern detection server-side, where it runs whether or not the app is open.",
     ],
-    dissection: {
+    architecture: {
       description:
         "A React Native client backed by a Node/Express API, with Supabase providing auth and persistence and Gemini generating mood-personalized guidance.",
       components: [
@@ -242,7 +210,7 @@ export const specimens: Specimen[] = [
         },
       ],
     },
-    annotations: [
+    notes: [
       {
         date: "2026",
         text: "Personalized guidance lives or dies on context discipline. Sending mood history and goals with each request made responses specific instead of horoscope-vague.",
@@ -250,36 +218,31 @@ export const specimens: Specimen[] = [
     ],
   },
 
-  /* ── RP-2025-0003 · Bizboard ───────────────────────────────────── */
+  /* Bizboard */
   {
-    accession: "RP-2025-0003",
+    id: "RP-2025-0003",
     slug: "bizboard",
     title: "Bizboard",
-    commonName: "a marketplace built for builders",
+    tagline: "a marketplace built for builders",
     description:
       "A full-stack service marketplace with real-time comments, upvotes, and row-level security. CodePath Web 102 final project.",
-    collectedAt: "CodePath Web 102",
+    builtAt: "CodePath Web 102",
     eventDate: "Aug 2025",
     year: 2025,
-    locality: "remote",
-    collectors: "R. Poudel (solo)",
-    method: "8-week course capstone",
-    substrate: ["React", "Supabase", "PostgreSQL", "CSS"],
+    location: "remote",
+    team: "R. Poudel (solo)",
+    format: "8-week course capstone",
+    stack: ["React", "Supabase", "PostgreSQL", "CSS"],
     status: "live",
-    plate: {
-      roman: "III",
-      kind: "balance",
-      caption: "fig. 1. balance. Fair exchange, weighed.",
-    },
     links: {
       github: "https://github.com/rijulpoudel",
     },
-    fieldNotes: [
+    story: [
       "For the CodePath final I wanted something with real complexity, not a todo app. A service marketplace forces the full set: auth, ownership, real-time interaction, filtering, and per-user dashboards.",
       "Supabase was the right call for a solo build. PostgreSQL underneath meant proper relational modeling, with listings, users, comments, and upvotes as linked tables. Row-level security meant ownership rules are declared in SQL policy, not scattered through React components.",
       "The dashboard was the hardest piece: aggregating upvotes, comment counts, and activity per listing in near-real-time. I used Supabase's real-time subscriptions for live comment feeds and polling for dashboard metrics, a deliberate trade between freshness and complexity.",
     ],
-    dissection: {
+    architecture: {
       description:
         "A React SPA communicating directly with Supabase. RLS policies in PostgreSQL enforce data ownership; real-time subscriptions power the comment feed.",
       components: [
@@ -301,7 +264,7 @@ export const specimens: Specimen[] = [
         },
       ],
     },
-    annotations: [
+    notes: [
       {
         date: "2025",
         text: "RLS takes a while to click. You are writing security as database policy, not application logic. Once it does, it's elegant.",
@@ -313,36 +276,31 @@ export const specimens: Specimen[] = [
     ],
   },
 
-  /* ── RP-2025-0002 · Lost & Found ───────────────────────────────── */
+  /* Lost & Found */
   {
-    accession: "RP-2025-0002",
+    id: "RP-2025-0002",
     slug: "lost-and-found",
     title: "Lost & Found",
-    commonName: "track what matters, find it fast",
+    tagline: "track what matters, find it fast",
     description:
       "A cross-platform mobile app built in 48 hours at HackKU 2025 to report, search, and claim lost items with location context.",
-    collectedAt: "HackKU",
+    builtAt: "HackKU",
     eventDate: "Apr 2025",
     year: 2025,
-    locality: "Lawrence, KS",
-    collectors: "R. Poudel et al. (team of 3)",
-    method: "48-hr hackathon",
-    substrate: ["React Native", "Expo", "Firebase", "Flask", "Python"],
-    status: "exhibited",
-    plate: {
-      roman: "II",
-      kind: "lens",
-      caption: "fig. 1. hand lens, ×10. For finding what was misplaced.",
-    },
+    location: "Lawrence, KS",
+    team: "R. Poudel et al. (team of 3)",
+    format: "48-hr hackathon",
+    stack: ["React Native", "Expo", "Firebase", "Flask", "Python"],
+    status: "shipped",
     links: {
       devpost: "https://devpost.com",
     },
-    fieldNotes: [
+    story: [
       "Campus lost-and-found runs on phone calls and bulletin boards. There is no way to search by location, time, or description; you just hope someone turned your thing in. We built the fix in 48 hours.",
       "Cross-platform was non-negotiable (lost items don't care about your phone OS), so React Native with Expo gave us one codebase. Firebase supplied real-time sync, which meant item status updates propagated to every client instantly.",
       "The Flask middleware was a deliberate architecture call: a clean REST surface we controlled, room for Python search and matching logic, and Firebase credentials kept server-side. We scoped ruthlessly. Auth, item creation, location tagging, and search were the four pillars; everything else was cut.",
     ],
-    dissection: {
+    architecture: {
       description:
         "Three layers: React Native client, Flask REST API, Firebase. The Flask layer owns business logic and credentials; Firestore provides real-time document sync.",
       components: [
@@ -360,7 +318,7 @@ export const specimens: Specimen[] = [
         },
       ],
     },
-    annotations: [
+    notes: [
       {
         date: "2025",
         text: "Firestore listeners fire often. Debouncing UI updates was the difference between a live app and a flickering one.",
@@ -372,37 +330,32 @@ export const specimens: Specimen[] = [
     ],
   },
 
-  /* ── RP-2024-0001 · Crafteako ──────────────────────────────────── */
+  /* Crafteako */
   {
-    accession: "RP-2024-0001",
+    id: "RP-2024-0001",
     slug: "crafteako",
     title: "Crafteako",
-    commonName: "where photography meets the web",
+    tagline: "where photography meets the web",
     description:
       "A hand-built photography and videography studio site. No frameworks, no build step, real client inquiries.",
-    collectedAt: "field work, self-directed",
+    builtAt: "field work, self-directed",
     eventDate: "2024 –",
     year: 2024,
-    locality: "Lawrence, KS",
-    collectors: "R. Poudel (solo)",
-    method: "ongoing practice",
-    substrate: ["HTML", "CSS", "JavaScript"],
+    location: "Lawrence, KS",
+    team: "R. Poudel (solo)",
+    format: "ongoing practice",
+    stack: ["HTML", "CSS", "JavaScript"],
     status: "live",
-    plate: {
-      roman: "I",
-      kind: "camera",
-      caption: "fig. 1. field camera, bellows type. The instrument of observation.",
-    },
     links: {
       live: "https://crafteako.com",
       github: "https://github.com/rijulpoudel",
     },
-    fieldNotes: [
+    story: [
       "Crafteako is the home for my photography and videography. Every portfolio template I looked at felt generic (sliders, grids, lightboxes), so I built the site from scratch to give the work its own visual language.",
       "No framework, deliberately. I had been writing React for months and wanted to rediscover what frameworks actually abstract. CSS Grid, custom properties, and the animation API turned out to cover far more ground than expected.",
       "Photography sites are image-heavy by nature, so performance was a constraint from day one: lazy loading, responsive srcset sizing, and a Lightroom-to-Squoosh compression pipeline keep first load fast on slow connections.",
     ],
-    dissection: {
+    architecture: {
       description:
         "A static site with no build step. Custom CSS for layout and theming; JavaScript only where paper can't do the job (lightbox, contact form, scroll observation).",
       components: [
@@ -420,7 +373,7 @@ export const specimens: Specimen[] = [
         },
       ],
     },
-    annotations: [
+    notes: [
       {
         date: "2024",
         text: "Vanilla CSS is underrated. Grid, custom properties, and clamp() cover most of what a framework gives you, at zero runtime cost.",
@@ -433,11 +386,11 @@ export const specimens: Specimen[] = [
   },
 ];
 
-export function getSpecimen(slug: string): Specimen | undefined {
-  return specimens.find((s) => s.slug === slug);
+export function getProject(slug: string): Project | undefined {
+  return projects.find((s) => s.slug === slug);
 }
 
-/** Ledger order: newest accession first. */
-export function ledgerOrder(): Specimen[] {
-  return [...specimens].sort((a, b) => b.accession.localeCompare(a.accession));
+/** Newest first. */
+export function newestFirst(): Project[] {
+  return [...projects].sort((a, b) => b.id.localeCompare(a.id));
 }

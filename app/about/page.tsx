@@ -5,17 +5,17 @@ import { movies } from "@/data/movies";
 import { siteConfig } from "@/data/siteConfig";
 
 export const metadata: Metadata = {
-  title: "The Collector",
+  title: "About",
   description:
-    "Poudel, Rijul (b. Bharatpur, Chitwan, Nepal). Collector active Lawrence, Kansas, 2023–. Fields: web systems, collections software, photography.",
+    "Rijul Poudel (b. Bharatpur, Chitwan, Nepal). Based in Lawrence, Kansas. Works on web systems, collections software, and photography.",
 };
 
 export default function AboutPage() {
   return (
-    <div className="container-sheet" style={{ paddingBlock: "3.5rem" }}>
-      {/* ── Collector's biography ───────────────────────────────── */}
-      <p className="voice-institutional" style={{ marginBottom: "0.75rem" }}>
-        Biographical Note · From the Finding Aid
+    <main className="container-sheet" style={{ paddingBlock: "3.5rem" }}>
+      {/* ── Biography ─────────────────────────────────────────────── */}
+      <p className="voice-kicker" style={{ marginBottom: "0.75rem" }}>
+        Biographical Note
       </p>
       <h1 className="display-title" style={{ marginBottom: "2.5rem" }}>
         POUDEL, RIJUL{" "}
@@ -34,17 +34,17 @@ export default function AboutPage() {
         }}
         className="bio-grid"
       >
-      <div className="prose-archive" style={{ maxWidth: "640px" }}>
+      <div className="prose-block" style={{ maxWidth: "640px" }}>
         <p className="voice-type" style={{ color: "var(--ink-faded)" }}>
-          Collector active Lawrence, Kansas, 2023–. Fields: web systems,
-          collections software, photography.
+          Based in Lawrence, Kansas. Works on web systems,
+          collections software, and photography.
         </p>
         <p>
           I build software for the people who keep the world&apos;s natural
           history. At the Specify Collections Consortium, based at the KU
           Biodiversity Institute, I work on Specify 7: the open-source
-          platform museums and herbaria worldwide use to catalog their
-          specimens.
+          platform used around the world to manage natural
+          history collections.
         </p>
         <p>
           I&apos;m studying Computer Science with a Data Science minor at the
@@ -59,10 +59,10 @@ export default function AboutPage() {
             Crafteako
           </a>{" "}
           is my photography and videography studio, and its website is the
-          only specimen in this catalog built with no framework at all, on
+          only project here built with no framework at all, on
           purpose. Before Kansas there was Bharatpur: math olympiad
           campaigns, a computational biology research program, and the habit
-          of collecting things carefully.
+          of keeping things carefully.
         </p>
         <p>
           Correspondence:{" "}
@@ -81,14 +81,14 @@ export default function AboutPage() {
           style={{ width: "100%", height: "auto", display: "block" }}
         />
         <figcaption className="voice-type" style={{ marginTop: "0.625rem", textAlign: "center", color: "var(--ink-faded)" }}>
-          The collector. Lawrence, Kansas.
+          Lawrence, Kansas.
         </figcaption>
       </figure>
       </div>
 
-      {/* ── Specimens kept for personal study ───────────────────── */}
+      {/* ── Kept for personal study ─────────────────────────────── */}
       <section style={{ marginTop: "5rem" }}>
-        <h2 className="section-heading">Specimens Kept for Personal Study</h2>
+        <h2 className="section-heading">Kept for Personal Study</h2>
 
         <p className="voice-type-caps" style={{ color: "var(--ink-faded)", margin: "1.5rem 0 0.5rem" }}>
           Books
@@ -116,6 +116,6 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
-    </div>
+    </main>
   );
 }
