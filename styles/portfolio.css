@@ -3650,6 +3650,14 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   line-height: 1.55;
 }
 
+.chalk-hero__goat {
+  display: inline-block;
+  width: auto;
+  height: 1.15em;
+  margin-left: 0.45rem;
+  vertical-align: -0.2em;
+}
+
 .chalk-hero__note {
   position: relative;
   min-width: 0;

@@ -209,6 +209,16 @@ export default async function Hero() {
 
           <p className="chalk-hero__status-line">
             building useful software. always learning. messi is the goat.
+            <svg className="chalk-hero__goat" viewBox="0 0 44 34" aria-hidden="true">
+              <path d="M16 11 C13 5 15 1 20 2" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+              <path d="M28 11 C31 5 29 1 24 2" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+              <path d="M14 17 L7 14" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+              <path d="M30 17 L37 14" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+              <rect x="13" y="10" width="18" height="17" rx="8" fill="none" stroke="currentColor" strokeWidth="2.4" />
+              <circle cx="19" cy="18" r="1.6" fill="currentColor" />
+              <circle cx="27" cy="18" r="1.6" fill="currentColor" />
+              <path d="M22 27 L18.5 33 L22 31 L25.5 33 Z" fill="currentColor" />
+            </svg>
           </p>
         </div>
 
