@@ -100,6 +100,9 @@ function PersonalFootball() {
 }
 
 export default function FootballArchive() {
+  const focusPlayer = footballPlayers.find((player) => player.slug === "pedri")!;
+  const supportingPlayers = footballPlayers.filter((player) => player.slug !== "pedri");
+
   return (
     <main className="football-page">
       <header className="football-topbar">
@@ -153,9 +156,12 @@ export default function FootballArchive() {
         </header>
 
         <div className="football-archive-grid">
-          {footballPlayers.map((player) => (
-            <ArchiveCard key={player.slug} player={player} />
-          ))}
+          <ArchiveCard player={focusPlayer} />
+          <div className="football-archive-grid__supporting">
+            {supportingPlayers.map((player) => (
+              <ArchiveCard key={player.slug} player={player} />
+            ))}
+          </div>
         </div>
       </section>
 
