@@ -8,7 +8,6 @@ import {
 } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ThemeProvider from "@/components/layout/ThemeProvider";
 import { siteConfig } from "@/data/siteConfig";
@@ -88,7 +87,6 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <Navbar />
           {children}
           <Footer />
         </ThemeProvider>

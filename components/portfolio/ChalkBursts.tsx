@@ -53,13 +53,18 @@ function buildStrands(seed: number): Strand[] {
 export default function ChalkBursts() {
   const [pops, setPops] = useState<StringPop[]>([]);
   const nextId = useRef(0);
-  const timers = useRef<number[]>([]);
+  const timers = useRef<Set<number>>(new Set());
 
   useEffect(() => {
     const scheduledTimers = timers.current;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const makePop = (event: PointerEvent) => {
-      if (event.button !== 0 || document.documentElement.classList.contains("blackboard-draw-mode")) return;
+      if (
+        event.button !== 0 ||
+        prefersReducedMotion.matches ||
+        document.documentElement.classList.contains("blackboard-draw-mode")
+      ) return;
 
       const id = nextId.current++;
       const pop: StringPop = {
@@ -70,11 +75,11 @@ export default function ChalkBursts() {
       };
 
       setPops((current) => [...current.slice(-5), pop]);
-      scheduledTimers.push(
-        window.setTimeout(() => {
-          setPops((current) => current.filter((item) => item.id !== id));
-        }, 900),
-      );
+      const timerId = window.setTimeout(() => {
+        setPops((current) => current.filter((item) => item.id !== id));
+        scheduledTimers.delete(timerId);
+      }, 900);
+      scheduledTimers.add(timerId);
     };
 
     document.addEventListener("pointerdown", makePop);
@@ -82,6 +87,7 @@ export default function ChalkBursts() {
     return () => {
       document.removeEventListener("pointerdown", makePop);
       for (const timer of scheduledTimers) window.clearTimeout(timer);
+      scheduledTimers.clear();
     };
   }, []);
 

@@ -144,7 +144,7 @@ function drawSegment(
   }
 
   const distance = Math.hypot(to.x - from.x, to.y - from.y);
-  const dustCount = Math.min(18, Math.max(1, Math.floor(distance / 3)));
+  const dustCount = Math.min(10, Math.max(1, Math.floor(distance / 5)));
   context.globalAlpha = 0.28;
 
   for (let index = 0; index < dustCount; index += 1) {
@@ -162,10 +162,13 @@ export default function BlackboardStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const drawingRef = useRef(false);
+  const drawingFrameRef = useRef(0);
+  const strokeQueueRef = useRef<Point[]>([]);
   const pointerIdRef = useRef<number | null>(null);
   const lastPointRef = useRef<Point | null>(null);
   const toolRef = useRef<DrawingTool>("browse");
   const colorRef = useRef(colors[0].value);
+  const hasDrawingRef = useRef(false);
   const [tool, setTool] = useState<DrawingTool>("browse");
   const [color, setColor] = useState(colors[0].value);
   const [isOpen, setIsOpen] = useState(false);
@@ -184,7 +187,7 @@ export default function BlackboardStudio() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || tool === "browse") return;
 
     let resizeFrame = 0;
 
@@ -220,7 +223,7 @@ export default function BlackboardStudio() {
       window.removeEventListener("resize", scheduleResize);
       window.cancelAnimationFrame(resizeFrame);
     };
-  }, []);
+  }, [tool]);
 
   useEffect(() => {
     const cursor = cursorRef.current;
@@ -263,12 +266,22 @@ export default function BlackboardStudio() {
     };
 
     const moveCursor = (event: PointerEvent) => {
+      if (toolRef.current === "browse") {
+        if (isVisible || animationFrame !== 0) {
+          isVisible = false;
+          cursor.dataset.visible = "false";
+          if (animationFrame !== 0) window.cancelAnimationFrame(animationFrame);
+          animationFrame = 0;
+          lastFrameTime = 0;
+        }
+        return;
+      }
+
       const target = event.target;
       const isInteractive =
         target instanceof Element &&
         Boolean(target.closest("[data-blackboard-toolbar], a, button, input, textarea, select, summary"));
-      const shouldShow =
-        toolRef.current !== "browse" && event.pointerType !== "touch" && !isInteractive;
+      const shouldShow = event.pointerType !== "touch" && !isInteractive;
 
       targetX = event.clientX;
       targetY = event.clientY;
@@ -327,16 +340,49 @@ export default function BlackboardStudio() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const strokeQueue = strokeQueueRef.current;
 
     const isInteractiveTarget = (target: EventTarget | null) =>
       target instanceof Element &&
       Boolean(target.closest("[data-blackboard-toolbar], a, button, input, textarea, select, summary"));
+
+    const flushDrawing = () => {
+      drawingFrameRef.current = 0;
+      const queuedPoints = strokeQueueRef.current;
+      const context = canvas.getContext("2d");
+      let previousPoint = lastPointRef.current;
+
+      if (!context || !previousPoint || queuedPoints.length === 0) {
+        queuedPoints.length = 0;
+        return;
+      }
+
+      const activeTool = toolRef.current;
+      if (activeTool === "browse") {
+        queuedPoints.length = 0;
+        return;
+      }
+      for (const nextPoint of queuedPoints) {
+        drawSegment(context, previousPoint, nextPoint, activeTool, colorRef.current);
+        previousPoint = nextPoint;
+      }
+
+      queuedPoints.length = 0;
+      lastPointRef.current = previousPoint;
+      if (activeTool !== "eraser" && !hasDrawingRef.current) {
+        hasDrawingRef.current = true;
+        setHasDrawing(true);
+      }
+    };
 
     const startDrawing = (event: PointerEvent) => {
       const activeTool = toolRef.current;
       if (activeTool === "browse" || event.button !== 0 || isInteractiveTarget(event.target)) return;
 
       event.stopPropagation();
+      if (drawingFrameRef.current !== 0) window.cancelAnimationFrame(drawingFrameRef.current);
+      drawingFrameRef.current = 0;
+      strokeQueueRef.current.length = 0;
       drawingRef.current = true;
       pointerIdRef.current = event.pointerId;
       lastPointRef.current = {
@@ -351,23 +397,31 @@ export default function BlackboardStudio() {
       const activeTool = toolRef.current;
       if (!drawingRef.current || pointerIdRef.current !== event.pointerId || activeTool === "browse") return;
 
-      const lastPoint = lastPointRef.current;
-      const context = canvas.getContext("2d");
-      if (!lastPoint || !context) return;
-
-      const nextPoint = {
-        x: event.clientX + window.scrollX,
-        y: event.clientY + window.scrollY,
-      };
-
       event.preventDefault();
-      drawSegment(context, lastPoint, nextPoint, activeTool, colorRef.current);
-      lastPointRef.current = nextPoint;
-      if (activeTool !== "eraser") setHasDrawing(true);
+      const coalescedSamples = event.getCoalescedEvents?.();
+      const samples = coalescedSamples?.length ? coalescedSamples : [event];
+      for (const sample of samples) {
+        strokeQueueRef.current.push({
+          x: sample.clientX + window.scrollX,
+          y: sample.clientY + window.scrollY,
+        });
+      }
+
+      if (drawingFrameRef.current === 0) {
+        drawingFrameRef.current = window.requestAnimationFrame(flushDrawing);
+      }
     };
 
     const stopDrawing = (event: PointerEvent) => {
       if (pointerIdRef.current !== event.pointerId) return;
+      if (event.type === "pointerup") {
+        strokeQueueRef.current.push({
+          x: event.clientX + window.scrollX,
+          y: event.clientY + window.scrollY,
+        });
+      }
+      if (drawingFrameRef.current !== 0) window.cancelAnimationFrame(drawingFrameRef.current);
+      flushDrawing();
       drawingRef.current = false;
       pointerIdRef.current = null;
       lastPointRef.current = null;
@@ -383,6 +437,9 @@ export default function BlackboardStudio() {
       window.removeEventListener("pointermove", continueDrawing, { capture: true });
       window.removeEventListener("pointerup", stopDrawing, { capture: true });
       window.removeEventListener("pointercancel", stopDrawing, { capture: true });
+      if (drawingFrameRef.current !== 0) window.cancelAnimationFrame(drawingFrameRef.current);
+      drawingFrameRef.current = 0;
+      strokeQueue.length = 0;
     };
   }, []);
 
@@ -406,6 +463,7 @@ export default function BlackboardStudio() {
     const context = canvas?.getContext("2d");
     if (!canvas || !context) return;
     context.clearRect(0, 0, canvas.width, canvas.height);
+    hasDrawingRef.current = false;
     setHasDrawing(false);
   };
 

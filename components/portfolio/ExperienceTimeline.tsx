@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import Image from "next/image";
 import { FiChevronDown } from "react-icons/fi";
 import { experiences, type Experience } from "@/data/experience";
 
@@ -42,7 +43,7 @@ function TimelineRail({ mark, tone, logo }: { mark: string; tone: number; logo?:
     <div className="experience-paper__rail" aria-hidden="true">
       {logo ? (
         <span className="experience-paper__badge experience-paper__badge--logo" data-tone={tone}>
-          <img src={logo} alt="" width={48} height={48} />
+          <Image src={logo} alt="" width={48} height={48} sizes="48px" />
         </span>
       ) : (
         <span className="experience-paper__badge" data-tone={tone}>

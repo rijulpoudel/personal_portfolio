@@ -7,8 +7,8 @@ import StorageToggle from "@/components/layout/StorageToggle";
 export default function Footer() {
   const pathname = usePathname();
 
-  // The redesigned landing page is a standalone full-bleed experience.
-  if (pathname === "/") return null;
+  // Full-bleed experiences render their own footer.
+  if (pathname === "/" || pathname === "/football") return null;
 
   return (
     <footer className="site-footer">

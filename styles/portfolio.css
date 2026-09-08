@@ -1687,6 +1687,13 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -3199,7 +3206,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   background: transparent;
   filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.24));
   transform-origin: 50% 0;
-  animation: chalk-nav-drop 420ms step-end 60ms both;
+  animation: chalk-nav-drop 520ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both;
 }
 
 .chalk-header__frame {
@@ -3262,7 +3269,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   line-height: 1;
   text-decoration: none;
   transform-origin: 50%;
-  animation: chalk-nav-link-pop 280ms steps(1, end) both;
+  animation: chalk-nav-link-pop 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .chalk-header__link:nth-child(1) {
@@ -3326,7 +3333,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 }
 
 .chalk-header__link--active .chalk-header__underline path {
-  animation: chalk-rule-draw 320ms steps(1, end) both;
+  animation: chalk-rule-draw 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .chalk-header__connect {
@@ -3344,7 +3351,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   font-weight: 400;
   line-height: 1;
   text-decoration: none;
-  animation: chalk-connect-stamp 360ms step-end 460ms both;
+  animation: chalk-connect-stamp 460ms cubic-bezier(0.22, 1, 0.36, 1) 420ms both;
 }
 
 .chalk-header__connect-mark {
@@ -3357,7 +3364,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   pointer-events: none;
   transform: rotate(-7deg);
   transform-origin: 50%;
-  transition: transform 120ms step-end;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .chalk-header__connect:hover .chalk-header__connect-mark,
@@ -3505,6 +3512,71 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 
 .chalk-hero__thatsme svg text {
   font-family: var(--font-gochi-hand), "Bradley Hand", cursive;
+}
+
+.chalk-hero__football {
+  position: absolute;
+  top: 21.5rem;
+  left: -2.75rem;
+  z-index: 5;
+  display: block;
+  width: 11.5rem;
+  color: #f5ece3;
+  text-decoration: none;
+  rotate: 2.5deg;
+  transform-origin: 85% 70%;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), rotate 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.chalk-hero__football--mobile {
+  display: none;
+}
+
+.chalk-hero__football svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.chalk-hero__football svg text {
+  font-family: var(--font-gochi-hand), "Bradley Hand", cursive;
+}
+
+.chalk-hero__football-arrow {
+  transition: stroke-width 180ms ease;
+}
+
+.chalk-hero__football-ball {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: rotate 320ms cubic-bezier(0.22, 1, 0.36, 1), scale 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.chalk-hero__football-crest {
+  filter: drop-shadow(0 0.5px 0 rgba(0, 0, 0, 0.72));
+}
+
+.chalk-hero__football:hover,
+.chalk-hero__football:focus-visible {
+  transform: translateY(-0.2rem);
+  rotate: -1deg;
+}
+
+.chalk-hero__football:hover .chalk-hero__football-arrow,
+.chalk-hero__football:focus-visible .chalk-hero__football-arrow {
+  stroke-width: 3.2;
+}
+
+.chalk-hero__football:hover .chalk-hero__football-ball,
+.chalk-hero__football:focus-visible .chalk-hero__football-ball {
+  rotate: 18deg;
+  scale: 1.06;
+}
+
+.chalk-hero__football:focus-visible {
+  outline: 2px dashed #e85749;
+  outline-offset: 0.28rem;
 }
 
 .chalk-hero__portrait {
@@ -4063,8 +4135,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 @keyframes chalk-name-write {
   from {
     opacity: 0;
-    filter: blur(4px);
-    transform: translateX(-1.5rem);
+    transform: translate3d(-1.25rem, 0, 0);
   }
 }
 
@@ -4090,9 +4161,13 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
     opacity: 0;
     animation: portfolio-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) 650ms both;
   }
+  .chalk-hero__football {
+    opacity: 0;
+    animation: portfolio-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) 750ms both;
+  }
   .chalk-hero__name,
   .chalk-hero__status-line {
-    animation: chalk-name-write 520ms steps(6, end) 180ms both;
+    animation: chalk-name-write 560ms cubic-bezier(0.22, 1, 0.36, 1) 180ms both;
   }
   .chalk-hero__social {
     opacity: 0;
@@ -4115,6 +4190,13 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   }
   .github-calendar {
     animation: chalk-card-unfold 620ms cubic-bezier(0.22, 1, 0.36, 1) 390ms both;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1100px) {
+  .chalk-hero__football--desktop {
+    left: 0.25rem;
+    width: 10rem;
   }
 }
 
@@ -4170,6 +4252,18 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   .chalk-hero__status-line {
     margin-top: 0.45rem;
     font-size: 0.92rem;
+  }
+  .chalk-hero__football--desktop {
+    display: none;
+  }
+  .chalk-hero__football--mobile {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: block;
+    width: 9.75rem;
+    margin-top: 0.2rem;
+    rotate: -1deg;
   }
   .chalk-hero__note,
   .chalk-hero__activity {
@@ -4633,11 +4727,19 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .lately-clothesline__rope path {
+  .lately-section--motion-ready:not(.lately-section--visible) .lately-clothesline__rope path {
+    stroke-dasharray: 1700;
+    stroke-dashoffset: 1700;
+  }
+  .lately-section--motion-ready:not(.lately-section--visible) .lately-card {
+    opacity: 0;
+    translate: 0 -2.5rem;
+  }
+  .lately-section--visible .lately-clothesline__rope path {
     animation: lately-rope-draw 900ms cubic-bezier(0.2, 0.75, 0.25, 1) 120ms both;
     stroke-dasharray: 1700;
   }
-  .lately-card {
+  .lately-section--visible .lately-card {
     animation: lately-card-arrive 620ms cubic-bezier(0.2, 0.8, 0.25, 1) var(--card-delay) both;
   }
   .lately-card-wrap:hover .lately-card__pin,
@@ -5375,7 +5477,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   }
 }
 
-/* Projects rail: pinned horizontal walk with a trotting pup. */
+/* Projects rail: pinned horizontal walk with a dribbling Barça ball. */
 .project-rail {
   position: relative;
   overflow-x: clip;
@@ -5393,7 +5495,6 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   flex-direction: column;
   gap: clamp(1.25rem, 3vh, 2.25rem);
   transform-origin: 50% 50%;
-  will-change: transform;
 }
 
 .project-rail__heading {
@@ -5660,8 +5761,11 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 }
 
 .project-rail__linewrap {
+  --project-ball-size: 3.75rem;
+  --project-ball-radius: 1.875rem;
   position: relative;
   flex: 1;
+  margin-inline: var(--project-ball-radius);
   padding-top: 3.2rem;
 }
 
@@ -5681,26 +5785,43 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   transform-origin: 0 50%;
 }
 
-.project-rail__pup-slot {
+.project-rail__ball-slot {
   position: absolute;
   bottom: 0.35rem;
   left: 0;
-  width: 3.4rem;
+  width: var(--project-ball-size);
   translate: -50% 0;
   color: #f5ece3;
   pointer-events: none;
+  will-change: transform;
 }
 
-.project-rail__pup {
+.project-rail__ball {
+  display: block;
+  width: 100%;
+}
+
+.project-rail__ball svg {
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
 }
 
-.project-rail__pup-tail {
+.project-rail__ball-crest {
+  filter: drop-shadow(0 1px 0 rgba(8, 10, 10, 0.72));
+}
+
+.project-rail__ball-bounce,
+.project-rail__ball-spin,
+.project-rail__ball-shadow {
   transform-box: fill-box;
-  transform-origin: 85% 90%;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.project-rail__ball-bounce {
+  transform-origin: 50% 100%;
 }
 
 .project-rail--pinned .project-rail__pin {
@@ -5713,6 +5834,7 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 .project-rail--pinned .project-rail__stage {
   height: 100%;
   padding-block: clamp(4.5rem, 9vh, 6rem) clamp(1.25rem, 3vh, 2rem);
+  will-change: transform;
 }
 
 .project-rail--pinned .project-rail__track {
@@ -5735,34 +5857,11 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .project-rail--trotting .project-rail__pup-trot {
-    animation: pup-trot 0.28s ease-in-out infinite alternate;
-  }
-  .project-rail--trotting .project-rail__pup-tail {
-    animation: pup-wag 0.3s ease-in-out infinite alternate;
-  }
-}
-
-@keyframes pup-trot {
-  from {
-    translate: 0 0;
-  }
-  to {
-    translate: 0 -2.5px;
-  }
-}
-
-@keyframes pup-wag {
-  from {
-    rotate: -10deg;
-  }
-  to {
-    rotate: 14deg;
-  }
-}
-
 @media (max-width: 760px) {
+  .project-rail--pinned .project-rail__stage {
+    padding-bottom: 4.25rem;
+  }
+
   .project-rail__card {
     flex-basis: 78vw;
   }
@@ -5983,25 +6082,6 @@ html.blackboard-draw-mode .portfolio-site :where(a, button, input, textarea, sel
 
 .experience-paper__education-details {
   margin-top: 0.85rem;
-}
-
-@keyframes experience-paper-arrive {
-  from {
-    opacity: 0;
-    translate: 0 2rem;
-    rotate: -0.3deg;
-  }
-  to {
-    opacity: 1;
-    translate: 0 0;
-    rotate: 0deg;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .experience-paper {
-    animation: experience-paper-arrive 720ms cubic-bezier(0.2, 0.8, 0.25, 1) both;
-  }
 }
 
 @media (max-width: 680px) {

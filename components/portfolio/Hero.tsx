@@ -7,6 +7,7 @@ import ChalkboardBackdrop from "./ChalkboardBackdrop";
 import ChalkBursts from "./ChalkBursts";
 import AskAboutMe from "./AskAboutMe";
 import { ThatsMeArrow } from "./ThatsMeArrow";
+import { FootballInviteDoodle } from "./FootballInviteDoodle";
 import OrbitRing from "./OrbitRing";
 
 const aboutNotes = [
@@ -162,6 +163,7 @@ export default async function Hero() {
           <span className="chalk-hero__thatsme" aria-hidden="true">
             <ThatsMeArrow />
           </span>
+          <FootballInviteDoodle variant="desktop" />
         </div>
 
         <div className="chalk-hero__identity">
@@ -224,6 +226,7 @@ export default async function Hero() {
               <path d="M22 27 L18.5 33 L22 31 L25.5 33 Z" fill="currentColor" />
             </svg>
           </p>
+          <FootballInviteDoodle variant="mobile" />
         </div>
 
         <aside className="chalk-hero__note" aria-label="About Rijul">

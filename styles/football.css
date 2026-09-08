@@ -1,0 +1,883 @@
+.football-page {
+  --football-navy: #071b33;
+  --football-blue: #0756a0;
+  --football-garnet: #7e173f;
+  --football-gold: #edbb00;
+  --football-cream: #efe2c4;
+  --football-ink: #18202a;
+  min-height: 100vh;
+  overflow: clip;
+  background: var(--football-navy);
+  color: var(--football-cream);
+  font-family: var(--font-courier-prime), "Courier New", monospace;
+}
+
+.football-page,
+.football-page * {
+  box-sizing: border-box;
+}
+
+.football-page::before {
+  position: fixed;
+  z-index: 70;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+  content: "";
+  mix-blend-mode: soft-light;
+  opacity: 0.32;
+}
+
+.football-page a {
+  color: inherit;
+}
+
+.football-page :focus-visible {
+  outline: 3px solid var(--football-gold);
+  outline-offset: 5px;
+}
+
+.football-topbar {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  width: min(100% - 2rem, 88rem);
+  min-height: 4.25rem;
+  align-items: center;
+  margin-inline: auto;
+  border-bottom: 1px solid rgba(239, 226, 196, 0.42);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.football-back {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+}
+
+.football-back span {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-family: sans-serif;
+  font-size: 1.05rem;
+  transition: transform 180ms ease-out, background-color 180ms ease-out, color 180ms ease-out;
+}
+
+.football-back:hover span {
+  background: var(--football-cream);
+  color: var(--football-navy);
+  transform: translateX(-0.2rem);
+}
+
+.football-opening {
+  position: relative;
+  display: grid;
+  width: min(100% - 2rem, 88rem);
+  grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.65fr);
+  align-items: center;
+  gap: clamp(3rem, 7vw, 7rem);
+  margin-inline: auto;
+  padding-block: clamp(3.5rem, 6vw, 6rem);
+}
+
+.football-opening::before,
+.football-opening::after {
+  position: absolute;
+  z-index: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.football-opening::before {
+  top: 4%;
+  right: 18%;
+  width: 24rem;
+  max-width: 34vw;
+  aspect-ratio: 1;
+  border: 1px solid rgba(239, 226, 196, 0.18);
+  border-radius: 50%;
+}
+
+.football-opening::after {
+  right: -12vw;
+  bottom: 8%;
+  width: 38vw;
+  height: 1px;
+  background: rgba(239, 226, 196, 0.22);
+  rotate: -18deg;
+}
+
+.football-opening__copy,
+.football-opening__mark {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.football-kicker {
+  color: var(--football-gold);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.football-opening h1 {
+  display: grid;
+  margin: 1rem 0 1.5rem;
+  color: var(--football-cream);
+  font-family: var(--font-kanit), Impact, sans-serif;
+  font-size: clamp(4.75rem, 10.5vw, 9.5rem);
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: -0.075em;
+  line-height: 0.68;
+  text-transform: uppercase;
+}
+
+.football-opening h1 span:nth-child(1) {
+  margin-left: 0.08em;
+  color: var(--football-gold);
+  font-family: var(--font-gochi-hand), cursive;
+  font-size: 0.23em;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 2;
+  rotate: -4deg;
+}
+
+.football-opening h1 span:nth-child(2) {
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  -webkit-text-stroke: 1px rgba(239, 226, 196, 0.42);
+  text-shadow: 0.055em 0.055em 0 var(--football-garnet);
+}
+
+.football-opening h1 span:nth-child(3) {
+  margin-left: 0.43em;
+  color: var(--football-blue);
+  text-shadow: 0.04em 0.04em 0 var(--football-cream);
+}
+
+.football-opening__lede {
+  max-width: 42rem;
+  color: rgba(239, 226, 196, 0.78);
+  font-family: var(--font-source-serif), Georgia, serif;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.football-opening__jump {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  border-bottom: 1px solid var(--football-cream);
+  font-size: 0.77rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.football-opening__jump span {
+  color: var(--football-gold);
+  font-size: 1.1rem;
+  transition: transform 180ms ease-out;
+}
+
+.football-opening__jump:hover span {
+  transform: translateY(0.3rem);
+}
+
+.football-opening__mark {
+  display: grid;
+  justify-items: center;
+  padding: clamp(1.75rem, 3vw, 3rem);
+  border: 1px solid rgba(239, 226, 196, 0.42);
+  background: var(--football-garnet);
+  box-shadow: 1.4rem 1.4rem 0 var(--football-blue);
+  clip-path: polygon(3% 0, 99% 2%, 96% 97%, 1% 100%);
+  rotate: 3deg;
+}
+
+.football-opening__mark::before {
+  position: absolute;
+  inset: 0.7rem;
+  border: 1px dashed rgba(239, 226, 196, 0.5);
+  content: "";
+  clip-path: inherit;
+}
+
+.football-mark {
+  width: min(100%, 14rem);
+  filter: drop-shadow(0.75rem 0.9rem 0 rgba(9, 17, 29, 0.32));
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.football-opening__mark:hover .football-mark {
+  transform: rotate(10deg) translateY(-0.35rem);
+}
+
+.football-opening__mark p {
+  position: relative;
+  margin-top: 1.2rem;
+  color: var(--football-cream);
+  font-family: var(--font-gochi-hand), cursive;
+  font-size: clamp(1.45rem, 3vw, 2.3rem);
+  line-height: 0.95;
+  text-align: center;
+  rotate: -3deg;
+}
+
+.football-opening__mark > span {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 0.3rem;
+  color: var(--football-gold);
+  font-family: var(--font-kanit), sans-serif;
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0.18;
+}
+
+.football-opening__margin-note {
+  position: absolute;
+  right: 0;
+  bottom: 2rem;
+  max-width: 13rem;
+  color: rgba(239, 226, 196, 0.68);
+  font-family: var(--font-gochi-hand), cursive;
+  font-size: 1rem;
+  rotate: -4deg;
+}
+
+.football-lineage {
+  position: relative;
+  padding: clamp(4rem, 7vw, 6.5rem) max(1rem, calc((100vw - 88rem) / 2));
+  border-block: 1px solid rgba(24, 32, 42, 0.32);
+  background: var(--football-cream);
+  color: var(--football-ink);
+}
+
+.football-lineage::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(24, 32, 42, 0.14) 0 1px, transparent 1.5px);
+  background-size: 9px 9px;
+  content: "";
+  opacity: 0.24;
+}
+
+.football-lineage__header {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.55fr);
+  align-items: end;
+  gap: clamp(2rem, 7vw, 8rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.football-lineage .football-kicker {
+  color: var(--football-garnet);
+}
+
+.football-lineage__header h2 {
+  max-width: 10ch;
+  margin-top: 0.8rem;
+  font-family: var(--font-kanit), Impact, sans-serif;
+  font-size: clamp(3.3rem, 7.5vw, 7rem);
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+.football-lineage__header > p {
+  padding-left: 1.4rem;
+  border-left: 4px solid var(--football-gold);
+  font-family: var(--font-source-serif), Georgia, serif;
+  font-size: clamp(1rem, 1.7vw, 1.22rem);
+  line-height: 1.65;
+}
+
+.football-archive-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 0.8fr)) repeat(2, minmax(0, 1.2fr)) repeat(2, minmax(0, 0.8fr));
+  gap: clamp(0.75rem, 1.5vw, 1.4rem);
+  align-items: start;
+  margin-inline: clamp(0.75rem, 2vw, 2rem);
+}
+
+.football-archive-grid__supporting {
+  display: contents;
+}
+
+.football-archive-card {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: 0.6rem 0.6rem 1rem;
+  background: #f7eedb;
+  box-shadow: 0.7rem 0.8rem 0 rgba(24, 32, 42, 0.2);
+  color: var(--football-ink);
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.football-archive-card::before {
+  position: absolute;
+  z-index: 4;
+  top: -0.85rem;
+  left: 50%;
+  width: 4.5rem;
+  height: 1.45rem;
+  border: 1px solid rgba(24, 32, 42, 0.1);
+  background: rgba(237, 217, 164, 0.76);
+  content: "";
+  transform: translateX(-50%) rotate(-3deg);
+}
+
+.football-archive-card:hover {
+  z-index: 5;
+  box-shadow: 0.9rem 1rem 0 rgba(24, 32, 42, 0.16);
+  transform: translateY(-0.65rem) rotate(0deg);
+}
+
+.football-archive-card__image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: #c4b797;
+}
+
+.football-archive-card__image::after {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, transparent 0 1px, rgba(7, 27, 51, 0.18) 1.5px 2px);
+  background-size: 5px 5px;
+  content: "";
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.football-archive-card__image img {
+  object-fit: cover;
+  filter: saturate(0.68) contrast(1.12) sepia(0.12);
+  transition: filter 350ms ease-out, transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.football-archive-card:hover img {
+  filter: saturate(0.94) contrast(1.06) sepia(0.02);
+  transform: scale(1.025);
+}
+
+.football-archive-card figcaption {
+  display: grid;
+  gap: 0.7rem;
+  padding: 0.85rem 0.3rem 0;
+}
+
+.football-archive-card figcaption > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.football-archive-card figcaption strong {
+  font-family: var(--font-kanit), sans-serif;
+  font-size: clamp(1.15rem, 2vw, 1.6rem);
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.football-archive-card figcaption span {
+  color: var(--football-garnet);
+  font-family: var(--font-gochi-hand), cursive;
+  font-size: clamp(0.9rem, 1.3vw, 1.15rem);
+  rotate: -2deg;
+}
+
+.football-archive-card figcaption > p {
+  font-family: var(--font-source-serif), Georgia, serif;
+  font-size: clamp(0.76rem, 1vw, 0.94rem);
+  line-height: 1.45;
+}
+
+.football-archive-card--messi {
+  grid-column: 1;
+  grid-row: 1;
+  rotate: -3deg;
+}
+
+.football-archive-card--xavi {
+  grid-column: 2;
+  grid-row: 1;
+  rotate: 2deg;
+}
+
+.football-archive-card--iniesta {
+  grid-column: 5;
+  grid-row: 1;
+  rotate: 2deg;
+}
+
+.football-archive-card--busquets {
+  grid-column: 6;
+  grid-row: 1;
+  rotate: -2deg;
+}
+
+.football-archive-card--pedri {
+  grid-column: 3 / span 2;
+  grid-row: 1;
+  width: min(100%, 27rem);
+  justify-self: center;
+  padding: 0.8rem 0.8rem 1.2rem;
+  border: 5px solid var(--football-blue);
+  box-shadow: 1rem 1.1rem 0 var(--football-garnet);
+  rotate: -1deg;
+}
+
+.football-archive-card--pedri .football-archive-card__image {
+  aspect-ratio: 3 / 4;
+}
+
+.football-archive-card--xavi .football-archive-card__image img {
+  object-position: center top;
+}
+
+.football-archive-card--busquets .football-archive-card__image img {
+  image-rendering: auto;
+  object-position: center;
+}
+
+.football-focus-tag {
+  position: absolute;
+  z-index: 6;
+  top: 1.6rem;
+  right: -2.1rem;
+  padding: 0.45rem 0.8rem;
+  border: 2px solid var(--football-ink);
+  background: var(--football-gold);
+  box-shadow: 0.2rem 0.25rem 0 var(--football-ink);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  rotate: 7deg;
+}
+
+.football-personal {
+  position: relative;
+  padding: clamp(4rem, 7vw, 6.5rem) max(1rem, calc((100vw - 88rem) / 2));
+  border-top: 0.85rem solid var(--football-gold);
+  background:
+    linear-gradient(rgba(239, 226, 196, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(239, 226, 196, 0.055) 1px, transparent 1px),
+    var(--football-navy);
+  background-size: 2.5rem 2.5rem;
+  color: var(--football-cream);
+}
+
+.football-personal::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 31%;
+  height: 0.85rem;
+  background: var(--football-garnet);
+  content: "";
+  translate: 0 -100%;
+}
+
+.football-personal__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.55fr);
+  align-items: end;
+  gap: 1rem 3rem;
+  margin-bottom: 2rem;
+}
+
+.football-personal__header .football-kicker {
+  grid-column: 1 / -1;
+  color: var(--football-gold);
+}
+
+.football-personal__header h2 {
+  max-width: 10ch;
+  font-family: var(--font-kanit), Impact, sans-serif;
+  font-size: clamp(3rem, 5vw, 5.15rem);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  line-height: 0.82;
+  text-transform: uppercase;
+}
+
+.football-personal__header > p:last-child {
+  max-width: 31rem;
+  color: rgba(239, 226, 196, 0.76);
+  font-family: Georgia, serif;
+  font-size: clamp(1rem, 1.6vw, 1.28rem);
+  line-height: 1.55;
+}
+
+.football-personal__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.football-personal-card {
+  overflow: hidden;
+  border: 2px solid rgba(239, 226, 196, 0.65);
+  background: var(--football-cream);
+  color: var(--football-ink);
+  box-shadow: 0.55rem 0.55rem 0 rgba(237, 187, 0, 0.92);
+}
+
+.football-personal-card:nth-child(2) {
+  box-shadow: 0.55rem 0.55rem 0 rgba(126, 23, 63, 0.95);
+}
+
+.football-personal-card__image {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 2px solid var(--football-ink);
+}
+
+.football-personal-card__image img {
+  object-fit: cover;
+}
+
+.football-personal-card__copy {
+  padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+.football-personal-card__copy span {
+  color: var(--football-garnet);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.football-personal-card__copy h3 {
+  margin: 0.3rem 0 0.5rem;
+  font-family: var(--font-kanit), Impact, sans-serif;
+  font-size: clamp(1.65rem, 3vw, 2.45rem);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.football-personal-card__copy p {
+  max-width: 46ch;
+  font-family: Georgia, serif;
+  line-height: 1.55;
+}
+
+.football-credits {
+  display: flex;
+  width: min(100% - 2rem, 88rem);
+  align-items: start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-inline: auto;
+  padding-block: 2rem 2.5rem;
+  color: rgba(239, 226, 196, 0.65);
+  font-size: 0.68rem;
+  line-height: 1.6;
+}
+
+.football-credits details {
+  max-width: 44rem;
+}
+
+.football-credits summary {
+  min-height: 44px;
+  cursor: pointer;
+  color: var(--football-cream);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 44px;
+  text-transform: uppercase;
+}
+
+.football-credits p {
+  margin-bottom: 0.75rem;
+}
+
+.football-credits ul {
+  display: grid;
+  gap: 0.3rem;
+  padding-left: 1.25rem;
+}
+
+.football-credits a {
+  text-decoration-color: rgba(239, 226, 196, 0.35);
+  text-underline-offset: 0.2rem;
+}
+
+.football-credits a:hover {
+  color: var(--football-gold);
+}
+
+@media (max-width: 900px) {
+  .football-opening {
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.56fr);
+    gap: 3rem;
+  }
+
+  .football-opening h1 {
+    font-size: clamp(5rem, 13vw, 8rem);
+  }
+
+  .football-archive-grid {
+    min-height: 44rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .football-topbar {
+    min-height: 4rem;
+  }
+
+  .football-opening {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-block: 3rem 4rem;
+  }
+
+  .football-opening h1 {
+    font-size: clamp(4.6rem, 23vw, 8rem);
+  }
+
+  .football-opening h1 span:nth-child(3) {
+    margin-left: 0.17em;
+  }
+
+  .football-opening__mark {
+    width: min(58vw, 15rem);
+    justify-self: center;
+  }
+
+  .football-opening__margin-note {
+    display: none;
+  }
+
+  .football-lineage__header {
+    grid-template-columns: 1fr;
+  }
+
+  .football-lineage__header > p {
+    max-width: 36rem;
+  }
+
+  .football-archive-grid {
+    min-height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    gap: 2.2rem;
+    margin-inline: 0;
+  }
+
+  .football-archive-grid__supporting {
+    display: grid;
+    width: calc(100% + 1.5rem);
+    grid-auto-columns: min(74vw, 18rem);
+    grid-auto-flow: column;
+    gap: 1rem;
+    margin-inline: -0.75rem;
+    padding: 0.5rem 0.75rem 1.25rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: 0.75rem;
+    scroll-snap-type: inline mandatory;
+    scrollbar-color: var(--football-garnet) rgba(24, 32, 42, 0.14);
+    scrollbar-width: thin;
+  }
+
+  .football-archive-card--pedri {
+    width: min(90%, 28rem);
+    grid-column: 1;
+    grid-row: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .football-archive-card--messi,
+  .football-archive-card--iniesta,
+  .football-archive-card--xavi,
+  .football-archive-card--busquets {
+    width: 100%;
+    grid-column: auto;
+    grid-row: auto;
+    scroll-snap-align: start;
+  }
+
+  .football-archive-card--messi {
+    rotate: -2deg;
+  }
+
+  .football-archive-card--iniesta {
+    rotate: 2deg;
+  }
+
+  .football-archive-card--xavi {
+    rotate: 1deg;
+  }
+
+  .football-archive-card--busquets {
+    rotate: -1deg;
+  }
+
+  .football-archive-card figcaption > div {
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  .football-archive-card figcaption {
+    gap: 0.6rem;
+  }
+
+  .football-archive-card figcaption span {
+    width: fit-content;
+  }
+
+  .football-personal__header {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .football-personal__header h2 {
+    font-size: clamp(3rem, 13vw, 4.4rem);
+  }
+
+  .football-personal__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .football-personal-card {
+    box-shadow: 0.4rem 0.4rem 0 rgba(237, 187, 0, 0.92);
+  }
+
+  .football-personal-card:nth-child(2) {
+    box-shadow: 0.4rem 0.4rem 0 rgba(126, 23, 63, 0.95);
+  }
+
+  .football-credits {
+    display: grid;
+  }
+}
+
+@media (max-width: 430px) {
+  .football-topbar {
+    width: min(100% - 1.25rem, 88rem);
+  }
+
+  .football-back {
+    font-size: 0.64rem;
+  }
+
+  .football-opening h1 {
+    font-size: clamp(4.25rem, 19.5vw, 6rem);
+  }
+
+  .football-opening,
+  .football-lineage {
+    width: 100%;
+  }
+
+  .football-opening {
+    padding-inline: 0.75rem;
+  }
+
+  .football-lineage {
+    padding-inline: 0.75rem;
+  }
+
+  .football-opening__lede {
+    font-size: 1rem;
+  }
+
+  .football-archive-card {
+    padding: 0.4rem 0.4rem 0.7rem;
+  }
+
+  .football-focus-tag {
+    right: -0.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .football-opening__copy {
+    animation: football-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .football-opening__mark {
+    animation: football-stamp 760ms 140ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .football-page {
+    scroll-behavior: auto;
+  }
+
+  .football-page *,
+  .football-page *::before,
+  .football-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes football-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes football-stamp {
+  from {
+    opacity: 0;
+    transform: translateY(2rem) rotate(-5deg) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}

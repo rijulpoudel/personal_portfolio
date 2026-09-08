@@ -20,6 +20,7 @@ export async function getGitHubActivity(username: string): Promise<GitHubActivit
       `https://github-contributions-api.jogruber.de/v4/${encodeURIComponent(username)}?y=last`,
       {
         headers: { Accept: "application/json" },
+        signal: AbortSignal.timeout(2_500),
         next: { revalidate: 21_600 },
       },
     );
